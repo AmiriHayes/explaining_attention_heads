@@ -2,9 +2,9 @@
 
 Lightweight workspace for testing symbolic hypothesis programs against attention heads in BERT, GPT-2, and TinyLlama.
 
-Original repository: https://github.com/AmiriHayes/LLM-Interpretability
+<!-- Original repository: https://github.com/AmiriHayes/LLM-Interpretability -->
 
-Preprint: https://www.overleaf.com/6482759765tsfvtgdxygym#4ec445
+<!-- Preprint: https://www.overleaf.com/6482759765tsfvtgdxygym#4ec445 -->
 
 ## What This Contains
 
