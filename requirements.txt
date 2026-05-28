@@ -1,0 +1,12 @@
+numpy
+pandas
+matplotlib
+seaborn
+scipy
+torch
+transformers
+huggingface-hub
+spacy
+nltk
+tqdm
+openai
