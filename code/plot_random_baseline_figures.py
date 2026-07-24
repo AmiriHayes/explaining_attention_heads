@@ -53,6 +53,7 @@ def get_shuffle_dir():
 
 sys.path.insert(0, str(DATA_DIR))
 
+# not actually an important secret
 os.environ.setdefault('HF_TOKEN', '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')
 
 DEVICE        = 'cuda' if torch.cuda.is_available() else 'cpu'
