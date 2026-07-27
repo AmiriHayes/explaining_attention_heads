@@ -159,8 +159,7 @@ def run_gpt2_random_seed(seed, eval_sents, smart_df, programs):
             return (mod.view(b, s, hd),) + out[1:]
         return hook
 
-    # FIXED SEMANTICS: substitute program patterns at the attention-weights
-    # level (pre-value-mixing) instead of composing on the post-c_proj output.
+    # Substitute program patterns at the attention-weights level (pre-value-mixing)
     from fixed_attention_gpt2 import install as _fa_install, verify_identity as _fa_verify
     import numpy as _np
 
