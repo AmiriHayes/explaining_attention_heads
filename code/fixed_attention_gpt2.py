@@ -1,26 +1,11 @@
-"""Correct head-replacement semantics for GPT-2: attention-weight substitution.
+"""Head-replacement module for GPT-2: substituting attention-weights.
 
-FIX for the head-replacement hooks in this repo (plot_random_baseline_figures.py
-and all_experiments.ipynb "Figure 4.3" cell): those hooks run on the attention
-module's forward-hook OUTPUT, which in HuggingFace GPT-2 is post-c_proj (head
-channels already mixed), and they left-multiply the program matrix into that
-output — composing the pattern on top of the attention the model already
-applied instead of replacing it. This module substitutes the program's
+This module substitutes the program's
 (causally-masked, row-normalized) pattern for the head's softmaxed attention
-probabilities BEFORE value mixing, upstream of c_proj.
-
-NOTE: GPT-2 only. BERT needs the same treatment WITHOUT the causal mask
-(bidirectional); TinyLlama/Llama-3B need it with q_proj/k_proj/v_proj + GQA
-key-value head repetition instead of c_attn. Same ~30-line pattern per
-architecture.
-
-Replaces a head's softmaxed attention probabilities with the program's
-(causally-masked, row-normalized) pattern BEFORE value mixing — upstream of
-c_proj — instead of the repo's post-projection output composition.
+probabilities before value mixing, upstream of c_proj.
 
 The wrapper recomputes the eager attention path from the module's own
-weights. Identity contract: with an empty assignment it must reproduce the
-module's original output (asserted by verify_identity at setup).
+weights.
 """
 
 import math
