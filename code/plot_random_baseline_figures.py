@@ -159,8 +159,24 @@ def run_gpt2_random_seed(seed, eval_sents, smart_df, programs):
             return (mod.view(b, s, hd),) + out[1:]
         return hook
 
-    handles = [model.transformer.h[li].attn.register_forward_hook(make_hook(li))
-               for li in range(N_LAYERS)]
+    # FIXED SEMANTICS: substitute program patterns at the attention-weights
+    # level (pre-value-mixing) instead of composing on the post-c_proj output.
+    from fixed_attention_gpt2 import install as _fa_install, verify_identity as _fa_verify
+    import numpy as _np
+
+    def _raw_mat(prog_name, sentence):
+        p = prog_lookup.get(prog_name)
+        try:
+            m = p(sentence, tok)[1] if p else None
+        except Exception:
+            m = None
+        return None if m is None else _np.asarray(m)
+
+    _fa_state = {"assignment": shared_smart, "pattern": _raw_mat,
+                 "sentence": active_sent}
+    assert _fa_verify(model, tok, eval_sents[0], DEVICE) < 1e-3
+    _fa_restore = _fa_install(model, _fa_state)
+    handles = []
 
     baseline_ppls = []
     for s in eval_sents:
@@ -198,6 +214,7 @@ def run_gpt2_random_seed(seed, eval_sents, smart_df, programs):
 
     print()
     for h in handles: h.remove()
+    _fa_restore()
     del model
     if DEVICE == 'cuda': torch.cuda.empty_cache()
     return pd.DataFrame(results)
