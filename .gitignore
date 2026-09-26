@@ -2,3 +2,18 @@
 **/.DS_Store
 __pycache__/
 *.pyc
+layer_programs/data/
+llama_programs_v3/.venv/
+llama_programs_v3/eda_phase0/cache/
+
+# make_programs.ipynb scratch: extracted attention, LLM cache, per-head programs
+code/.synthesis_*/
+data/gpt2new_programs.py
+
+# Generated layer-grid PDFs: ~1.4 GB, five files over GitHub's 100 MB hard limit.
+# Regenerate with layer_programs/export_layer_grids_pdf.py
+layer_programs/outputs/
+
+# Paused GPT-2 SAE exploration (not an attention-program library despite the
+# name -- generated_code/ is empty). Kept local; see its eda_phase0/summary.md
+llama_programs_v3/

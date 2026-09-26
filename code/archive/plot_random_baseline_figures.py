@@ -28,6 +28,7 @@ Usage:
   python code/plot_random_baseline_figures.py --out results/plots/figure_random_baseline.pdf
 """
 
+import os
 import argparse, glob, inspect, json, os, pathlib, random, sys, warnings
 import numpy as np
 import pandas as pd
@@ -53,8 +54,8 @@ def get_shuffle_dir():
 
 sys.path.insert(0, str(DATA_DIR))
 
-# not actually an important secret
-os.environ.setdefault('HF_TOKEN', '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')
+# HF token was hardcoded here and has been revoked; set HF_TOKEN in the
+# environment instead if this script is ever revived.
 
 DEVICE        = 'cuda' if torch.cuda.is_available() else 'cpu'
 N_SEEDS       = 5

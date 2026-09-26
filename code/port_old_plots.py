@@ -11,6 +11,8 @@ results/replacement_run_v2/*.
 Outputs -> results/plots/*_v2.pdf (+.png where the original saved both),
 so the original paper PDFs are never overwritten.
 """
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent / "lib"))
 import inspect, json, os, pathlib, random, re, sys, warnings
 import numpy as np
 import pandas as pd

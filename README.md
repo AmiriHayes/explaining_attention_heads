@@ -8,12 +8,35 @@ Lightweight workspace for testing symbolic hypothesis programs against attention
 
 ## What This Contains
 
-- `code/make_prorams.ipynb`: Generates symbolic hypothesis programs for attention heads. (makes programs)
+Three notebooks, one job each:
+
+- `code/make_programs.ipynb`: Generates symbolic hypothesis programs for attention heads. (makes programs)
 - `code/write_data.ipynb`: Generates IoU and interpolation CSV files. (scores programs)
 - `code/all_experiments.ipynb`: Produces figures, best-fit mappings, and replacement experiments. (tests programs)
 
-- `data/`: Input assets and generated score tables.
-- `results/`: Best fits, plots, and replacement run outputs.
+Supporting directories:
+
+- `code/lib/`: Mechanism imported by the notebooks, not run directly — the synthesis
+  engine (`program_synthesis.py`), the per-head attention substitution modules
+  (`fixed_attention_*.py`), and the GPT-2 tokenizer shim.
+- `code/archive/`: Superseded scripts, kept readable rather than deleted. Nothing
+  imports them and none of the committed results depend on them.
+- `data/`: Input assets, program libraries (`<model>_programs.py`), and score tables.
+- `results/`: Best fits, plots, and replacement run outputs. `results/run_logs/`
+  holds executed notebooks kept as provenance for committed results.
+
+## Generating programs for a new model
+
+`make_programs.ipynb` is model-agnostic — set `MODEL_ID` and it reads the layer and
+head counts off the loaded model. For an unattended run of a large head grid:
+
+```bash
+python -m program_synthesis --model-id Qwen/Qwen3-4B-Base --model-key qwen3 \
+       --strategy two_pass --workers 8        # run from code/lib/
+```
+
+Output is `data/<model_key>_programs.py`: one `prog_L{layer}H{head}` function per
+attention head, self-contained, verified to execute before it is written.
 
 ## Quick Start
 
