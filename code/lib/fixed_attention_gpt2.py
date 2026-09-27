@@ -31,7 +31,8 @@ def wrap_gpt2_attention(module, layer_idx: int, state: dict):
     """Replace module.forward with a substituting eager implementation.
 
     state: {"assignment": {(layer, head): prog_name}, "pattern": callable
-    (prog_name, sent) -> np.ndarray | None, "sentence": [str]}.
+    (prog_name, sent) -> np.ndarray | None, "sentence": [str],
+    "zero_heads": optional iterable of (layer, head) to zero-ablate}.
     """
     orig_forward = module.forward
     n_head = module.num_heads
@@ -60,6 +61,15 @@ def wrap_gpt2_attention(module, layer_idx: int, state: dict):
             if mat is None or mat.shape[0] != s:
                 continue  # uncovered: keep the head's own attention (repo convention)
             attn[:, hi] = normalize_pattern(mat).to(attn.dtype).to(attn.device)
+
+
+        # Zero-ablation: drop these heads' contribution entirely. Applied AFTER
+        # the substitution loop so an explicitly zeroed head always wins over any
+        # program assignment, and before value-mixing so the head's context
+        # output becomes exactly zero. state["zero_heads"] is optional.
+        for (li, hi) in state.get("zero_heads", ()):
+            if li == layer_idx:
+                attn[:, hi] = 0.0
 
         ctx = torch.matmul(attn, v)
         ctx = ctx.permute(0, 2, 1, 3).contiguous().view(b, s, n_head * head_dim)

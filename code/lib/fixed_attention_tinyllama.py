@@ -51,7 +51,8 @@ def wrap_llama_attention(module, layer_idx: int, state: dict):
     eager implementation.
 
     state: {"assignment": {(layer, head): prog_name}, "pattern": callable
-    (prog_name, sent) -> np.ndarray | None, "sentence": [str]}.
+    (prog_name, sent) -> np.ndarray | None, "sentence": [str],
+    "zero_heads": optional iterable of (layer, head) to zero-ablate}.
     """
     orig_forward   = module.forward
     num_kv_groups  = module.num_key_value_groups
@@ -87,6 +88,15 @@ def wrap_llama_attention(module, layer_idx: int, state: dict):
             if mat is None or mat.shape[0] != s:
                 continue  # uncovered: keep the head's own attention (repo convention)
             attn[:, hi] = normalize_pattern(mat).to(attn.dtype).to(attn.device)
+
+
+        # Zero-ablation: drop these heads' contribution entirely. Applied AFTER
+        # the substitution loop so an explicitly zeroed head always wins over any
+        # program assignment, and before value-mixing so the head's context
+        # output becomes exactly zero. state["zero_heads"] is optional.
+        for (li, hi) in state.get("zero_heads", ()):
+            if li == layer_idx:
+                attn[:, hi] = 0.0
 
         ctx = torch.matmul(attn, value_states)
         ctx = ctx.transpose(1, 2).contiguous().reshape(*input_shape, -1)

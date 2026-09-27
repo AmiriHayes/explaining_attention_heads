@@ -28,8 +28,10 @@ import numpy as np
 
 def iou_score(p: np.ndarray, q: np.ndarray) -> float:
     """Soft IoU between two attention matrices. Repo convention; higher is better."""
-    p = np.clip(np.asarray(p, dtype=np.float64), 1e-12, 1.0)
-    q = np.clip(np.asarray(q, dtype=np.float64), 1e-12, 1.0)
+    p = np.asarray(p, dtype=np.float64); q = np.asarray(q, dtype=np.float64)
+    if not (np.isfinite(p).all() and np.isfinite(q).all()):
+        return 0.0          # a non-finite matrix is a failed program, not a good score
+    p = np.clip(p, 1e-12, 1.0); q = np.clip(q, 1e-12, 1.0)
     return float(np.minimum(p, q).sum() / np.maximum(p, q).sum())
 
 
@@ -239,6 +241,8 @@ class Sandbox:
                 label, mat = fn(sentence, tokenizer)
             mat = np.asarray(mat, dtype=np.float64)
             n = mat.shape[0]
+            if not np.isfinite(mat).all():
+                return False, "matrix contains NaN or inf"
             if mat.shape != (n, n):
                 return False, f"not square: {mat.shape}"
             if not np.allclose(mat.sum(axis=1), 1.0, atol=1e-3):
@@ -708,7 +712,10 @@ class HeadContext:
                                       "PreTrainedTokenizerBase"})
             if missing:
                 err = f"calls undefined helpers: {sorted(missing)}"; continue
-            ok, err = self.sandbox.smoke(code, fname, self.tokenizer, self.sentences[0])
+            for probe in self.sentences[:3]:
+                ok, err = self.sandbox.smoke(code, fname, self.tokenizer, probe)
+                if not ok:
+                    break
             if not ok:
                 continue
             return code
