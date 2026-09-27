@@ -907,7 +907,8 @@ def run_grid(heads, data, score_sentences, tokenizer, sandbox, llm, helpers,
     def one(lh):
         l, h = lh
         key = f"L{l}H{h}"
-        real = {d["sentence"]: d["attention"][l, h][:len(d["tokens"]), :len(d["tokens"])]
+        n_tok = lambda d: len(d["tokens"])
+        real = {d["sentence"]: d["attention"][l, h][:n_tok(d), :n_tok(d)].astype(np.float64)
                 for d in data if d["sentence"] in score_set}
         ctx = HeadContext(layer=l, head=h, model_name=model_name, helpers=helpers,
                           head_examples=format_head_examples(data, l, h, seed=seed),
@@ -1003,7 +1004,7 @@ def extract_attention(model, tokenizer, sentences, out_dir, device, log=print):
         if p.exists():
             d = np.load(p, allow_pickle=True)
             data.append({"tokens": list(d["tokens"]), "sentence": str(d["sentence"]),
-                         "attention": d["attention"].astype(np.float64)})
+                         "attention": d["attention"]})   # stays fp16; upcast per head slice
             continue
         enc = tokenizer(s, return_tensors="pt").to(device)
         with torch.no_grad():
@@ -1011,7 +1012,7 @@ def extract_attention(model, tokenizer, sentences, out_dir, device, log=print):
         att = np.stack([a[0].float().cpu().numpy() for a in o.attentions], 0)
         toks = tokenizer.convert_ids_to_tokens(enc["input_ids"][0])
         np.savez_compressed(p, tokens=toks, sentence=s, attention=att.astype(np.float16))
-        data.append({"tokens": toks, "sentence": s, "attention": att.astype(np.float64)})
+        data.append({"tokens": toks, "sentence": s, "attention": att.astype(np.float16)})
         made += 1
     log(f"[extract] {len(data)} sentences cached ({made} new) in {out_dir.name}")
     return data
@@ -1040,6 +1041,12 @@ def main(argv=None):
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--heads", default="all", help="'all' or 'L,H L,H ...'")
+    ap.add_argument("--device", default=None,
+                    help="force extraction device. A model near "
+                         "torch.mps.recommended_max_memory() swaps instead of OOMing "
+                         "cleanly (Qwen3-8B bf16 is 15.3 GiB vs a 16 GiB cap), so use "
+                         "cpu for large models -- extraction is only a few dozen "
+                         "short forward passes.")
     a = ap.parse_args(argv)
     key = a.model_key or a.model_id.split("/")[-1].lower().replace("-", "")
 
@@ -1048,6 +1055,8 @@ def main(argv=None):
     work.mkdir(parents=True, exist_ok=True)
     device = ("cuda" if torch.cuda.is_available()
               else "mps" if torch.backends.mps.is_available() else "cpu")
+    if a.device:
+        device = a.device
 
     tok = AutoTokenizer.from_pretrained(a.model_id)
     model = AutoModel.from_pretrained(a.model_id, attn_implementation="eager").to(device).eval()
