@@ -1,0 +1,18 @@
+{
+ "model": "tinyllama",
+ "model_id": "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+ "revision": "59f6f375b26bde864a6ca194a9a3044570490064",
+ "llm": "gpt-6.1-sol",
+ "reasoning_effort": "medium",
+ "max_tokens": 32000,
+ "seed": 1,
+ "n_sentences": 20,
+ "repr": "top_pct",
+ "top_pct": 2.5,
+ "splits_fingerprint": "e9fe2ad83857bb81",
+ "n_programs": 704,
+ "expected": 704,
+ "git_commit": "e6bf7138555df50f83d262a3ed7c64d5379f2324",
+ "date": "2026-10-24",
+ "sha256": "d013b65390d1bf50d70670eed3e6da8b748255f2a42f4f89ff69bf1cb83f97dd"
+}

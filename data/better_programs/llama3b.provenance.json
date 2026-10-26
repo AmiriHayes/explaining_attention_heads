@@ -1,0 +1,18 @@
+{
+ "model": "llama3b",
+ "model_id": "meta-llama/Llama-3.2-3B",
+ "revision": null,
+ "llm": "gpt-6.1-sol",
+ "reasoning_effort": "medium",
+ "max_tokens": 32000,
+ "seed": 1,
+ "n_sentences": 20,
+ "repr": "top_pct",
+ "top_pct": 2.5,
+ "splits_fingerprint": "e9fe2ad83857bb81",
+ "n_programs": 672,
+ "expected": 672,
+ "git_commit": "e6bf7138555df50f83d262a3ed7c64d5379f2324",
+ "date": "2026-10-24",
+ "sha256": "6c34121a2da97a996cb541b52ead78e3e8bd885bacefefeae18e9fe427cc2601"
+}

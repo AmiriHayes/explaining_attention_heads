@@ -1,0 +1,18 @@
+{
+ "model": "qwen3",
+ "model_id": "Qwen/Qwen3-8B-Base",
+ "revision": "49e3418fbbbca6ecbdf9608b4d22e5a407081db4",
+ "llm": "gpt-6.1-sol",
+ "reasoning_effort": "medium",
+ "max_tokens": 32000,
+ "seed": 1,
+ "n_sentences": 20,
+ "repr": "top_pct",
+ "top_pct": 2.5,
+ "splits_fingerprint": "e9fe2ad83857bb81",
+ "n_programs": 1152,
+ "expected": 1152,
+ "git_commit": "e6bf7138555df50f83d262a3ed7c64d5379f2324",
+ "date": "2026-10-24",
+ "sha256": "940f59ae791c404ec35b614d6837acd47d54503e446601a89ad3443e316b293d"
+}

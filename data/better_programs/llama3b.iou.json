@@ -1,0 +1,4034 @@
+{
+ "L0H0": {
+  "test_iou": 0.6833151060310692,
+  "val_iou": 0.6890429361026552,
+  "chosen": "refined",
+  "same_data_iou": 0.7085632103070033
+ },
+ "L0H1": {
+  "test_iou": 0.6939618277386376,
+  "val_iou": 0.7033967277933459,
+  "chosen": "refined",
+  "same_data_iou": 0.712044919994633
+ },
+ "L0H10": {
+  "test_iou": 0.9219090454507186,
+  "val_iou": 0.9229327011822754,
+  "chosen": "refined",
+  "same_data_iou": 0.9215711581855901
+ },
+ "L0H11": {
+  "test_iou": 0.8940045052376786,
+  "val_iou": 0.9018158407480682,
+  "chosen": "refined",
+  "same_data_iou": 0.8983567066482164
+ },
+ "L0H12": {
+  "test_iou": 0.8728024041242992,
+  "val_iou": 0.8718628676531346,
+  "chosen": "refined",
+  "same_data_iou": 0.8752199721431291
+ },
+ "L0H13": {
+  "test_iou": 0.7500577519925907,
+  "val_iou": 0.7578246247678188,
+  "chosen": "initial",
+  "same_data_iou": 0.7653516604926757
+ },
+ "L0H14": {
+  "test_iou": 0.7488609332618456,
+  "val_iou": 0.7506673867269226,
+  "chosen": "initial",
+  "same_data_iou": 0.7538932021091356
+ },
+ "L0H15": {
+  "test_iou": 0.6889403504306787,
+  "val_iou": 0.6931998256862073,
+  "chosen": "refined",
+  "same_data_iou": 0.7097921047384254
+ },
+ "L0H16": {
+  "test_iou": 0.8823632249508768,
+  "val_iou": 0.883190608614477,
+  "chosen": "refined",
+  "same_data_iou": 0.8840838029629376
+ },
+ "L0H17": {
+  "test_iou": 0.4907838109900331,
+  "val_iou": 0.4888640077429682,
+  "chosen": "refined",
+  "same_data_iou": 0.5015751239274986
+ },
+ "L0H18": {
+  "test_iou": 0.6112853233301189,
+  "val_iou": 0.6122071653452661,
+  "chosen": "refined",
+  "same_data_iou": 0.6234367773915593
+ },
+ "L0H19": {
+  "test_iou": 0.5658106070816319,
+  "val_iou": 0.5576563817675908,
+  "chosen": "refined",
+  "same_data_iou": 0.5738317666234479
+ },
+ "L0H2": {
+  "test_iou": 0.9078571355165215,
+  "val_iou": 0.9147419946681171,
+  "chosen": "refined",
+  "same_data_iou": 0.9108137369893015
+ },
+ "L0H20": {
+  "test_iou": 0.6734769410784938,
+  "val_iou": 0.6756433802422325,
+  "chosen": "refined",
+  "same_data_iou": 0.6721337911595816
+ },
+ "L0H21": {
+  "test_iou": 0.7329424818120903,
+  "val_iou": 0.7324740447884476,
+  "chosen": "refined",
+  "same_data_iou": 0.7588793104987045
+ },
+ "L0H22": {
+  "test_iou": 0.9998225011945331,
+  "val_iou": 0.9998232265083312,
+  "chosen": "initial",
+  "same_data_iou": 0.9998033995696529
+ },
+ "L0H23": {
+  "test_iou": 0.9992843445741377,
+  "val_iou": 0.9991459440162326,
+  "chosen": "initial",
+  "same_data_iou": 0.9991684137909619
+ },
+ "L0H3": {
+  "test_iou": 0.758619852726993,
+  "val_iou": 0.7617849388190571,
+  "chosen": "refined",
+  "same_data_iou": 0.7623663914910985
+ },
+ "L0H4": {
+  "test_iou": 0.7118818657399256,
+  "val_iou": 0.7205471315813898,
+  "chosen": "refined",
+  "same_data_iou": 0.7077349142071204
+ },
+ "L0H5": {
+  "test_iou": 0.5473742584685757,
+  "val_iou": 0.5449609606212109,
+  "chosen": "initial",
+  "same_data_iou": 0.5575425433011736
+ },
+ "L0H6": {
+  "test_iou": 0.7117595094385168,
+  "val_iou": 0.719061768134858,
+  "chosen": "refined",
+  "same_data_iou": 0.7154110956340172
+ },
+ "L0H7": {
+  "test_iou": 0.6348992096200667,
+  "val_iou": 0.6392519132772848,
+  "chosen": "refined",
+  "same_data_iou": 0.6481327956229151
+ },
+ "L0H8": {
+  "test_iou": 0.7049056110127624,
+  "val_iou": 0.7136251152090105,
+  "chosen": "initial",
+  "same_data_iou": 0.7188696191203036
+ },
+ "L0H9": {
+  "test_iou": 0.8836115251852291,
+  "val_iou": 0.8837769010589821,
+  "chosen": "refined",
+  "same_data_iou": 0.8886221650518131
+ },
+ "L10H0": {
+  "test_iou": 0.5601363110633527,
+  "val_iou": 0.5701359560045923,
+  "chosen": "refined",
+  "same_data_iou": 0.582800912662673
+ },
+ "L10H1": {
+  "test_iou": 0.6413718112042943,
+  "val_iou": 0.6663078447366505,
+  "chosen": "initial",
+  "same_data_iou": 0.6730097731344035
+ },
+ "L10H10": {
+  "test_iou": 0.6690390602613836,
+  "val_iou": 0.6864788873026453,
+  "chosen": "refined",
+  "same_data_iou": 0.6830162631851554
+ },
+ "L10H11": {
+  "test_iou": 0.8514837505043117,
+  "val_iou": 0.8619438711922385,
+  "chosen": "initial",
+  "same_data_iou": 0.8447177387833771
+ },
+ "L10H12": {
+  "test_iou": 0.5495689145244946,
+  "val_iou": 0.5577617893753298,
+  "chosen": "refined",
+  "same_data_iou": 0.5635291520529992
+ },
+ "L10H13": {
+  "test_iou": 0.6269906671193791,
+  "val_iou": 0.6339333097599075,
+  "chosen": "initial",
+  "same_data_iou": 0.6322196692486177
+ },
+ "L10H14": {
+  "test_iou": 0.6436008382775131,
+  "val_iou": 0.6462264854416401,
+  "chosen": "initial",
+  "same_data_iou": 0.644638840287503
+ },
+ "L10H15": {
+  "test_iou": 0.8441278274608649,
+  "val_iou": 0.8511931617180796,
+  "chosen": "initial",
+  "same_data_iou": 0.8444701269998804
+ },
+ "L10H16": {
+  "test_iou": 0.741493019937827,
+  "val_iou": 0.7521396610237308,
+  "chosen": "initial",
+  "same_data_iou": 0.7477824384853065
+ },
+ "L10H17": {
+  "test_iou": 0.7944099491684432,
+  "val_iou": 0.8036345769269593,
+  "chosen": "initial",
+  "same_data_iou": 0.7936214798086014
+ },
+ "L10H18": {
+  "test_iou": 0.7215719257926021,
+  "val_iou": 0.7316835432279868,
+  "chosen": "initial",
+  "same_data_iou": 0.7324476312810293
+ },
+ "L10H19": {
+  "test_iou": 0.6756928612599136,
+  "val_iou": 0.6775147470310341,
+  "chosen": "initial",
+  "same_data_iou": 0.6769068895756309
+ },
+ "L10H2": {
+  "test_iou": 0.7413102671014371,
+  "val_iou": 0.7475075778604551,
+  "chosen": "initial",
+  "same_data_iou": 0.7538539185439479
+ },
+ "L10H20": {
+  "test_iou": 0.6909263942309752,
+  "val_iou": 0.6937451753771644,
+  "chosen": "initial",
+  "same_data_iou": 0.6995324899989768
+ },
+ "L10H21": {
+  "test_iou": 0.9554504192317418,
+  "val_iou": 0.9610046151689303,
+  "chosen": "initial",
+  "same_data_iou": 0.9541419755506503
+ },
+ "L10H22": {
+  "test_iou": 0.8915695344275401,
+  "val_iou": 0.8943487435292193,
+  "chosen": "initial",
+  "same_data_iou": 0.8963963454582698
+ },
+ "L10H23": {
+  "test_iou": 0.8455538540366844,
+  "val_iou": 0.8585521070903661,
+  "chosen": "initial",
+  "same_data_iou": 0.856325784801176
+ },
+ "L10H3": {
+  "test_iou": 0.8566400873053576,
+  "val_iou": 0.8626512480932991,
+  "chosen": "initial",
+  "same_data_iou": 0.8598608233256255
+ },
+ "L10H4": {
+  "test_iou": 0.8264225489349591,
+  "val_iou": 0.8316708853629905,
+  "chosen": "refined",
+  "same_data_iou": 0.8294801087542988
+ },
+ "L10H5": {
+  "test_iou": 0.860149926339284,
+  "val_iou": 0.8648131835922461,
+  "chosen": "initial",
+  "same_data_iou": 0.8560648956972943
+ },
+ "L10H6": {
+  "test_iou": 0.7038294919080186,
+  "val_iou": 0.7089277116470193,
+  "chosen": "initial",
+  "same_data_iou": 0.7118495439570547
+ },
+ "L10H7": {
+  "test_iou": 0.6775637578774372,
+  "val_iou": 0.6886011402622914,
+  "chosen": "refined",
+  "same_data_iou": 0.6845734939641787
+ },
+ "L10H8": {
+  "test_iou": 0.7531392684457819,
+  "val_iou": 0.7630480823866783,
+  "chosen": "initial",
+  "same_data_iou": 0.7709062731018441
+ },
+ "L10H9": {
+  "test_iou": 0.800121581138088,
+  "val_iou": 0.8106790825106942,
+  "chosen": "initial",
+  "same_data_iou": 0.807118096312465
+ },
+ "L11H0": {
+  "test_iou": 0.7171135884839854,
+  "val_iou": 0.7275446966089311,
+  "chosen": "initial",
+  "same_data_iou": 0.7301983505417035
+ },
+ "L11H1": {
+  "test_iou": 0.8439774396388705,
+  "val_iou": 0.8518509942788363,
+  "chosen": "initial",
+  "same_data_iou": 0.8384127016757257
+ },
+ "L11H10": {
+  "test_iou": 0.7459303544320142,
+  "val_iou": 0.7485822609897298,
+  "chosen": "initial",
+  "same_data_iou": 0.7403240275265054
+ },
+ "L11H11": {
+  "test_iou": 0.6689364274522643,
+  "val_iou": 0.6716903675925806,
+  "chosen": "initial",
+  "same_data_iou": 0.665094258855597
+ },
+ "L11H12": {
+  "test_iou": 0.6610466469671603,
+  "val_iou": 0.6714566853498435,
+  "chosen": "refined",
+  "same_data_iou": 0.6889736731132964
+ },
+ "L11H13": {
+  "test_iou": 0.646220176795052,
+  "val_iou": 0.6438590340388847,
+  "chosen": "initial",
+  "same_data_iou": 0.6642053070941152
+ },
+ "L11H14": {
+  "test_iou": 0.6972542180202006,
+  "val_iou": 0.6994342307170901,
+  "chosen": "refined",
+  "same_data_iou": 0.7138622931672441
+ },
+ "L11H15": {
+  "test_iou": 0.7743037490070835,
+  "val_iou": 0.7802843006794298,
+  "chosen": "refined",
+  "same_data_iou": 0.7779646822900275
+ },
+ "L11H16": {
+  "test_iou": 0.6849356319951432,
+  "val_iou": 0.6908831161466535,
+  "chosen": "initial",
+  "same_data_iou": 0.696641011272731
+ },
+ "L11H17": {
+  "test_iou": 0.7929548640903533,
+  "val_iou": 0.7997017145107341,
+  "chosen": "refined",
+  "same_data_iou": 0.8025767307982641
+ },
+ "L11H18": {
+  "test_iou": 0.64331494139326,
+  "val_iou": 0.6476502217705148,
+  "chosen": "initial",
+  "same_data_iou": 0.6384960596451121
+ },
+ "L11H19": {
+  "test_iou": 0.5912583940908944,
+  "val_iou": 0.6019807420839515,
+  "chosen": "refined",
+  "same_data_iou": 0.6069493091815499
+ },
+ "L11H2": {
+  "test_iou": 0.7739907256706552,
+  "val_iou": 0.782278580985543,
+  "chosen": "refined",
+  "same_data_iou": 0.7853298874845757
+ },
+ "L11H20": {
+  "test_iou": 0.7095399375414674,
+  "val_iou": 0.7109961919774819,
+  "chosen": "initial",
+  "same_data_iou": 0.7019152159501586
+ },
+ "L11H21": {
+  "test_iou": 0.7235794209052586,
+  "val_iou": 0.7250698616850241,
+  "chosen": "refined",
+  "same_data_iou": 0.743653155851238
+ },
+ "L11H22": {
+  "test_iou": 0.6834678920014369,
+  "val_iou": 0.6908577242820726,
+  "chosen": "initial",
+  "same_data_iou": 0.6912536234639406
+ },
+ "L11H23": {
+  "test_iou": 0.6922666057248631,
+  "val_iou": 0.699569035940966,
+  "chosen": "initial",
+  "same_data_iou": 0.6985458147061652
+ },
+ "L11H3": {
+  "test_iou": 0.7233242343645487,
+  "val_iou": 0.7369399083149354,
+  "chosen": "initial",
+  "same_data_iou": 0.7395446838873594
+ },
+ "L11H4": {
+  "test_iou": 0.7495954252737149,
+  "val_iou": 0.7631164801053656,
+  "chosen": "initial",
+  "same_data_iou": 0.7760352303527858
+ },
+ "L11H5": {
+  "test_iou": 0.791272829973214,
+  "val_iou": 0.7998541397045469,
+  "chosen": "initial",
+  "same_data_iou": 0.8045084114269978
+ },
+ "L11H6": {
+  "test_iou": 0.7932555742311294,
+  "val_iou": 0.8017926989722395,
+  "chosen": "initial",
+  "same_data_iou": 0.7968479756289522
+ },
+ "L11H7": {
+  "test_iou": 0.7621247512938932,
+  "val_iou": 0.7713807183049753,
+  "chosen": "initial",
+  "same_data_iou": 0.7816652329047746
+ },
+ "L11H8": {
+  "test_iou": 0.728862675116934,
+  "val_iou": 0.7368344373960624,
+  "chosen": "initial",
+  "same_data_iou": 0.7435917161651245
+ },
+ "L11H9": {
+  "test_iou": 0.7091697161018071,
+  "val_iou": 0.7124131475089596,
+  "chosen": "initial",
+  "same_data_iou": 0.7128497127254239
+ },
+ "L12H0": {
+  "test_iou": 0.743699015857542,
+  "val_iou": 0.750987177352235,
+  "chosen": "initial",
+  "same_data_iou": 0.7419640851894517
+ },
+ "L12H1": {
+  "test_iou": 0.6414866221094471,
+  "val_iou": 0.6596432248911067,
+  "chosen": "refined",
+  "same_data_iou": 0.6523623280073132
+ },
+ "L12H10": {
+  "test_iou": 0.6942159029097023,
+  "val_iou": 0.7027713652600467,
+  "chosen": "initial",
+  "same_data_iou": 0.7048861880571476
+ },
+ "L12H11": {
+  "test_iou": 0.7011630112456229,
+  "val_iou": 0.7038650664200348,
+  "chosen": "initial",
+  "same_data_iou": 0.7176279448522619
+ },
+ "L12H12": {
+  "test_iou": 0.6959966233728757,
+  "val_iou": 0.6965398737259259,
+  "chosen": "initial",
+  "same_data_iou": 0.7047393533606753
+ },
+ "L12H13": {
+  "test_iou": 0.8463933420493652,
+  "val_iou": 0.8535294553442505,
+  "chosen": "initial",
+  "same_data_iou": 0.8488222212154497
+ },
+ "L12H14": {
+  "test_iou": 0.7265858201672524,
+  "val_iou": 0.7295337767655561,
+  "chosen": "refined",
+  "same_data_iou": 0.7330052408522512
+ },
+ "L12H15": {
+  "test_iou": 0.8070900539262331,
+  "val_iou": 0.8186218817164419,
+  "chosen": "initial",
+  "same_data_iou": 0.7965181260596886
+ },
+ "L12H16": {
+  "test_iou": 0.7060782447470588,
+  "val_iou": 0.7103797024582373,
+  "chosen": "initial",
+  "same_data_iou": 0.7103762683101082
+ },
+ "L12H17": {
+  "test_iou": 0.5638340322181272,
+  "val_iou": 0.5682098051969456,
+  "chosen": "initial",
+  "same_data_iou": 0.5620696078462007
+ },
+ "L12H18": {
+  "test_iou": 0.8055615547183441,
+  "val_iou": 0.8109701340267965,
+  "chosen": "refined",
+  "same_data_iou": 0.8138180874673644
+ },
+ "L12H19": {
+  "test_iou": 0.9242800158189973,
+  "val_iou": 0.9309344636193831,
+  "chosen": "initial",
+  "same_data_iou": 0.9280750909997995
+ },
+ "L12H2": {
+  "test_iou": 0.6049313702441389,
+  "val_iou": 0.6196249656223999,
+  "chosen": "initial",
+  "same_data_iou": 0.6161561238863249
+ },
+ "L12H20": {
+  "test_iou": 0.911769989584583,
+  "val_iou": 0.9090786783817684,
+  "chosen": "refined",
+  "same_data_iou": 0.9159317514494895
+ },
+ "L12H21": {
+  "test_iou": 0.7459900153269662,
+  "val_iou": 0.7537009558164992,
+  "chosen": "initial",
+  "same_data_iou": 0.7396508363802008
+ },
+ "L12H22": {
+  "test_iou": 0.7208174910666937,
+  "val_iou": 0.7226152221567992,
+  "chosen": "refined",
+  "same_data_iou": 0.7279046786544101
+ },
+ "L12H23": {
+  "test_iou": 0.5178436940261473,
+  "val_iou": 0.52846937007903,
+  "chosen": "refined",
+  "same_data_iou": 0.5326888952090195
+ },
+ "L12H3": {
+  "test_iou": 0.8942012442034678,
+  "val_iou": 0.8953215244163679,
+  "chosen": "initial",
+  "same_data_iou": 0.9001953526145522
+ },
+ "L12H4": {
+  "test_iou": 0.876384968553895,
+  "val_iou": 0.8815729390308442,
+  "chosen": "initial",
+  "same_data_iou": 0.8774049933148715
+ },
+ "L12H5": {
+  "test_iou": 0.6613338689016345,
+  "val_iou": 0.6732317179942204,
+  "chosen": "initial",
+  "same_data_iou": 0.666119821549699
+ },
+ "L12H6": {
+  "test_iou": 0.0,
+  "val_iou": 0.0,
+  "chosen": "initial",
+  "same_data_iou": 0.0
+ },
+ "L12H7": {
+  "test_iou": 0.5698258939759033,
+  "val_iou": 0.5815940031224492,
+  "chosen": "initial",
+  "same_data_iou": 0.557932454094066
+ },
+ "L12H8": {
+  "test_iou": 0.7285477728295249,
+  "val_iou": 0.7349537182318536,
+  "chosen": "initial",
+  "same_data_iou": 0.7370289140571511
+ },
+ "L12H9": {
+  "test_iou": 0.6618677812524848,
+  "val_iou": 0.667399173060908,
+  "chosen": "initial",
+  "same_data_iou": 0.6576418983119943
+ },
+ "L13H0": {
+  "test_iou": 0.6503752074348548,
+  "val_iou": 0.6515660752596311,
+  "chosen": "initial",
+  "same_data_iou": 0.6542776844798587
+ },
+ "L13H1": {
+  "test_iou": 0.6351512115576231,
+  "val_iou": 0.6400651002598585,
+  "chosen": "initial",
+  "same_data_iou": 0.6503464180058595
+ },
+ "L13H10": {
+  "test_iou": 0.7392941629949297,
+  "val_iou": 0.7427442973779198,
+  "chosen": "initial",
+  "same_data_iou": 0.7451200869070621
+ },
+ "L13H11": {
+  "test_iou": 0.6748100714584976,
+  "val_iou": 0.681109825453384,
+  "chosen": "refined",
+  "same_data_iou": 0.6854888860521557
+ },
+ "L13H12": {
+  "test_iou": 0.800978017876499,
+  "val_iou": 0.8091845057778952,
+  "chosen": "refined",
+  "same_data_iou": 0.8032313214111516
+ },
+ "L13H13": {
+  "test_iou": 0.9249555344168986,
+  "val_iou": 0.9348320409332327,
+  "chosen": "refined",
+  "same_data_iou": 0.9290266145270178
+ },
+ "L13H14": {
+  "test_iou": 0.7922891482434133,
+  "val_iou": 0.8034330187955689,
+  "chosen": "refined",
+  "same_data_iou": 0.8010506571891678
+ },
+ "L13H15": {
+  "test_iou": 0.6991454729198056,
+  "val_iou": 0.7093538764960683,
+  "chosen": "initial",
+  "same_data_iou": 0.6996031888403386
+ },
+ "L13H16": {
+  "test_iou": 0.8367667371859207,
+  "val_iou": 0.8507968516400684,
+  "chosen": "initial",
+  "same_data_iou": 0.8400469628272187
+ },
+ "L13H17": {
+  "test_iou": 0.7282429934696475,
+  "val_iou": 0.7482491713088864,
+  "chosen": "initial",
+  "same_data_iou": 0.7295197357835159
+ },
+ "L13H18": {
+  "test_iou": 0.6968538805936663,
+  "val_iou": 0.6983190058875017,
+  "chosen": "initial",
+  "same_data_iou": 0.7130828594550994
+ },
+ "L13H19": {
+  "test_iou": 0.7251484418820732,
+  "val_iou": 0.7350309016481699,
+  "chosen": "initial",
+  "same_data_iou": 0.7333982831973874
+ },
+ "L13H2": {
+  "test_iou": 0.6990773104841159,
+  "val_iou": 0.7118949610694735,
+  "chosen": "initial",
+  "same_data_iou": 0.709197993157803
+ },
+ "L13H20": {
+  "test_iou": 0.7850149996390653,
+  "val_iou": 0.7846976112048165,
+  "chosen": "initial",
+  "same_data_iou": 0.7800379280164832
+ },
+ "L13H21": {
+  "test_iou": 0.7962853476640137,
+  "val_iou": 0.8064657058811069,
+  "chosen": "initial",
+  "same_data_iou": 0.7991517026410785
+ },
+ "L13H22": {
+  "test_iou": 0.0,
+  "val_iou": 0.0,
+  "chosen": "initial",
+  "same_data_iou": 0.0
+ },
+ "L13H23": {
+  "test_iou": 0.8068875023108228,
+  "val_iou": 0.8169032218241256,
+  "chosen": "initial",
+  "same_data_iou": 0.8078458111503402
+ },
+ "L13H3": {
+  "test_iou": 0.7890119160986143,
+  "val_iou": 0.7953686543261204,
+  "chosen": "initial",
+  "same_data_iou": 0.7959035000255611
+ },
+ "L13H4": {
+  "test_iou": 0.6695153716087445,
+  "val_iou": 0.689255834715253,
+  "chosen": "initial",
+  "same_data_iou": 0.6688719359535849
+ },
+ "L13H5": {
+  "test_iou": 0.7445989230435817,
+  "val_iou": 0.7531286205649534,
+  "chosen": "refined",
+  "same_data_iou": 0.7469740564748719
+ },
+ "L13H6": {
+  "test_iou": 0.753256387944532,
+  "val_iou": 0.754280794663271,
+  "chosen": "refined",
+  "same_data_iou": 0.7538434376533968
+ },
+ "L13H7": {
+  "test_iou": 0.6976294607847567,
+  "val_iou": 0.6986104107563013,
+  "chosen": "initial",
+  "same_data_iou": 0.7069343413909772
+ },
+ "L13H8": {
+  "test_iou": 0.5853425328048054,
+  "val_iou": 0.5836310170960659,
+  "chosen": "refined",
+  "same_data_iou": 0.5931024659923066
+ },
+ "L13H9": {
+  "test_iou": 0.6287330880583651,
+  "val_iou": 0.6423379603965195,
+  "chosen": "refined",
+  "same_data_iou": 0.6372276245653443
+ },
+ "L14H0": {
+  "test_iou": 0.547071275123912,
+  "val_iou": 0.557148211471134,
+  "chosen": "refined",
+  "same_data_iou": 0.5563740066844081
+ },
+ "L14H1": {
+  "test_iou": 0.979028310322907,
+  "val_iou": 0.9799760819134079,
+  "chosen": "initial",
+  "same_data_iou": 0.9775220353436895
+ },
+ "L14H10": {
+  "test_iou": 0.6970625580714427,
+  "val_iou": 0.7027113528432278,
+  "chosen": "initial",
+  "same_data_iou": 0.7028929739275254
+ },
+ "L14H11": {
+  "test_iou": 0.6184840248539143,
+  "val_iou": 0.6433004392565198,
+  "chosen": "initial",
+  "same_data_iou": 0.6342592916872012
+ },
+ "L14H12": {
+  "test_iou": 0.8324076334069115,
+  "val_iou": 0.8432853702941929,
+  "chosen": "initial",
+  "same_data_iou": 0.8237354760905362
+ },
+ "L14H13": {
+  "test_iou": 0.9233563442229837,
+  "val_iou": 0.9282974536745272,
+  "chosen": "initial",
+  "same_data_iou": 0.915732051701824
+ },
+ "L14H14": {
+  "test_iou": 0.8911235358227109,
+  "val_iou": 0.8958629233652482,
+  "chosen": "refined",
+  "same_data_iou": 0.8983124709265787
+ },
+ "L14H15": {
+  "test_iou": 0.7063186105272006,
+  "val_iou": 0.718082478883546,
+  "chosen": "initial",
+  "same_data_iou": 0.7214513183218465
+ },
+ "L14H16": {
+  "test_iou": 0.734646683867529,
+  "val_iou": 0.7454772457074409,
+  "chosen": "initial",
+  "same_data_iou": 0.7389352967681062
+ },
+ "L14H17": {
+  "test_iou": 0.5954591382129473,
+  "val_iou": 0.6068284255523326,
+  "chosen": "initial",
+  "same_data_iou": 0.5810432198260032
+ },
+ "L14H18": {
+  "test_iou": 0.7636710540910738,
+  "val_iou": 0.7678644719444222,
+  "chosen": "refined",
+  "same_data_iou": 0.7543822168471084
+ },
+ "L14H19": {
+  "test_iou": 0.6346841674287877,
+  "val_iou": 0.6376173795005546,
+  "chosen": "initial",
+  "same_data_iou": 0.6324209962699336
+ },
+ "L14H2": {
+  "test_iou": 0.9711063906208354,
+  "val_iou": 0.9717899709816626,
+  "chosen": "initial",
+  "same_data_iou": 0.9676695954757563
+ },
+ "L14H20": {
+  "test_iou": 0.6988107384393674,
+  "val_iou": 0.7100061342271331,
+  "chosen": "initial",
+  "same_data_iou": 0.7114147719255404
+ },
+ "L14H21": {
+  "test_iou": 0.8385282137345778,
+  "val_iou": 0.844482981370799,
+  "chosen": "initial",
+  "same_data_iou": 0.8465056769959223
+ },
+ "L14H22": {
+  "test_iou": 0.9543005159154019,
+  "val_iou": 0.9627847529551644,
+  "chosen": "initial",
+  "same_data_iou": 0.9590622209331577
+ },
+ "L14H23": {
+  "test_iou": 0.6272009490388845,
+  "val_iou": 0.6260502536220932,
+  "chosen": "refined",
+  "same_data_iou": 0.6307438736477003
+ },
+ "L14H3": {
+  "test_iou": 0.6632903632233703,
+  "val_iou": 0.6703685235564677,
+  "chosen": "initial",
+  "same_data_iou": 0.6701942025224363
+ },
+ "L14H4": {
+  "test_iou": 0.7240186635757584,
+  "val_iou": 0.7281264232407696,
+  "chosen": "refined",
+  "same_data_iou": 0.7292355805374308
+ },
+ "L14H5": {
+  "test_iou": 0.587153229967827,
+  "val_iou": 0.5867606467014065,
+  "chosen": "initial",
+  "same_data_iou": 0.5838370238111956
+ },
+ "L14H6": {
+  "test_iou": 0.6408022630204349,
+  "val_iou": 0.6345848509779054,
+  "chosen": "refined",
+  "same_data_iou": 0.6348752729628446
+ },
+ "L14H7": {
+  "test_iou": 0.5780867050800832,
+  "val_iou": 0.5836925750202332,
+  "chosen": "initial",
+  "same_data_iou": 0.5783475032728782
+ },
+ "L14H8": {
+  "test_iou": 0.7216083727381926,
+  "val_iou": 0.717733240517492,
+  "chosen": "refined",
+  "same_data_iou": 0.7050867391607543
+ },
+ "L14H9": {
+  "test_iou": 0.6227002937302619,
+  "val_iou": 0.6202157421746616,
+  "chosen": "refined",
+  "same_data_iou": 0.6263886510247743
+ },
+ "L15H0": {
+  "test_iou": 0.7710381204151824,
+  "val_iou": 0.7658631725365894,
+  "chosen": "initial",
+  "same_data_iou": 0.7904129614361249
+ },
+ "L15H1": {
+  "test_iou": 0.889620462231807,
+  "val_iou": 0.9013036670390987,
+  "chosen": "initial",
+  "same_data_iou": 0.8784346420097929
+ },
+ "L15H10": {
+  "test_iou": 0.6652806084386893,
+  "val_iou": 0.6716943353181902,
+  "chosen": "initial",
+  "same_data_iou": 0.677156084178166
+ },
+ "L15H11": {
+  "test_iou": 0.6704191016025274,
+  "val_iou": 0.6700718270170074,
+  "chosen": "initial",
+  "same_data_iou": 0.669403995271855
+ },
+ "L15H12": {
+  "test_iou": 0.9328436494643796,
+  "val_iou": 0.934780320207301,
+  "chosen": "initial",
+  "same_data_iou": 0.9371724513597686
+ },
+ "L15H13": {
+  "test_iou": 0.9716655254069994,
+  "val_iou": 0.9729927267429148,
+  "chosen": "initial",
+  "same_data_iou": 0.9738697517659448
+ },
+ "L15H14": {
+  "test_iou": 0.7468784763206405,
+  "val_iou": 0.7506666186088138,
+  "chosen": "refined",
+  "same_data_iou": 0.7625381349775855
+ },
+ "L15H15": {
+  "test_iou": 0.6852830111332662,
+  "val_iou": 0.685600930309011,
+  "chosen": "initial",
+  "same_data_iou": 0.6856580201969954
+ },
+ "L15H16": {
+  "test_iou": 0.7540759644792844,
+  "val_iou": 0.7537176329311257,
+  "chosen": "refined",
+  "same_data_iou": 0.7644575986596069
+ },
+ "L15H17": {
+  "test_iou": 0.7604613479102379,
+  "val_iou": 0.7878916980629911,
+  "chosen": "initial",
+  "same_data_iou": 0.770184528814181
+ },
+ "L15H18": {
+  "test_iou": 0.8366357778537095,
+  "val_iou": 0.8536218642081524,
+  "chosen": "initial",
+  "same_data_iou": 0.8337569082752717
+ },
+ "L15H19": {
+  "test_iou": 0.8989249836480423,
+  "val_iou": 0.9098970545044456,
+  "chosen": "initial",
+  "same_data_iou": 0.9054184989048532
+ },
+ "L15H2": {
+  "test_iou": 0.609667623160398,
+  "val_iou": 0.6191328761424886,
+  "chosen": "initial",
+  "same_data_iou": 0.6266508778483415
+ },
+ "L15H20": {
+  "test_iou": 0.8527269596646633,
+  "val_iou": 0.8670273727691113,
+  "chosen": "initial",
+  "same_data_iou": 0.8545011799294591
+ },
+ "L15H21": {
+  "test_iou": 0.6679247055249192,
+  "val_iou": 0.6797841617755735,
+  "chosen": "initial",
+  "same_data_iou": 0.6706310501697252
+ },
+ "L15H22": {
+  "test_iou": 0.8117195900751826,
+  "val_iou": 0.8301130687349795,
+  "chosen": "initial",
+  "same_data_iou": 0.7985393587609197
+ },
+ "L15H23": {
+  "test_iou": 0.6853231776131368,
+  "val_iou": 0.7006234407023781,
+  "chosen": "initial",
+  "same_data_iou": 0.6776599407882745
+ },
+ "L15H3": {
+  "test_iou": 0.6541055716043204,
+  "val_iou": 0.6581388595307538,
+  "chosen": "initial",
+  "same_data_iou": 0.6511767278858753
+ },
+ "L15H4": {
+  "test_iou": 0.7177007622040962,
+  "val_iou": 0.722162448942272,
+  "chosen": "initial",
+  "same_data_iou": 0.7176420353420937
+ },
+ "L15H5": {
+  "test_iou": 0.7671774646866315,
+  "val_iou": 0.7730898067341289,
+  "chosen": "initial",
+  "same_data_iou": 0.7745416514774328
+ },
+ "L15H6": {
+  "test_iou": 0.887141394401321,
+  "val_iou": 0.8979576742594254,
+  "chosen": "initial",
+  "same_data_iou": 0.889747616154912
+ },
+ "L15H7": {
+  "test_iou": 0.7979001046736899,
+  "val_iou": 0.8124455923791761,
+  "chosen": "initial",
+  "same_data_iou": 0.801140071902017
+ },
+ "L15H8": {
+  "test_iou": 0.6653069663071224,
+  "val_iou": 0.6641304761934858,
+  "chosen": "refined",
+  "same_data_iou": 0.660255980879102
+ },
+ "L15H9": {
+  "test_iou": 0.723103141450922,
+  "val_iou": 0.7289058772260578,
+  "chosen": "initial",
+  "same_data_iou": 0.7299479294884529
+ },
+ "L16H0": {
+  "test_iou": 0.9579918630159386,
+  "val_iou": 0.9609061731052154,
+  "chosen": "initial",
+  "same_data_iou": 0.9544024659153457
+ },
+ "L16H1": {
+  "test_iou": 0.7081015197725335,
+  "val_iou": 0.7097100768463147,
+  "chosen": "initial",
+  "same_data_iou": 0.7131213382842163
+ },
+ "L16H10": {
+  "test_iou": 0.9285889511618569,
+  "val_iou": 0.9368655418435378,
+  "chosen": "initial",
+  "same_data_iou": 0.9344983609824002
+ },
+ "L16H11": {
+  "test_iou": 0.728230077914561,
+  "val_iou": 0.728449976629184,
+  "chosen": "refined",
+  "same_data_iou": 0.7478309595495897
+ },
+ "L16H12": {
+  "test_iou": 0.9372864508043949,
+  "val_iou": 0.942098270417247,
+  "chosen": "initial",
+  "same_data_iou": 0.9494768953528672
+ },
+ "L16H13": {
+  "test_iou": 0.8267499864100336,
+  "val_iou": 0.8414114630075754,
+  "chosen": "initial",
+  "same_data_iou": 0.7981779789180276
+ },
+ "L16H14": {
+  "test_iou": 0.8656303746534096,
+  "val_iou": 0.8793079635937687,
+  "chosen": "initial",
+  "same_data_iou": 0.8542072149197889
+ },
+ "L16H15": {
+  "test_iou": 0.9028091859214729,
+  "val_iou": 0.9173671928128124,
+  "chosen": "initial",
+  "same_data_iou": 0.90379730397782
+ },
+ "L16H16": {
+  "test_iou": 0.9110551807642137,
+  "val_iou": 0.9217202987434295,
+  "chosen": "initial",
+  "same_data_iou": 0.9071565508531914
+ },
+ "L16H17": {
+  "test_iou": 0.845554180750229,
+  "val_iou": 0.8562707896868225,
+  "chosen": "initial",
+  "same_data_iou": 0.8346940358210938
+ },
+ "L16H18": {
+  "test_iou": 0.6740812264490785,
+  "val_iou": 0.6789790858782713,
+  "chosen": "initial",
+  "same_data_iou": 0.676428538099541
+ },
+ "L16H19": {
+  "test_iou": 0.6151132779867292,
+  "val_iou": 0.614766789614002,
+  "chosen": "refined",
+  "same_data_iou": 0.6260590156949084
+ },
+ "L16H2": {
+  "test_iou": 0.9408321949857418,
+  "val_iou": 0.9461164444333875,
+  "chosen": "refined",
+  "same_data_iou": 0.9553448898290762
+ },
+ "L16H20": {
+  "test_iou": 0.6662091630803276,
+  "val_iou": 0.6810522174175833,
+  "chosen": "initial",
+  "same_data_iou": 0.6708882848150913
+ },
+ "L16H21": {
+  "test_iou": 0.6847886672904957,
+  "val_iou": 0.6870690695715527,
+  "chosen": "initial",
+  "same_data_iou": 0.6931672167782297
+ },
+ "L16H22": {
+  "test_iou": 0.8808471165828364,
+  "val_iou": 0.8873231652145083,
+  "chosen": "initial",
+  "same_data_iou": 0.8687021987551278
+ },
+ "L16H23": {
+  "test_iou": 0.8729293688399903,
+  "val_iou": 0.8742225431295222,
+  "chosen": "initial",
+  "same_data_iou": 0.9023272484167807
+ },
+ "L16H3": {
+  "test_iou": 0.9656681261105422,
+  "val_iou": 0.9757487764910115,
+  "chosen": "initial",
+  "same_data_iou": 0.967881285690648
+ },
+ "L16H4": {
+  "test_iou": 0.6798966553308151,
+  "val_iou": 0.6807217952386737,
+  "chosen": "refined",
+  "same_data_iou": 0.6888325427231015
+ },
+ "L16H5": {
+  "test_iou": 0.9638352444196928,
+  "val_iou": 0.9659587584295238,
+  "chosen": "initial",
+  "same_data_iou": 0.966548234546495
+ },
+ "L16H6": {
+  "test_iou": 0.6783385880742222,
+  "val_iou": 0.7016916479974907,
+  "chosen": "initial",
+  "same_data_iou": 0.6662944368498723
+ },
+ "L16H7": {
+  "test_iou": 0.7701230757166038,
+  "val_iou": 0.7854893708035046,
+  "chosen": "initial",
+  "same_data_iou": 0.7784215228044161
+ },
+ "L16H8": {
+  "test_iou": 0.7159366636237027,
+  "val_iou": 0.7307595242904504,
+  "chosen": "initial",
+  "same_data_iou": 0.7242510972246226
+ },
+ "L16H9": {
+  "test_iou": 0.6401575656580697,
+  "val_iou": 0.6526209577527488,
+  "chosen": "initial",
+  "same_data_iou": 0.6573156042811119
+ },
+ "L17H0": {
+  "test_iou": 0.8358419785516724,
+  "val_iou": 0.8461877992706573,
+  "chosen": "refined",
+  "same_data_iou": 0.851196503820311
+ },
+ "L17H1": {
+  "test_iou": 0.9107419917935274,
+  "val_iou": 0.922519217811384,
+  "chosen": "initial",
+  "same_data_iou": 0.9054634296097002
+ },
+ "L17H10": {
+  "test_iou": 0.9083198529813983,
+  "val_iou": 0.9203467117257899,
+  "chosen": "initial",
+  "same_data_iou": 0.9117946634474551
+ },
+ "L17H11": {
+  "test_iou": 0.9365240505526299,
+  "val_iou": 0.9398019680927154,
+  "chosen": "initial",
+  "same_data_iou": 0.9404679726094318
+ },
+ "L17H12": {
+  "test_iou": 0.9228810903772137,
+  "val_iou": 0.9284952827532911,
+  "chosen": "initial",
+  "same_data_iou": 0.9226846553769159
+ },
+ "L17H13": {
+  "test_iou": 0.8390885818684108,
+  "val_iou": 0.8398291954086777,
+  "chosen": "initial",
+  "same_data_iou": 0.8446738849569442
+ },
+ "L17H14": {
+  "test_iou": 0.8973163274011354,
+  "val_iou": 0.8973514596834588,
+  "chosen": "initial",
+  "same_data_iou": 0.899679611451884
+ },
+ "L17H15": {
+  "test_iou": 0.7204146035658561,
+  "val_iou": 0.7419327756812345,
+  "chosen": "initial",
+  "same_data_iou": 0.7325461731672227
+ },
+ "L17H16": {
+  "test_iou": 0.8161665123520564,
+  "val_iou": 0.8194591559154,
+  "chosen": "initial",
+  "same_data_iou": 0.8306053884747815
+ },
+ "L17H17": {
+  "test_iou": 0.8056567908368234,
+  "val_iou": 0.8179755348289187,
+  "chosen": "initial",
+  "same_data_iou": 0.8062700138850142
+ },
+ "L17H18": {
+  "test_iou": 0.9224815009119829,
+  "val_iou": 0.9252260333552982,
+  "chosen": "initial",
+  "same_data_iou": 0.9196694909415528
+ },
+ "L17H19": {
+  "test_iou": 0.8969193909282288,
+  "val_iou": 0.9018433035485013,
+  "chosen": "refined",
+  "same_data_iou": 0.9033645305831713
+ },
+ "L17H2": {
+  "test_iou": 0.7903418255823333,
+  "val_iou": 0.8007542495863106,
+  "chosen": "initial",
+  "same_data_iou": 0.7982358300148851
+ },
+ "L17H20": {
+  "test_iou": 0.8533125208216121,
+  "val_iou": 0.8823312012812913,
+  "chosen": "initial",
+  "same_data_iou": 0.8597388459195869
+ },
+ "L17H21": {
+  "test_iou": 0.9469567923865034,
+  "val_iou": 0.9519701274838969,
+  "chosen": "initial",
+  "same_data_iou": 0.9486572150260966
+ },
+ "L17H22": {
+  "test_iou": 0.8445231282913795,
+  "val_iou": 0.8500965905715221,
+  "chosen": "initial",
+  "same_data_iou": 0.8483197804027623
+ },
+ "L17H23": {
+  "test_iou": 0.8594648734178878,
+  "val_iou": 0.8605853451067437,
+  "chosen": "initial",
+  "same_data_iou": 0.8658066081686533
+ },
+ "L17H3": {
+  "test_iou": 0.9496899565973095,
+  "val_iou": 0.9566784436565229,
+  "chosen": "refined",
+  "same_data_iou": 0.9504227651917899
+ },
+ "L17H4": {
+  "test_iou": 0.937119634162626,
+  "val_iou": 0.9391554769240987,
+  "chosen": "refined",
+  "same_data_iou": 0.947845718772701
+ },
+ "L17H5": {
+  "test_iou": 0.7658032730559126,
+  "val_iou": 0.7615232826074066,
+  "chosen": "refined",
+  "same_data_iou": 0.7747927223246116
+ },
+ "L17H6": {
+  "test_iou": 0.6423484978638595,
+  "val_iou": 0.6397599072431165,
+  "chosen": "initial",
+  "same_data_iou": 0.6477279754511006
+ },
+ "L17H7": {
+  "test_iou": 0.7242726068037055,
+  "val_iou": 0.7229682757284566,
+  "chosen": "initial",
+  "same_data_iou": 0.7118470258164858
+ },
+ "L17H8": {
+  "test_iou": 0.7262281679083711,
+  "val_iou": 0.7265054970604271,
+  "chosen": "initial",
+  "same_data_iou": 0.7411869652733857
+ },
+ "L17H9": {
+  "test_iou": 0.9394921891341798,
+  "val_iou": 0.941026552304735,
+  "chosen": "refined",
+  "same_data_iou": 0.9469313460159599
+ },
+ "L18H0": {
+  "test_iou": 0.7542677484126241,
+  "val_iou": 0.754404146553803,
+  "chosen": "refined",
+  "same_data_iou": 0.7640602146256279
+ },
+ "L18H1": {
+  "test_iou": 0.8581964931288494,
+  "val_iou": 0.8582663720012483,
+  "chosen": "initial",
+  "same_data_iou": 0.8561454871518116
+ },
+ "L18H10": {
+  "test_iou": 0.845722454658538,
+  "val_iou": 0.8566263484189791,
+  "chosen": "initial",
+  "same_data_iou": 0.8289166460186257
+ },
+ "L18H11": {
+  "test_iou": 0.8329618704129694,
+  "val_iou": 0.8472236820706636,
+  "chosen": "initial",
+  "same_data_iou": 0.8283628771313707
+ },
+ "L18H12": {
+  "test_iou": 0.9324141310690126,
+  "val_iou": 0.9376912348008112,
+  "chosen": "refined",
+  "same_data_iou": 0.9361740048829816
+ },
+ "L18H13": {
+  "test_iou": 0.9232774561195138,
+  "val_iou": 0.9189918938884967,
+  "chosen": "initial",
+  "same_data_iou": 0.907469918672264
+ },
+ "L18H14": {
+  "test_iou": 0.9446510133960347,
+  "val_iou": 0.9444252281867564,
+  "chosen": "initial",
+  "same_data_iou": 0.9454578604646281
+ },
+ "L18H15": {
+  "test_iou": 0.9672257250724252,
+  "val_iou": 0.9686966745257299,
+  "chosen": "initial",
+  "same_data_iou": 0.9632388493210591
+ },
+ "L18H16": {
+  "test_iou": 0.8387508938106589,
+  "val_iou": 0.8385900626137246,
+  "chosen": "refined",
+  "same_data_iou": 0.8512516347537027
+ },
+ "L18H17": {
+  "test_iou": 0.7628019389853458,
+  "val_iou": 0.7614552712976527,
+  "chosen": "refined",
+  "same_data_iou": 0.7649470537271217
+ },
+ "L18H18": {
+  "test_iou": 0.9268679609926014,
+  "val_iou": 0.9328108535237984,
+  "chosen": "initial",
+  "same_data_iou": 0.9313987102470958
+ },
+ "L18H19": {
+  "test_iou": 0.8380465087081285,
+  "val_iou": 0.8535847003495596,
+  "chosen": "initial",
+  "same_data_iou": 0.821582560823796
+ },
+ "L18H2": {
+  "test_iou": 0.9717536375865281,
+  "val_iou": 0.9757293375313592,
+  "chosen": "initial",
+  "same_data_iou": 0.9623376722784218
+ },
+ "L18H20": {
+  "test_iou": 0.7747205927406372,
+  "val_iou": 0.7793093305596392,
+  "chosen": "initial",
+  "same_data_iou": 0.7773264043001268
+ },
+ "L18H21": {
+  "test_iou": 0.6870646444477311,
+  "val_iou": 0.6867261991931782,
+  "chosen": "refined",
+  "same_data_iou": 0.6796207555611942
+ },
+ "L18H22": {
+  "test_iou": 0.8553726109247992,
+  "val_iou": 0.8558128542135448,
+  "chosen": "initial",
+  "same_data_iou": 0.850116557274616
+ },
+ "L18H23": {
+  "test_iou": 0.7978998979155978,
+  "val_iou": 0.8032960016971793,
+  "chosen": "initial",
+  "same_data_iou": 0.783316074824228
+ },
+ "L18H3": {
+  "test_iou": 0.9524690744986859,
+  "val_iou": 0.9530589710490323,
+  "chosen": "initial",
+  "same_data_iou": 0.94887124340401
+ },
+ "L18H4": {
+  "test_iou": 0.9622006356084899,
+  "val_iou": 0.966104647330364,
+  "chosen": "initial",
+  "same_data_iou": 0.9619115901682076
+ },
+ "L18H5": {
+  "test_iou": 0.8927164263993664,
+  "val_iou": 0.8947862614779762,
+  "chosen": "refined",
+  "same_data_iou": 0.8894651954746149
+ },
+ "L18H6": {
+  "test_iou": 0.6544717736491681,
+  "val_iou": 0.6578850450490817,
+  "chosen": "refined",
+  "same_data_iou": 0.6578886607395132
+ },
+ "L18H7": {
+  "test_iou": 0.7288489494491202,
+  "val_iou": 0.7445664065084519,
+  "chosen": "initial",
+  "same_data_iou": 0.7124076622600996
+ },
+ "L18H8": {
+  "test_iou": 0.7971002463571552,
+  "val_iou": 0.793384267064601,
+  "chosen": "initial",
+  "same_data_iou": 0.8112241926650648
+ },
+ "L18H9": {
+  "test_iou": 0.836099785056218,
+  "val_iou": 0.8344242517290925,
+  "chosen": "initial",
+  "same_data_iou": 0.8335940713607208
+ },
+ "L19H0": {
+  "test_iou": 0.8434298520716061,
+  "val_iou": 0.8435815662808045,
+  "chosen": "initial",
+  "same_data_iou": 0.8359829526505684
+ },
+ "L19H1": {
+  "test_iou": 0.6646435892253447,
+  "val_iou": 0.6744334988939907,
+  "chosen": "initial",
+  "same_data_iou": 0.6756939931831552
+ },
+ "L19H10": {
+  "test_iou": 0.7686723705798753,
+  "val_iou": 0.7848231884063297,
+  "chosen": "initial",
+  "same_data_iou": 0.7526233359090853
+ },
+ "L19H11": {
+  "test_iou": 0.6833104203840769,
+  "val_iou": 0.7026590788933598,
+  "chosen": "initial",
+  "same_data_iou": 0.6704463215819374
+ },
+ "L19H12": {
+  "test_iou": 0.9295818549042681,
+  "val_iou": 0.9357981510108847,
+  "chosen": "initial",
+  "same_data_iou": 0.9146231742136941
+ },
+ "L19H13": {
+  "test_iou": 0.6467136702830533,
+  "val_iou": 0.6424609734938234,
+  "chosen": "refined",
+  "same_data_iou": 0.6578005434997315
+ },
+ "L19H14": {
+  "test_iou": 0.867226982726435,
+  "val_iou": 0.8926350318138583,
+  "chosen": "initial",
+  "same_data_iou": 0.884694942680615
+ },
+ "L19H15": {
+  "test_iou": 0.9450090419808757,
+  "val_iou": 0.957899784051893,
+  "chosen": "initial",
+  "same_data_iou": 0.9557062290169686
+ },
+ "L19H16": {
+  "test_iou": 0.9179175186519799,
+  "val_iou": 0.9322664180472495,
+  "chosen": "refined",
+  "same_data_iou": 0.9277013727411834
+ },
+ "L19H17": {
+  "test_iou": 0.9085455555611958,
+  "val_iou": 0.9220426560056696,
+  "chosen": "initial",
+  "same_data_iou": 0.9131466097371426
+ },
+ "L19H18": {
+  "test_iou": 0.810577020912169,
+  "val_iou": 0.8167637545646831,
+  "chosen": "initial",
+  "same_data_iou": 0.7930137387028259
+ },
+ "L19H19": {
+  "test_iou": 0.6816422479744056,
+  "val_iou": 0.6899158248091485,
+  "chosen": "initial",
+  "same_data_iou": 0.6814475802012355
+ },
+ "L19H2": {
+  "test_iou": 0.7282928679987851,
+  "val_iou": 0.727106446013767,
+  "chosen": "initial",
+  "same_data_iou": 0.7379948565730913
+ },
+ "L19H20": {
+  "test_iou": 0.7625096471671093,
+  "val_iou": 0.7575156579896164,
+  "chosen": "refined",
+  "same_data_iou": 0.7807483002697583
+ },
+ "L19H21": {
+  "test_iou": 0.9585702889541201,
+  "val_iou": 0.9614600793034539,
+  "chosen": "initial",
+  "same_data_iou": 0.9580882875678544
+ },
+ "L19H22": {
+  "test_iou": 0.9610142642656883,
+  "val_iou": 0.964944736091615,
+  "chosen": "initial",
+  "same_data_iou": 0.9553978426671934
+ },
+ "L19H23": {
+  "test_iou": 0.9466490658938875,
+  "val_iou": 0.9544454211023695,
+  "chosen": "initial",
+  "same_data_iou": 0.948411141538432
+ },
+ "L19H3": {
+  "test_iou": 0.6880576520063078,
+  "val_iou": 0.6878580991842297,
+  "chosen": "refined",
+  "same_data_iou": 0.7021514863626257
+ },
+ "L19H4": {
+  "test_iou": 0.6524922029530532,
+  "val_iou": 0.6535398275639079,
+  "chosen": "refined",
+  "same_data_iou": 0.6546939138674837
+ },
+ "L19H5": {
+  "test_iou": 0.7091004482849109,
+  "val_iou": 0.7156483235156013,
+  "chosen": "refined",
+  "same_data_iou": 0.7216537190372981
+ },
+ "L19H6": {
+  "test_iou": 0.6742941961545725,
+  "val_iou": 0.6701995813732854,
+  "chosen": "initial",
+  "same_data_iou": 0.681787999872635
+ },
+ "L19H7": {
+  "test_iou": 0.7263778333043809,
+  "val_iou": 0.7292559118455574,
+  "chosen": "refined",
+  "same_data_iou": 0.7397761401635219
+ },
+ "L19H8": {
+  "test_iou": 0.840720475350286,
+  "val_iou": 0.8495917903161789,
+  "chosen": "initial",
+  "same_data_iou": 0.8381521752972076
+ },
+ "L19H9": {
+  "test_iou": 0.6697548842416075,
+  "val_iou": 0.6749490000435463,
+  "chosen": "initial",
+  "same_data_iou": 0.6694326104275448
+ },
+ "L1H0": {
+  "test_iou": 0.8184815357286394,
+  "val_iou": 0.8264983283756813,
+  "chosen": "initial",
+  "same_data_iou": 0.8175782414134964
+ },
+ "L1H1": {
+  "test_iou": 0.7125619714527519,
+  "val_iou": 0.7093444778780031,
+  "chosen": "refined",
+  "same_data_iou": 0.70862159886776
+ },
+ "L1H10": {
+  "test_iou": 0.9331903084384168,
+  "val_iou": 0.9409043466153194,
+  "chosen": "refined",
+  "same_data_iou": 0.9408337843996776
+ },
+ "L1H11": {
+  "test_iou": 0.9321625620385012,
+  "val_iou": 0.9354687599511569,
+  "chosen": "refined",
+  "same_data_iou": 0.9312025617334309
+ },
+ "L1H12": {
+  "test_iou": 0.805063093298277,
+  "val_iou": 0.8093743033341984,
+  "chosen": "refined",
+  "same_data_iou": 0.8192297748355071
+ },
+ "L1H13": {
+  "test_iou": 0.7370408510253189,
+  "val_iou": 0.7394024297838198,
+  "chosen": "initial",
+  "same_data_iou": 0.7464891198443645
+ },
+ "L1H14": {
+  "test_iou": 0.8395061904578257,
+  "val_iou": 0.8454802696035866,
+  "chosen": "initial",
+  "same_data_iou": 0.8412422616433799
+ },
+ "L1H15": {
+  "test_iou": 0.6362183478913566,
+  "val_iou": 0.638504735694292,
+  "chosen": "refined",
+  "same_data_iou": 0.6431911583782779
+ },
+ "L1H16": {
+  "test_iou": 0.7643031475840882,
+  "val_iou": 0.7619702885818664,
+  "chosen": "refined",
+  "same_data_iou": 0.7614365648983851
+ },
+ "L1H17": {
+  "test_iou": 0.8836826441892769,
+  "val_iou": 0.889172800919861,
+  "chosen": "refined",
+  "same_data_iou": 0.8907117108854413
+ },
+ "L1H18": {
+  "test_iou": 0.8394168218610301,
+  "val_iou": 0.8416810930189559,
+  "chosen": "refined",
+  "same_data_iou": 0.8434069326542808
+ },
+ "L1H19": {
+  "test_iou": 0.8572695941490506,
+  "val_iou": 0.866118721722162,
+  "chosen": "refined",
+  "same_data_iou": 0.8685883482359514
+ },
+ "L1H2": {
+  "test_iou": 0.9222276575512888,
+  "val_iou": 0.9272376648678236,
+  "chosen": "initial",
+  "same_data_iou": 0.9261381906811046
+ },
+ "L1H20": {
+  "test_iou": 0.932158347324012,
+  "val_iou": 0.9348552081738766,
+  "chosen": "refined",
+  "same_data_iou": 0.9361290871986403
+ },
+ "L1H21": {
+  "test_iou": 0.7473759020169891,
+  "val_iou": 0.7581101448342972,
+  "chosen": "initial",
+  "same_data_iou": 0.7585836640648057
+ },
+ "L1H22": {
+  "test_iou": 0.8178801620472055,
+  "val_iou": 0.8146961699237546,
+  "chosen": "refined",
+  "same_data_iou": 0.8174462937864118
+ },
+ "L1H23": {
+  "test_iou": 0.8450931215013224,
+  "val_iou": 0.8449874669874243,
+  "chosen": "refined",
+  "same_data_iou": 0.8509218994719225
+ },
+ "L1H3": {
+  "test_iou": 0.8204161174819876,
+  "val_iou": 0.8170147444592563,
+  "chosen": "refined",
+  "same_data_iou": 0.8359827457495619
+ },
+ "L1H4": {
+  "test_iou": 0.7824599557575709,
+  "val_iou": 0.7873152451714627,
+  "chosen": "refined",
+  "same_data_iou": 0.7898414963174172
+ },
+ "L1H5": {
+  "test_iou": 0.8356907794844693,
+  "val_iou": 0.8262397629428981,
+  "chosen": "refined",
+  "same_data_iou": 0.8429389392186396
+ },
+ "L1H6": {
+  "test_iou": 0.7873723002337977,
+  "val_iou": 0.7928560675087962,
+  "chosen": "refined",
+  "same_data_iou": 0.7891933208985044
+ },
+ "L1H7": {
+  "test_iou": 0.9493362571401803,
+  "val_iou": 0.9520094337323919,
+  "chosen": "refined",
+  "same_data_iou": 0.9541239013886328
+ },
+ "L1H8": {
+  "test_iou": 0.7371047557912369,
+  "val_iou": 0.740124369200889,
+  "chosen": "refined",
+  "same_data_iou": 0.7453139017320136
+ },
+ "L1H9": {
+  "test_iou": 0.8693946484213894,
+  "val_iou": 0.8838137979279237,
+  "chosen": "initial",
+  "same_data_iou": 0.8693128811963605
+ },
+ "L20H0": {
+  "test_iou": 0.793443753178131,
+  "val_iou": 0.7861728066372986,
+  "chosen": "initial",
+  "same_data_iou": 0.7910523419282982
+ },
+ "L20H1": {
+  "test_iou": 0.939489908726626,
+  "val_iou": 0.9438828489106812,
+  "chosen": "initial",
+  "same_data_iou": 0.9382123512346418
+ },
+ "L20H10": {
+  "test_iou": 0.9404158729477419,
+  "val_iou": 0.9478340578370762,
+  "chosen": "initial",
+  "same_data_iou": 0.9377338093523229
+ },
+ "L20H11": {
+  "test_iou": 0.9418233378018641,
+  "val_iou": 0.9468841235126512,
+  "chosen": "initial",
+  "same_data_iou": 0.9364256986264292
+ },
+ "L20H12": {
+  "test_iou": 0.7665635777569995,
+  "val_iou": 0.7577728238188982,
+  "chosen": "refined",
+  "same_data_iou": 0.7592932111622138
+ },
+ "L20H13": {
+  "test_iou": 0.7236473723247187,
+  "val_iou": 0.7183115847249231,
+  "chosen": "initial",
+  "same_data_iou": 0.7252553262824899
+ },
+ "L20H14": {
+  "test_iou": 0.8832498688427611,
+  "val_iou": 0.8860256619454634,
+  "chosen": "initial",
+  "same_data_iou": 0.8832906163345948
+ },
+ "L20H15": {
+  "test_iou": 0.8582749479353474,
+  "val_iou": 0.8422850249855436,
+  "chosen": "initial",
+  "same_data_iou": 0.8649121732115747
+ },
+ "L20H16": {
+  "test_iou": 0.8970991959103586,
+  "val_iou": 0.8921221051674454,
+  "chosen": "initial",
+  "same_data_iou": 0.8924498360331276
+ },
+ "L20H17": {
+  "test_iou": 0.8132380175704629,
+  "val_iou": 0.8129497617843792,
+  "chosen": "initial",
+  "same_data_iou": 0.8288820373218206
+ },
+ "L20H18": {
+  "test_iou": 0.8769237639006277,
+  "val_iou": 0.8824753370001747,
+  "chosen": "initial",
+  "same_data_iou": 0.879186766821425
+ },
+ "L20H19": {
+  "test_iou": 0.7790499185117216,
+  "val_iou": 0.7947187339438733,
+  "chosen": "initial",
+  "same_data_iou": 0.7856396837931854
+ },
+ "L20H2": {
+  "test_iou": 0.9358573832267905,
+  "val_iou": 0.9381155091878586,
+  "chosen": "initial",
+  "same_data_iou": 0.9229078832045167
+ },
+ "L20H20": {
+  "test_iou": 0.8276104195527222,
+  "val_iou": 0.8371372839411415,
+  "chosen": "initial",
+  "same_data_iou": 0.8278964244969893
+ },
+ "L20H21": {
+  "test_iou": 0.7029456448870556,
+  "val_iou": 0.7058244000433088,
+  "chosen": "refined",
+  "same_data_iou": 0.7112811718679941
+ },
+ "L20H22": {
+  "test_iou": 0.8322685525324209,
+  "val_iou": 0.8285217650692779,
+  "chosen": "refined",
+  "same_data_iou": 0.8284421638913821
+ },
+ "L20H23": {
+  "test_iou": 0.7508576606828519,
+  "val_iou": 0.751519511040683,
+  "chosen": "initial",
+  "same_data_iou": 0.7477503625805889
+ },
+ "L20H3": {
+  "test_iou": 0.9316429400315935,
+  "val_iou": 0.9453519819893164,
+  "chosen": "initial",
+  "same_data_iou": 0.9416736594283343
+ },
+ "L20H4": {
+  "test_iou": 0.945452831245715,
+  "val_iou": 0.9534535394664135,
+  "chosen": "initial",
+  "same_data_iou": 0.9385149439397298
+ },
+ "L20H5": {
+  "test_iou": 0.9211042281791387,
+  "val_iou": 0.9227273016369278,
+  "chosen": "refined",
+  "same_data_iou": 0.9266472311451244
+ },
+ "L20H6": {
+  "test_iou": 0.6776450406490366,
+  "val_iou": 0.6707085352008245,
+  "chosen": "refined",
+  "same_data_iou": 0.7111904552120072
+ },
+ "L20H7": {
+  "test_iou": 0.8774073332235856,
+  "val_iou": 0.8742644000060382,
+  "chosen": "initial",
+  "same_data_iou": 0.878934210109579
+ },
+ "L20H8": {
+  "test_iou": 0.891848316024754,
+  "val_iou": 0.8964079056825909,
+  "chosen": "initial",
+  "same_data_iou": 0.8671114430999758
+ },
+ "L20H9": {
+  "test_iou": 0.9410424641368078,
+  "val_iou": 0.9473896101433371,
+  "chosen": "initial",
+  "same_data_iou": 0.9365150189923777
+ },
+ "L21H0": {
+  "test_iou": 0.8819320487169054,
+  "val_iou": 0.8888229723557486,
+  "chosen": "initial",
+  "same_data_iou": 0.8747718112430499
+ },
+ "L21H1": {
+  "test_iou": 0.8984964632192094,
+  "val_iou": 0.8974215922823029,
+  "chosen": "initial",
+  "same_data_iou": 0.869018524206643
+ },
+ "L21H10": {
+  "test_iou": 0.8082380066449127,
+  "val_iou": 0.8117597341127829,
+  "chosen": "refined",
+  "same_data_iou": 0.8170632798606082
+ },
+ "L21H11": {
+  "test_iou": 0.7718252716805688,
+  "val_iou": 0.7730325794431014,
+  "chosen": "refined",
+  "same_data_iou": 0.7792981230029132
+ },
+ "L21H12": {
+  "test_iou": 0.9560920668585149,
+  "val_iou": 0.9553899619639603,
+  "chosen": "initial",
+  "same_data_iou": 0.9575756290789149
+ },
+ "L21H13": {
+  "test_iou": 0.9599142448138235,
+  "val_iou": 0.9619451535905195,
+  "chosen": "initial",
+  "same_data_iou": 0.9551845373444359
+ },
+ "L21H14": {
+  "test_iou": 0.9010059794031838,
+  "val_iou": 0.8883635543711728,
+  "chosen": "initial",
+  "same_data_iou": 0.9143106959628279
+ },
+ "L21H15": {
+  "test_iou": 0.9451800073652149,
+  "val_iou": 0.9478268808174642,
+  "chosen": "initial",
+  "same_data_iou": 0.9339187255270789
+ },
+ "L21H16": {
+  "test_iou": 0.8483337174466987,
+  "val_iou": 0.8542949268961766,
+  "chosen": "initial",
+  "same_data_iou": 0.8667618474279815
+ },
+ "L21H17": {
+  "test_iou": 0.9576154950502547,
+  "val_iou": 0.9628095095201082,
+  "chosen": "initial",
+  "same_data_iou": 0.9559622564482737
+ },
+ "L21H18": {
+  "test_iou": 0.9371308152866581,
+  "val_iou": 0.9422795097022781,
+  "chosen": "initial",
+  "same_data_iou": 0.9340737688510616
+ },
+ "L21H19": {
+  "test_iou": 0.9522628390259388,
+  "val_iou": 0.9521905114866162,
+  "chosen": "initial",
+  "same_data_iou": 0.9469842535585491
+ },
+ "L21H2": {
+  "test_iou": 0.8157640852683261,
+  "val_iou": 0.8255308978925747,
+  "chosen": "initial",
+  "same_data_iou": 0.8135619817350982
+ },
+ "L21H20": {
+  "test_iou": 0.8828197563969389,
+  "val_iou": 0.8932111193896798,
+  "chosen": "initial",
+  "same_data_iou": 0.8671761049332373
+ },
+ "L21H21": {
+  "test_iou": 0.7367830819681599,
+  "val_iou": 0.7336077042646052,
+  "chosen": "initial",
+  "same_data_iou": 0.7380395349618245
+ },
+ "L21H22": {
+  "test_iou": 0.7898625145705516,
+  "val_iou": 0.785559096544572,
+  "chosen": "refined",
+  "same_data_iou": 0.7843437207282988
+ },
+ "L21H23": {
+  "test_iou": 0.7635527444852945,
+  "val_iou": 0.764160157302033,
+  "chosen": "refined",
+  "same_data_iou": 0.7710659328990085
+ },
+ "L21H3": {
+  "test_iou": 0.9744475894127161,
+  "val_iou": 0.9761016968390386,
+  "chosen": "refined",
+  "same_data_iou": 0.9723910958941187
+ },
+ "L21H4": {
+  "test_iou": 0.9836642017425163,
+  "val_iou": 0.9848641006254055,
+  "chosen": "initial",
+  "same_data_iou": 0.9790908099940946
+ },
+ "L21H5": {
+  "test_iou": 0.9249516776051783,
+  "val_iou": 0.9284666152795877,
+  "chosen": "initial",
+  "same_data_iou": 0.9221947913477015
+ },
+ "L21H6": {
+  "test_iou": 0.9609078832568569,
+  "val_iou": 0.9629224994730354,
+  "chosen": "initial",
+  "same_data_iou": 0.9544973633715094
+ },
+ "L21H7": {
+  "test_iou": 0.9698219842040601,
+  "val_iou": 0.9705820318187047,
+  "chosen": "refined",
+  "same_data_iou": 0.9749881164391452
+ },
+ "L21H8": {
+  "test_iou": 0.9678115136223372,
+  "val_iou": 0.9692899604662091,
+  "chosen": "refined",
+  "same_data_iou": 0.9681468618618446
+ },
+ "L21H9": {
+  "test_iou": 0.6562612285164764,
+  "val_iou": 0.6649906741160369,
+  "chosen": "initial",
+  "same_data_iou": 0.6655515975263625
+ },
+ "L22H0": {
+  "test_iou": 0.8782528938059022,
+  "val_iou": 0.8979127519671422,
+  "chosen": "initial",
+  "same_data_iou": 0.9020479350299743
+ },
+ "L22H1": {
+  "test_iou": 0.7823651060700578,
+  "val_iou": 0.7885970707647028,
+  "chosen": "initial",
+  "same_data_iou": 0.7857013601577013
+ },
+ "L22H10": {
+  "test_iou": 0.9704758685581362,
+  "val_iou": 0.9711685120166574,
+  "chosen": "initial",
+  "same_data_iou": 0.9703737835447713
+ },
+ "L22H11": {
+  "test_iou": 0.9706279884535252,
+  "val_iou": 0.972836263784918,
+  "chosen": "initial",
+  "same_data_iou": 0.9673676537528912
+ },
+ "L22H12": {
+  "test_iou": 0.8768051739790961,
+  "val_iou": 0.8742604466460108,
+  "chosen": "initial",
+  "same_data_iou": 0.8659231562269907
+ },
+ "L22H13": {
+  "test_iou": 0.7798535539723193,
+  "val_iou": 0.7863985140442112,
+  "chosen": "initial",
+  "same_data_iou": 0.803705325451542
+ },
+ "L22H14": {
+  "test_iou": 0.6670053623625029,
+  "val_iou": 0.6685722642412868,
+  "chosen": "initial",
+  "same_data_iou": 0.6673095753235654
+ },
+ "L22H15": {
+  "test_iou": 0.8267259577780203,
+  "val_iou": 0.8341895401830175,
+  "chosen": "refined",
+  "same_data_iou": 0.8397745815810354
+ },
+ "L22H16": {
+  "test_iou": 0.7908783664302353,
+  "val_iou": 0.7996442125852234,
+  "chosen": "refined",
+  "same_data_iou": 0.8044585608529673
+ },
+ "L22H17": {
+  "test_iou": 0.8365683195042135,
+  "val_iou": 0.8431751415213427,
+  "chosen": "refined",
+  "same_data_iou": 0.8436987648531483
+ },
+ "L22H18": {
+  "test_iou": 0.9618665919044718,
+  "val_iou": 0.9689075004572985,
+  "chosen": "refined",
+  "same_data_iou": 0.9646455954775135
+ },
+ "L22H19": {
+  "test_iou": 0.9652910886409964,
+  "val_iou": 0.9685505688111394,
+  "chosen": "initial",
+  "same_data_iou": 0.9648470969438387
+ },
+ "L22H2": {
+  "test_iou": 0.9195367519341573,
+  "val_iou": 0.9283858747012128,
+  "chosen": "initial",
+  "same_data_iou": 0.9260879999239384
+ },
+ "L22H20": {
+  "test_iou": 0.9223762409483734,
+  "val_iou": 0.9357572266319518,
+  "chosen": "initial",
+  "same_data_iou": 0.930213406464692
+ },
+ "L22H21": {
+  "test_iou": 0.9290562382836512,
+  "val_iou": 0.9329142096022808,
+  "chosen": "initial",
+  "same_data_iou": 0.9305305504686128
+ },
+ "L22H22": {
+  "test_iou": 0.9492491752739608,
+  "val_iou": 0.960987796095243,
+  "chosen": "refined",
+  "same_data_iou": 0.9644125139832607
+ },
+ "L22H23": {
+  "test_iou": 0.9228219324342374,
+  "val_iou": 0.9239346459586878,
+  "chosen": "refined",
+  "same_data_iou": 0.9289769899918167
+ },
+ "L22H3": {
+  "test_iou": 0.9615183325948977,
+  "val_iou": 0.9716903427006648,
+  "chosen": "initial",
+  "same_data_iou": 0.9314922958780565
+ },
+ "L22H4": {
+  "test_iou": 0.9647110975299836,
+  "val_iou": 0.9700293452861305,
+  "chosen": "initial",
+  "same_data_iou": 0.960547157363418
+ },
+ "L22H5": {
+  "test_iou": 0.9611861560958702,
+  "val_iou": 0.9661173564545448,
+  "chosen": "refined",
+  "same_data_iou": 0.9737291122614229
+ },
+ "L22H6": {
+  "test_iou": 0.8972157946143997,
+  "val_iou": 0.9049115061020434,
+  "chosen": "initial",
+  "same_data_iou": 0.8909481057860758
+ },
+ "L22H7": {
+  "test_iou": 0.9507922851951691,
+  "val_iou": 0.9546282929729268,
+  "chosen": "initial",
+  "same_data_iou": 0.9448742392014837
+ },
+ "L22H8": {
+  "test_iou": 0.9446282995737518,
+  "val_iou": 0.9453061099694944,
+  "chosen": "refined",
+  "same_data_iou": 0.9448074883549493
+ },
+ "L22H9": {
+  "test_iou": 0.9736687948965732,
+  "val_iou": 0.9785495199281015,
+  "chosen": "initial",
+  "same_data_iou": 0.9718990599911479
+ },
+ "L23H0": {
+  "test_iou": 0.7647573393430307,
+  "val_iou": 0.7649921093629808,
+  "chosen": "refined",
+  "same_data_iou": 0.7824186503781287
+ },
+ "L23H1": {
+  "test_iou": 0.8754861231307213,
+  "val_iou": 0.8743287848448281,
+  "chosen": "initial",
+  "same_data_iou": 0.8733446226803496
+ },
+ "L23H10": {
+  "test_iou": 0.8663236417463697,
+  "val_iou": 0.8796738139501072,
+  "chosen": "initial",
+  "same_data_iou": 0.8667103522602716
+ },
+ "L23H11": {
+  "test_iou": 0.9534351479291279,
+  "val_iou": 0.954921557392773,
+  "chosen": "initial",
+  "same_data_iou": 0.9579059642004122
+ },
+ "L23H12": {
+  "test_iou": 0.9597641791002474,
+  "val_iou": 0.9649829560458678,
+  "chosen": "initial",
+  "same_data_iou": 0.9608252222229707
+ },
+ "L23H13": {
+  "test_iou": 0.9042677560929627,
+  "val_iou": 0.9131445140299924,
+  "chosen": "refined",
+  "same_data_iou": 0.9098648625069595
+ },
+ "L23H14": {
+  "test_iou": 0.6306275340704797,
+  "val_iou": 0.6305953413616182,
+  "chosen": "initial",
+  "same_data_iou": 0.6429673156450473
+ },
+ "L23H15": {
+  "test_iou": 0.8207372586782512,
+  "val_iou": 0.8232401441576023,
+  "chosen": "initial",
+  "same_data_iou": 0.8250471729503225
+ },
+ "L23H16": {
+  "test_iou": 0.7554132353117088,
+  "val_iou": 0.7545128563324139,
+  "chosen": "initial",
+  "same_data_iou": 0.7449224556895376
+ },
+ "L23H17": {
+  "test_iou": 0.7123564742706088,
+  "val_iou": 0.7136275139749105,
+  "chosen": "initial",
+  "same_data_iou": 0.7276405709412704
+ },
+ "L23H18": {
+  "test_iou": 0.9440078830162535,
+  "val_iou": 0.9426527464336496,
+  "chosen": "initial",
+  "same_data_iou": 0.9473069249454108
+ },
+ "L23H19": {
+  "test_iou": 0.9735183099627054,
+  "val_iou": 0.9757937805852172,
+  "chosen": "initial",
+  "same_data_iou": 0.9759114032930662
+ },
+ "L23H2": {
+  "test_iou": 0.6342870888460598,
+  "val_iou": 0.6406460930991387,
+  "chosen": "refined",
+  "same_data_iou": 0.6508552286868522
+ },
+ "L23H20": {
+  "test_iou": 0.7370171198151596,
+  "val_iou": 0.7427789096724549,
+  "chosen": "initial",
+  "same_data_iou": 0.7372303491130845
+ },
+ "L23H21": {
+  "test_iou": 0.8916132054531056,
+  "val_iou": 0.8878776265870223,
+  "chosen": "initial",
+  "same_data_iou": 0.8861145474115488
+ },
+ "L23H22": {
+  "test_iou": 0.9310074159671974,
+  "val_iou": 0.9353953439349061,
+  "chosen": "initial",
+  "same_data_iou": 0.9230958375264615
+ },
+ "L23H23": {
+  "test_iou": 0.7167100181614273,
+  "val_iou": 0.719652584089434,
+  "chosen": "initial",
+  "same_data_iou": 0.7186243021714396
+ },
+ "L23H3": {
+  "test_iou": 0.8616464593532206,
+  "val_iou": 0.878205032669925,
+  "chosen": "initial",
+  "same_data_iou": 0.8738621245036728
+ },
+ "L23H4": {
+  "test_iou": 0.9537542924461871,
+  "val_iou": 0.9576030788415062,
+  "chosen": "refined",
+  "same_data_iou": 0.9613476157208171
+ },
+ "L23H5": {
+  "test_iou": 0.9255268322559616,
+  "val_iou": 0.9394778560418315,
+  "chosen": "initial",
+  "same_data_iou": 0.9277798531432605
+ },
+ "L23H6": {
+  "test_iou": 0.8379356515188059,
+  "val_iou": 0.8440796510916044,
+  "chosen": "refined",
+  "same_data_iou": 0.8539879184833273
+ },
+ "L23H7": {
+  "test_iou": 0.8917546194051411,
+  "val_iou": 0.9070738146441398,
+  "chosen": "initial",
+  "same_data_iou": 0.9009436085647786
+ },
+ "L23H8": {
+  "test_iou": 0.7088500768198185,
+  "val_iou": 0.7188961972210554,
+  "chosen": "initial",
+  "same_data_iou": 0.7219627306519054
+ },
+ "L23H9": {
+  "test_iou": 0.9388256256004651,
+  "val_iou": 0.9475899624929296,
+  "chosen": "initial",
+  "same_data_iou": 0.9287579139016771
+ },
+ "L24H0": {
+  "test_iou": 0.9363300493479163,
+  "val_iou": 0.9304156244561861,
+  "chosen": "initial",
+  "same_data_iou": 0.9316426402820388
+ },
+ "L24H1": {
+  "test_iou": 0.8886292540387548,
+  "val_iou": 0.8735133494257581,
+  "chosen": "initial",
+  "same_data_iou": 0.8914119434082828
+ },
+ "L24H10": {
+  "test_iou": 0.6040857221043544,
+  "val_iou": 0.612583232294858,
+  "chosen": "refined",
+  "same_data_iou": 0.6143028245448285
+ },
+ "L24H11": {
+  "test_iou": 0.7639624788103245,
+  "val_iou": 0.7682205018500882,
+  "chosen": "refined",
+  "same_data_iou": 0.7793714201180114
+ },
+ "L24H12": {
+  "test_iou": 0.6577239637074545,
+  "val_iou": 0.6680871763195669,
+  "chosen": "initial",
+  "same_data_iou": 0.6631119905905569
+ },
+ "L24H13": {
+  "test_iou": 0.8907051814780388,
+  "val_iou": 0.9068030556850841,
+  "chosen": "initial",
+  "same_data_iou": 0.8939153087907454
+ },
+ "L24H14": {
+  "test_iou": 0.9542214584405031,
+  "val_iou": 0.9506807095290797,
+  "chosen": "initial",
+  "same_data_iou": 0.9521695220307151
+ },
+ "L24H15": {
+  "test_iou": 0.920166862272621,
+  "val_iou": 0.9283579179006606,
+  "chosen": "initial",
+  "same_data_iou": 0.9226899125107467
+ },
+ "L24H16": {
+  "test_iou": 0.8761789505807127,
+  "val_iou": 0.8920448774760743,
+  "chosen": "initial",
+  "same_data_iou": 0.8817766665656377
+ },
+ "L24H17": {
+  "test_iou": 0.9473661173068848,
+  "val_iou": 0.9536653238172522,
+  "chosen": "initial",
+  "same_data_iou": 0.9460764361242866
+ },
+ "L24H18": {
+  "test_iou": 0.9430391506997257,
+  "val_iou": 0.9457537501284164,
+  "chosen": "initial",
+  "same_data_iou": 0.9449950267744093
+ },
+ "L24H19": {
+  "test_iou": 0.9689061601541427,
+  "val_iou": 0.9728724759975113,
+  "chosen": "initial",
+  "same_data_iou": 0.9710766517595815
+ },
+ "L24H2": {
+  "test_iou": 0.8621242238916921,
+  "val_iou": 0.8697803905065814,
+  "chosen": "initial",
+  "same_data_iou": 0.8851526685470177
+ },
+ "L24H20": {
+  "test_iou": 0.9704026591525283,
+  "val_iou": 0.9731737420632289,
+  "chosen": "initial",
+  "same_data_iou": 0.9697512494299234
+ },
+ "L24H21": {
+  "test_iou": 0.826808910135727,
+  "val_iou": 0.834478157710799,
+  "chosen": "initial",
+  "same_data_iou": 0.8269925239139896
+ },
+ "L24H22": {
+  "test_iou": 0.8736266114335183,
+  "val_iou": 0.8934032070794758,
+  "chosen": "refined",
+  "same_data_iou": 0.8917865850150889
+ },
+ "L24H23": {
+  "test_iou": 0.8534869882282939,
+  "val_iou": 0.8648676327076359,
+  "chosen": "refined",
+  "same_data_iou": 0.8742420169768194
+ },
+ "L24H3": {
+  "test_iou": 0.9192828509978025,
+  "val_iou": 0.9296314920821841,
+  "chosen": "initial",
+  "same_data_iou": 0.9137629261739166
+ },
+ "L24H4": {
+  "test_iou": 0.9409825497222519,
+  "val_iou": 0.949192241955598,
+  "chosen": "initial",
+  "same_data_iou": 0.9400655194866051
+ },
+ "L24H5": {
+  "test_iou": 0.9119539285099912,
+  "val_iou": 0.9213514359276378,
+  "chosen": "initial",
+  "same_data_iou": 0.9056928760363065
+ },
+ "L24H6": {
+  "test_iou": 0.6883269942090814,
+  "val_iou": 0.6925330084007889,
+  "chosen": "refined",
+  "same_data_iou": 0.6999721602127367
+ },
+ "L24H7": {
+  "test_iou": 0.7963907108624377,
+  "val_iou": 0.8028376021353485,
+  "chosen": "initial",
+  "same_data_iou": 0.8019857563523122
+ },
+ "L24H8": {
+  "test_iou": 0.7464861501800543,
+  "val_iou": 0.748316790166848,
+  "chosen": "refined",
+  "same_data_iou": 0.7562034808600739
+ },
+ "L24H9": {
+  "test_iou": 0.7409113496177815,
+  "val_iou": 0.7423970098405366,
+  "chosen": "refined",
+  "same_data_iou": 0.7570340650915882
+ },
+ "L25H0": {
+  "test_iou": 0.901287058251104,
+  "val_iou": 0.9093594863168907,
+  "chosen": "refined",
+  "same_data_iou": 0.9215030081868305
+ },
+ "L25H1": {
+  "test_iou": 0.9752719280698864,
+  "val_iou": 0.9759049860542772,
+  "chosen": "initial",
+  "same_data_iou": 0.9761944261749751
+ },
+ "L25H10": {
+  "test_iou": 0.9332455923992182,
+  "val_iou": 0.9356565121633064,
+  "chosen": "initial",
+  "same_data_iou": 0.9358598167744259
+ },
+ "L25H11": {
+  "test_iou": 0.9487542876831003,
+  "val_iou": 0.9571926037255988,
+  "chosen": "initial",
+  "same_data_iou": 0.9496142236337706
+ },
+ "L25H12": {
+  "test_iou": 0.9443275340222865,
+  "val_iou": 0.9496482721647006,
+  "chosen": "refined",
+  "same_data_iou": 0.9497347358864567
+ },
+ "L25H13": {
+  "test_iou": 0.8963242173617951,
+  "val_iou": 0.9154941163047797,
+  "chosen": "refined",
+  "same_data_iou": 0.8932856283520652
+ },
+ "L25H14": {
+  "test_iou": 0.9653957931797836,
+  "val_iou": 0.9705031780069298,
+  "chosen": "initial",
+  "same_data_iou": 0.9670992449059745
+ },
+ "L25H15": {
+  "test_iou": 0.9389711936972168,
+  "val_iou": 0.9482954999527462,
+  "chosen": "initial",
+  "same_data_iou": 0.9374150920473578
+ },
+ "L25H16": {
+  "test_iou": 0.9334185298763242,
+  "val_iou": 0.9449246202388849,
+  "chosen": "initial",
+  "same_data_iou": 0.9384052739418243
+ },
+ "L25H17": {
+  "test_iou": 0.9464559439054517,
+  "val_iou": 0.9561183265910782,
+  "chosen": "initial",
+  "same_data_iou": 0.9478056228428681
+ },
+ "L25H18": {
+  "test_iou": 0.7680171788181878,
+  "val_iou": 0.7744020769143396,
+  "chosen": "initial",
+  "same_data_iou": 0.7702780277998267
+ },
+ "L25H19": {
+  "test_iou": 0.8480980559267727,
+  "val_iou": 0.852223956678128,
+  "chosen": "initial",
+  "same_data_iou": 0.8629337159431296
+ },
+ "L25H2": {
+  "test_iou": 0.9563607769418729,
+  "val_iou": 0.962558887835531,
+  "chosen": "initial",
+  "same_data_iou": 0.9623852890845954
+ },
+ "L25H20": {
+  "test_iou": 0.7169230865524058,
+  "val_iou": 0.7174070844638412,
+  "chosen": "initial",
+  "same_data_iou": 0.7231526819329449
+ },
+ "L25H21": {
+  "test_iou": 0.6506114610234056,
+  "val_iou": 0.6508026628521246,
+  "chosen": "refined",
+  "same_data_iou": 0.6595375067352208
+ },
+ "L25H22": {
+  "test_iou": 0.9253230250919475,
+  "val_iou": 0.9379025517288335,
+  "chosen": "initial",
+  "same_data_iou": 0.9310059258735027
+ },
+ "L25H23": {
+  "test_iou": 0.6976086350033558,
+  "val_iou": 0.7081004739226755,
+  "chosen": "initial",
+  "same_data_iou": 0.706925300335776
+ },
+ "L25H3": {
+  "test_iou": 0.9769425037915238,
+  "val_iou": 0.98174294640515,
+  "chosen": "refined",
+  "same_data_iou": 0.9789834321960379
+ },
+ "L25H4": {
+  "test_iou": 0.9776803480551578,
+  "val_iou": 0.9802475639449686,
+  "chosen": "initial",
+  "same_data_iou": 0.9776067095554138
+ },
+ "L25H5": {
+  "test_iou": 0.9707153503415291,
+  "val_iou": 0.9740920501110382,
+  "chosen": "initial",
+  "same_data_iou": 0.973370962010627
+ },
+ "L25H6": {
+  "test_iou": 0.7281352051712262,
+  "val_iou": 0.7372606181994082,
+  "chosen": "initial",
+  "same_data_iou": 0.7291161549646199
+ },
+ "L25H7": {
+  "test_iou": 0.7258772682847663,
+  "val_iou": 0.7357103598622337,
+  "chosen": "refined",
+  "same_data_iou": 0.7433713097218131
+ },
+ "L25H8": {
+  "test_iou": 0.7271960852987948,
+  "val_iou": 0.745657107651661,
+  "chosen": "initial",
+  "same_data_iou": 0.7132593578207389
+ },
+ "L25H9": {
+  "test_iou": 0.9706036818001051,
+  "val_iou": 0.9729026785554629,
+  "chosen": "refined",
+  "same_data_iou": 0.9787203880438007
+ },
+ "L26H0": {
+  "test_iou": 0.7882226009368662,
+  "val_iou": 0.7937515691270793,
+  "chosen": "refined",
+  "same_data_iou": 0.7943797067054631
+ },
+ "L26H1": {
+  "test_iou": 0.7297267713190556,
+  "val_iou": 0.737180534726353,
+  "chosen": "initial",
+  "same_data_iou": 0.7364242274590497
+ },
+ "L26H10": {
+  "test_iou": 0.8984226032240984,
+  "val_iou": 0.9098394915435017,
+  "chosen": "initial",
+  "same_data_iou": 0.8888419938490679
+ },
+ "L26H11": {
+  "test_iou": 0.9125239807472179,
+  "val_iou": 0.9256789159957495,
+  "chosen": "initial",
+  "same_data_iou": 0.9145736883117784
+ },
+ "L26H12": {
+  "test_iou": 0.5480456584646874,
+  "val_iou": 0.565127357610342,
+  "chosen": "refined",
+  "same_data_iou": 0.5795551047332818
+ },
+ "L26H13": {
+  "test_iou": 0.4381549212496622,
+  "val_iou": 0.4405855208268143,
+  "chosen": "refined",
+  "same_data_iou": 0.4759076668157173
+ },
+ "L26H14": {
+  "test_iou": 0.6527095168059839,
+  "val_iou": 0.6578740646475063,
+  "chosen": "refined",
+  "same_data_iou": 0.6698231524267021
+ },
+ "L26H15": {
+  "test_iou": 0.8524281375535842,
+  "val_iou": 0.8776068307851078,
+  "chosen": "initial",
+  "same_data_iou": 0.8533435569866012
+ },
+ "L26H16": {
+  "test_iou": 0.8671903490819105,
+  "val_iou": 0.8848211745793519,
+  "chosen": "initial",
+  "same_data_iou": 0.8645644622109169
+ },
+ "L26H17": {
+  "test_iou": 0.7898949782366662,
+  "val_iou": 0.8021439266202097,
+  "chosen": "initial",
+  "same_data_iou": 0.7877815161091817
+ },
+ "L26H18": {
+  "test_iou": 0.7373659973216854,
+  "val_iou": 0.7400676622369761,
+  "chosen": "refined",
+  "same_data_iou": 0.7352728727303639
+ },
+ "L26H19": {
+  "test_iou": 0.7011245799105726,
+  "val_iou": 0.7117644836054279,
+  "chosen": "initial",
+  "same_data_iou": 0.7004421171742998
+ },
+ "L26H2": {
+  "test_iou": 0.7214149495591564,
+  "val_iou": 0.7341098382597677,
+  "chosen": "initial",
+  "same_data_iou": 0.7243829426940744
+ },
+ "L26H20": {
+  "test_iou": 0.721845685290534,
+  "val_iou": 0.7310468426673721,
+  "chosen": "initial",
+  "same_data_iou": 0.7109104932486515
+ },
+ "L26H21": {
+  "test_iou": 0.9384212843219382,
+  "val_iou": 0.9372651630335721,
+  "chosen": "initial",
+  "same_data_iou": 0.9422004869230539
+ },
+ "L26H22": {
+  "test_iou": 0.933576435009892,
+  "val_iou": 0.9391796568540209,
+  "chosen": "initial",
+  "same_data_iou": 0.9200292351431207
+ },
+ "L26H23": {
+  "test_iou": 0.8384269030074748,
+  "val_iou": 0.8374927732984925,
+  "chosen": "initial",
+  "same_data_iou": 0.8203246479086804
+ },
+ "L26H3": {
+  "test_iou": 0.8398282397742779,
+  "val_iou": 0.8494721662825044,
+  "chosen": "refined",
+  "same_data_iou": 0.8595202419131975
+ },
+ "L26H4": {
+  "test_iou": 0.8521656230890625,
+  "val_iou": 0.8598903051785727,
+  "chosen": "refined",
+  "same_data_iou": 0.8584272701752417
+ },
+ "L26H5": {
+  "test_iou": 0.9499341272759161,
+  "val_iou": 0.9605449399878222,
+  "chosen": "initial",
+  "same_data_iou": 0.9569737910895928
+ },
+ "L26H6": {
+  "test_iou": 0.8987088541364702,
+  "val_iou": 0.9058934468767822,
+  "chosen": "initial",
+  "same_data_iou": 0.9037186955739056
+ },
+ "L26H7": {
+  "test_iou": 0.6829391528882783,
+  "val_iou": 0.6922227153912556,
+  "chosen": "refined",
+  "same_data_iou": 0.6907052615426739
+ },
+ "L26H8": {
+  "test_iou": 0.9344574961767149,
+  "val_iou": 0.9411913818603515,
+  "chosen": "initial",
+  "same_data_iou": 0.93338771757485
+ },
+ "L26H9": {
+  "test_iou": 0.9312472724873863,
+  "val_iou": 0.9361934254147983,
+  "chosen": "initial",
+  "same_data_iou": 0.9210222965205391
+ },
+ "L27H0": {
+  "test_iou": 0.6834832214429415,
+  "val_iou": 0.6891884523480372,
+  "chosen": "refined",
+  "same_data_iou": 0.6991368181285562
+ },
+ "L27H1": {
+  "test_iou": 0.8485542901832317,
+  "val_iou": 0.8611148378310749,
+  "chosen": "refined",
+  "same_data_iou": 0.855358377249653
+ },
+ "L27H10": {
+  "test_iou": 0.8441978224732155,
+  "val_iou": 0.8498837546836198,
+  "chosen": "refined",
+  "same_data_iou": 0.863597085891865
+ },
+ "L27H11": {
+  "test_iou": 0.9220063306510281,
+  "val_iou": 0.9297721435226534,
+  "chosen": "initial",
+  "same_data_iou": 0.9276731599123693
+ },
+ "L27H12": {
+  "test_iou": 0.9241264335244834,
+  "val_iou": 0.9292848759603143,
+  "chosen": "refined",
+  "same_data_iou": 0.938122904419709
+ },
+ "L27H13": {
+  "test_iou": 0.9014159606046193,
+  "val_iou": 0.9048258257915854,
+  "chosen": "refined",
+  "same_data_iou": 0.9062515285715437
+ },
+ "L27H14": {
+  "test_iou": 0.8979377704760906,
+  "val_iou": 0.9028762267504631,
+  "chosen": "refined",
+  "same_data_iou": 0.8963345642726921
+ },
+ "L27H15": {
+  "test_iou": 0.9172270447159537,
+  "val_iou": 0.9271200871261872,
+  "chosen": "initial",
+  "same_data_iou": 0.9196662944290157
+ },
+ "L27H16": {
+  "test_iou": 0.8972433906215299,
+  "val_iou": 0.9054290435663142,
+  "chosen": "initial",
+  "same_data_iou": 0.8872576230434556
+ },
+ "L27H17": {
+  "test_iou": 0.8236962191688341,
+  "val_iou": 0.8271426706137771,
+  "chosen": "initial",
+  "same_data_iou": 0.8189651582095353
+ },
+ "L27H18": {
+  "test_iou": 0.8216274782713338,
+  "val_iou": 0.8272012333744416,
+  "chosen": "refined",
+  "same_data_iou": 0.8266167245833931
+ },
+ "L27H19": {
+  "test_iou": 0.6858100912831133,
+  "val_iou": 0.6903202885889845,
+  "chosen": "refined",
+  "same_data_iou": 0.6967962444966589
+ },
+ "L27H2": {
+  "test_iou": 0.7772068025027502,
+  "val_iou": 0.7883444010950411,
+  "chosen": "refined",
+  "same_data_iou": 0.7820523951242483
+ },
+ "L27H20": {
+  "test_iou": 0.8033592233155983,
+  "val_iou": 0.8079776976837479,
+  "chosen": "refined",
+  "same_data_iou": 0.8159368214900571
+ },
+ "L27H21": {
+  "test_iou": 0.6834534824222109,
+  "val_iou": 0.6892527599078889,
+  "chosen": "refined",
+  "same_data_iou": 0.689371390322665
+ },
+ "L27H22": {
+  "test_iou": 0.871418578388172,
+  "val_iou": 0.8743242646358812,
+  "chosen": "initial",
+  "same_data_iou": 0.8744183194454299
+ },
+ "L27H23": {
+  "test_iou": 0.8460680154520824,
+  "val_iou": 0.8515341743026268,
+  "chosen": "refined",
+  "same_data_iou": 0.8452366747203044
+ },
+ "L27H3": {
+  "test_iou": 0.8369138168338048,
+  "val_iou": 0.8489785033249747,
+  "chosen": "refined",
+  "same_data_iou": 0.8317869996573641
+ },
+ "L27H4": {
+  "test_iou": 0.7497536972158937,
+  "val_iou": 0.7479030416119976,
+  "chosen": "refined",
+  "same_data_iou": 0.7553639196831023
+ },
+ "L27H5": {
+  "test_iou": 0.5599058459296128,
+  "val_iou": 0.5659388987230212,
+  "chosen": "initial",
+  "same_data_iou": 0.5584991695901098
+ },
+ "L27H6": {
+  "test_iou": 0.8019514512292101,
+  "val_iou": 0.8076941390488236,
+  "chosen": "refined",
+  "same_data_iou": 0.8116071127203061
+ },
+ "L27H7": {
+  "test_iou": 0.8372148978351132,
+  "val_iou": 0.8423766966239898,
+  "chosen": "refined",
+  "same_data_iou": 0.8471875267435165
+ },
+ "L27H8": {
+  "test_iou": 0.8570410230004525,
+  "val_iou": 0.8676619681993438,
+  "chosen": "refined",
+  "same_data_iou": 0.8700919875427848
+ },
+ "L27H9": {
+  "test_iou": 0.6548986137872314,
+  "val_iou": 0.6547940992374199,
+  "chosen": "initial",
+  "same_data_iou": 0.6644878577169651
+ },
+ "L2H0": {
+  "test_iou": 0.817998585936619,
+  "val_iou": 0.8092052092422685,
+  "chosen": "initial",
+  "same_data_iou": 0.8127029883965129
+ },
+ "L2H1": {
+  "test_iou": 0.9109514153439778,
+  "val_iou": 0.9018115488580009,
+  "chosen": "initial",
+  "same_data_iou": 0.9057456432626306
+ },
+ "L2H10": {
+  "test_iou": 0.9459209164465808,
+  "val_iou": 0.9458425688362537,
+  "chosen": "initial",
+  "same_data_iou": 0.9547479727415897
+ },
+ "L2H11": {
+  "test_iou": 0.946796426322839,
+  "val_iou": 0.9489037193911029,
+  "chosen": "refined",
+  "same_data_iou": 0.9529800463856073
+ },
+ "L2H12": {
+  "test_iou": 0.9205077477763772,
+  "val_iou": 0.9230624643180204,
+  "chosen": "initial",
+  "same_data_iou": 0.927088660045499
+ },
+ "L2H13": {
+  "test_iou": 0.8842505379495585,
+  "val_iou": 0.8863324531036674,
+  "chosen": "initial",
+  "same_data_iou": 0.8829542103787412
+ },
+ "L2H14": {
+  "test_iou": 0.8472010933337583,
+  "val_iou": 0.856475140096628,
+  "chosen": "initial",
+  "same_data_iou": 0.8482878513358971
+ },
+ "L2H15": {
+  "test_iou": 0.9768997593580557,
+  "val_iou": 0.9809637005784464,
+  "chosen": "refined",
+  "same_data_iou": 0.9812772576953632
+ },
+ "L2H16": {
+  "test_iou": 0.9854060398889822,
+  "val_iou": 0.9875484026318982,
+  "chosen": "initial",
+  "same_data_iou": 0.9892128888093469
+ },
+ "L2H17": {
+  "test_iou": 0.9556469573592001,
+  "val_iou": 0.9572557186632996,
+  "chosen": "refined",
+  "same_data_iou": 0.960061436217992
+ },
+ "L2H18": {
+  "test_iou": 0.8491986966887756,
+  "val_iou": 0.8600068766018063,
+  "chosen": "initial",
+  "same_data_iou": 0.854832270747875
+ },
+ "L2H19": {
+  "test_iou": 0.8943442350447418,
+  "val_iou": 0.8997064179574936,
+  "chosen": "refined",
+  "same_data_iou": 0.8936085976120183
+ },
+ "L2H2": {
+  "test_iou": 0.8935955388217743,
+  "val_iou": 0.9020207115911326,
+  "chosen": "initial",
+  "same_data_iou": 0.9039050980461811
+ },
+ "L2H20": {
+  "test_iou": 0.8771209916626083,
+  "val_iou": 0.8852113367872237,
+  "chosen": "refined",
+  "same_data_iou": 0.8872511054356828
+ },
+ "L2H21": {
+  "test_iou": 0.8212509661749229,
+  "val_iou": 0.8096789868125748,
+  "chosen": "initial",
+  "same_data_iou": 0.8158404725969175
+ },
+ "L2H22": {
+  "test_iou": 0.83356526787876,
+  "val_iou": 0.8372597812547283,
+  "chosen": "initial",
+  "same_data_iou": 0.8579839999073758
+ },
+ "L2H23": {
+  "test_iou": 0.8328532659247151,
+  "val_iou": 0.8343637342107314,
+  "chosen": "refined",
+  "same_data_iou": 0.830982461391612
+ },
+ "L2H3": {
+  "test_iou": 0.8585969439985308,
+  "val_iou": 0.861203568934678,
+  "chosen": "refined",
+  "same_data_iou": 0.8579188248537495
+ },
+ "L2H4": {
+  "test_iou": 0.9577212928197063,
+  "val_iou": 0.960779220927455,
+  "chosen": "initial",
+  "same_data_iou": 0.9588411889058192
+ },
+ "L2H5": {
+  "test_iou": 0.8515775568789291,
+  "val_iou": 0.8540411621223142,
+  "chosen": "refined",
+  "same_data_iou": 0.8615865414166377
+ },
+ "L2H6": {
+  "test_iou": 0.9456185844475459,
+  "val_iou": 0.946277454702575,
+  "chosen": "initial",
+  "same_data_iou": 0.9524795361843316
+ },
+ "L2H7": {
+  "test_iou": 0.8891586117300488,
+  "val_iou": 0.8874391716130278,
+  "chosen": "refined",
+  "same_data_iou": 0.8839684763192064
+ },
+ "L2H8": {
+  "test_iou": 0.8925760469270542,
+  "val_iou": 0.8974971131916434,
+  "chosen": "initial",
+  "same_data_iou": 0.9039591184773805
+ },
+ "L2H9": {
+  "test_iou": 0.9011307323174093,
+  "val_iou": 0.9018993521981344,
+  "chosen": "initial",
+  "same_data_iou": 0.9207690228715947
+ },
+ "L3H0": {
+  "test_iou": 0.8198474439073723,
+  "val_iou": 0.8259308488577574,
+  "chosen": "initial",
+  "same_data_iou": 0.8308858987575833
+ },
+ "L3H1": {
+  "test_iou": 0.8776870331495897,
+  "val_iou": 0.8923285613157717,
+  "chosen": "initial",
+  "same_data_iou": 0.8900587511467674
+ },
+ "L3H10": {
+  "test_iou": 0.9336565561267064,
+  "val_iou": 0.938398296353634,
+  "chosen": "initial",
+  "same_data_iou": 0.9325798066829837
+ },
+ "L3H11": {
+  "test_iou": 0.7705345259928024,
+  "val_iou": 0.7862940949479196,
+  "chosen": "initial",
+  "same_data_iou": 0.7726453731627485
+ },
+ "L3H12": {
+  "test_iou": 0.8355764307830148,
+  "val_iou": 0.8410835662219911,
+  "chosen": "refined",
+  "same_data_iou": 0.8393204333694456
+ },
+ "L3H13": {
+  "test_iou": 0.8401399043669417,
+  "val_iou": 0.840389152154373,
+  "chosen": "initial",
+  "same_data_iou": 0.8318927753873702
+ },
+ "L3H14": {
+  "test_iou": 0.8018380293644592,
+  "val_iou": 0.802513937324377,
+  "chosen": "refined",
+  "same_data_iou": 0.8132111514821609
+ },
+ "L3H15": {
+  "test_iou": 0.8877433369431428,
+  "val_iou": 0.8876180110570945,
+  "chosen": "initial",
+  "same_data_iou": 0.8973873905714109
+ },
+ "L3H16": {
+  "test_iou": 0.80553250698208,
+  "val_iou": 0.8091936557385548,
+  "chosen": "refined",
+  "same_data_iou": 0.8126905274563999
+ },
+ "L3H17": {
+  "test_iou": 0.8681280273636,
+  "val_iou": 0.8702807806967432,
+  "chosen": "initial",
+  "same_data_iou": 0.8712000332649863
+ },
+ "L3H18": {
+  "test_iou": 0.7569926730605815,
+  "val_iou": 0.7549981078044723,
+  "chosen": "initial",
+  "same_data_iou": 0.7652187315071505
+ },
+ "L3H19": {
+  "test_iou": 0.8570586422248077,
+  "val_iou": 0.8608399815513679,
+  "chosen": "initial",
+  "same_data_iou": 0.8738758749508234
+ },
+ "L3H2": {
+  "test_iou": 0.7352283772059158,
+  "val_iou": 0.733359880292236,
+  "chosen": "initial",
+  "same_data_iou": 0.7230005575128449
+ },
+ "L3H20": {
+  "test_iou": 0.9266714743931966,
+  "val_iou": 0.9308577426843435,
+  "chosen": "initial",
+  "same_data_iou": 0.9308678032269034
+ },
+ "L3H21": {
+  "test_iou": 0.6987663601850643,
+  "val_iou": 0.7024332827161065,
+  "chosen": "initial",
+  "same_data_iou": 0.7035006236403685
+ },
+ "L3H22": {
+  "test_iou": 0.7788607363075701,
+  "val_iou": 0.7836717600022926,
+  "chosen": "refined",
+  "same_data_iou": 0.7798810843028847
+ },
+ "L3H23": {
+  "test_iou": 0.6876768643186094,
+  "val_iou": 0.6908860994935755,
+  "chosen": "initial",
+  "same_data_iou": 0.680246277290186
+ },
+ "L3H3": {
+  "test_iou": 0.9367056402289319,
+  "val_iou": 0.9406304888045446,
+  "chosen": "initial",
+  "same_data_iou": 0.9442798582489853
+ },
+ "L3H4": {
+  "test_iou": 0.870305597867187,
+  "val_iou": 0.875626848099411,
+  "chosen": "initial",
+  "same_data_iou": 0.877427333008425
+ },
+ "L3H5": {
+  "test_iou": 0.9153899171064501,
+  "val_iou": 0.9138307895742757,
+  "chosen": "initial",
+  "same_data_iou": 0.9205782198304011
+ },
+ "L3H6": {
+  "test_iou": 0.8099996671867686,
+  "val_iou": 0.8159190551090358,
+  "chosen": "initial",
+  "same_data_iou": 0.8188204377680982
+ },
+ "L3H7": {
+  "test_iou": 0.7832688699568436,
+  "val_iou": 0.7795759089314939,
+  "chosen": "initial",
+  "same_data_iou": 0.792456007919135
+ },
+ "L3H8": {
+  "test_iou": 0.873643857783132,
+  "val_iou": 0.8779755923294212,
+  "chosen": "refined",
+  "same_data_iou": 0.8687415158882242
+ },
+ "L3H9": {
+  "test_iou": 0.8083421005354697,
+  "val_iou": 0.8259017178386983,
+  "chosen": "initial",
+  "same_data_iou": 0.8020953944292779
+ },
+ "L4H0": {
+  "test_iou": 0.8589933376193188,
+  "val_iou": 0.8626106377149084,
+  "chosen": "initial",
+  "same_data_iou": 0.8561473892693792
+ },
+ "L4H1": {
+  "test_iou": 0.8201315768053654,
+  "val_iou": 0.8292699046790976,
+  "chosen": "refined",
+  "same_data_iou": 0.835764277964951
+ },
+ "L4H10": {
+  "test_iou": 0.8036228344150342,
+  "val_iou": 0.8062986638306369,
+  "chosen": "initial",
+  "same_data_iou": 0.8052001219116232
+ },
+ "L4H11": {
+  "test_iou": 0.8059702447239506,
+  "val_iou": 0.8082687156751114,
+  "chosen": "refined",
+  "same_data_iou": 0.8302093808879947
+ },
+ "L4H12": {
+  "test_iou": 0.7890319232333648,
+  "val_iou": 0.7902923135785324,
+  "chosen": "initial",
+  "same_data_iou": 0.7807482230761664
+ },
+ "L4H13": {
+  "test_iou": 0.795920001541702,
+  "val_iou": 0.7906069564240776,
+  "chosen": "refined",
+  "same_data_iou": 0.7957744595520779
+ },
+ "L4H14": {
+  "test_iou": 0.8980437111672961,
+  "val_iou": 0.9059435687890496,
+  "chosen": "refined",
+  "same_data_iou": 0.9056476850863829
+ },
+ "L4H15": {
+  "test_iou": 0.8713135671374492,
+  "val_iou": 0.8720664371564911,
+  "chosen": "initial",
+  "same_data_iou": 0.8687065253734358
+ },
+ "L4H16": {
+  "test_iou": 0.9236703473446675,
+  "val_iou": 0.9296048315600407,
+  "chosen": "initial",
+  "same_data_iou": 0.9109553405978967
+ },
+ "L4H17": {
+  "test_iou": 0.7503216690850556,
+  "val_iou": 0.7565151486913095,
+  "chosen": "initial",
+  "same_data_iou": 0.756805408531647
+ },
+ "L4H18": {
+  "test_iou": 0.7072697209668971,
+  "val_iou": 0.7075629002613079,
+  "chosen": "initial",
+  "same_data_iou": 0.7084959790979675
+ },
+ "L4H19": {
+  "test_iou": 0.7738225438590216,
+  "val_iou": 0.771865637744268,
+  "chosen": "refined",
+  "same_data_iou": 0.7870222864604026
+ },
+ "L4H2": {
+  "test_iou": 0.9117863099474502,
+  "val_iou": 0.9234047208077172,
+  "chosen": "refined",
+  "same_data_iou": 0.9169632847070417
+ },
+ "L4H20": {
+  "test_iou": 0.8034911967591722,
+  "val_iou": 0.8027914574500091,
+  "chosen": "initial",
+  "same_data_iou": 0.8003992716705348
+ },
+ "L4H21": {
+  "test_iou": 0.9600418212992026,
+  "val_iou": 0.967176342068916,
+  "chosen": "refined",
+  "same_data_iou": 0.9668016528743776
+ },
+ "L4H22": {
+  "test_iou": 0.9445694183693308,
+  "val_iou": 0.9556739890280855,
+  "chosen": "initial",
+  "same_data_iou": 0.9490557366292863
+ },
+ "L4H23": {
+  "test_iou": 0.7980874649348041,
+  "val_iou": 0.7990257224836111,
+  "chosen": "refined",
+  "same_data_iou": 0.7869816742464779
+ },
+ "L4H3": {
+  "test_iou": 0.7334313386658817,
+  "val_iou": 0.7401331717704245,
+  "chosen": "initial",
+  "same_data_iou": 0.725813910673603
+ },
+ "L4H4": {
+  "test_iou": 0.7295854668552845,
+  "val_iou": 0.7291585604466212,
+  "chosen": "refined",
+  "same_data_iou": 0.7382828072814966
+ },
+ "L4H5": {
+  "test_iou": 0.7339597138832735,
+  "val_iou": 0.7345306539399141,
+  "chosen": "initial",
+  "same_data_iou": 0.7145727147571198
+ },
+ "L4H6": {
+  "test_iou": 0.7683397300614108,
+  "val_iou": 0.7894889730932125,
+  "chosen": "initial",
+  "same_data_iou": 0.7722002517379034
+ },
+ "L4H7": {
+  "test_iou": 0.7813400156257554,
+  "val_iou": 0.7845578978156663,
+  "chosen": "initial",
+  "same_data_iou": 0.7876555907933851
+ },
+ "L4H8": {
+  "test_iou": 0.8069801067251094,
+  "val_iou": 0.8015214641922469,
+  "chosen": "refined",
+  "same_data_iou": 0.8139989616259047
+ },
+ "L4H9": {
+  "test_iou": 0.7501617838686915,
+  "val_iou": 0.7527268541690384,
+  "chosen": "refined",
+  "same_data_iou": 0.752948428186442
+ },
+ "L5H0": {
+  "test_iou": 0.8787044840797352,
+  "val_iou": 0.8845797554138936,
+  "chosen": "initial",
+  "same_data_iou": 0.8934867734603283
+ },
+ "L5H1": {
+  "test_iou": 0.7136376353063616,
+  "val_iou": 0.6948472973738768,
+  "chosen": "initial",
+  "same_data_iou": 0.6994681558917948
+ },
+ "L5H10": {
+  "test_iou": 0.754870838360562,
+  "val_iou": 0.7544993044420198,
+  "chosen": "refined",
+  "same_data_iou": 0.7642462759056364
+ },
+ "L5H11": {
+  "test_iou": 0.7473139683283847,
+  "val_iou": 0.7453298261971658,
+  "chosen": "initial",
+  "same_data_iou": 0.7511506388738387
+ },
+ "L5H12": {
+  "test_iou": 0.6556796972697652,
+  "val_iou": 0.6684699824209439,
+  "chosen": "initial",
+  "same_data_iou": 0.6731961962273314
+ },
+ "L5H13": {
+  "test_iou": 0.6578871687247022,
+  "val_iou": 0.6659806768535627,
+  "chosen": "initial",
+  "same_data_iou": 0.6533724410921821
+ },
+ "L5H14": {
+  "test_iou": 0.7670634216845614,
+  "val_iou": 0.7670275079464386,
+  "chosen": "initial",
+  "same_data_iou": 0.7762681475248412
+ },
+ "L5H15": {
+  "test_iou": 0.9338554870063295,
+  "val_iou": 0.9363662979290409,
+  "chosen": "initial",
+  "same_data_iou": 0.9345388531611123
+ },
+ "L5H16": {
+  "test_iou": 0.8857690396018828,
+  "val_iou": 0.873348350052961,
+  "chosen": "initial",
+  "same_data_iou": 0.865629561428787
+ },
+ "L5H17": {
+  "test_iou": 0.8348535140526727,
+  "val_iou": 0.8206924683934068,
+  "chosen": "initial",
+  "same_data_iou": 0.8549284056985542
+ },
+ "L5H18": {
+  "test_iou": 0.8066504630923277,
+  "val_iou": 0.8173897253882728,
+  "chosen": "initial",
+  "same_data_iou": 0.8198714493687282
+ },
+ "L5H19": {
+  "test_iou": 0.728746642266202,
+  "val_iou": 0.7372827771849583,
+  "chosen": "initial",
+  "same_data_iou": 0.7269266046835906
+ },
+ "L5H2": {
+  "test_iou": 0.7807826787492408,
+  "val_iou": 0.7764774334520226,
+  "chosen": "initial",
+  "same_data_iou": 0.8000521156429878
+ },
+ "L5H20": {
+  "test_iou": 0.7846188054343923,
+  "val_iou": 0.7853462275717357,
+  "chosen": "initial",
+  "same_data_iou": 0.8015772576873381
+ },
+ "L5H21": {
+  "test_iou": 0.7317206138908461,
+  "val_iou": 0.7358314638676156,
+  "chosen": "initial",
+  "same_data_iou": 0.7440747543875235
+ },
+ "L5H22": {
+  "test_iou": 0.726026642367178,
+  "val_iou": 0.7273026259359636,
+  "chosen": "initial",
+  "same_data_iou": 0.704939299379924
+ },
+ "L5H23": {
+  "test_iou": 0.7220192923157691,
+  "val_iou": 0.7174944918189294,
+  "chosen": "initial",
+  "same_data_iou": 0.7267890068333116
+ },
+ "L5H3": {
+  "test_iou": 0.7440626546312714,
+  "val_iou": 0.765041938370972,
+  "chosen": "refined",
+  "same_data_iou": 0.7637877694462297
+ },
+ "L5H4": {
+  "test_iou": 0.7713074025057854,
+  "val_iou": 0.7771705012262526,
+  "chosen": "initial",
+  "same_data_iou": 0.7763063342777646
+ },
+ "L5H5": {
+  "test_iou": 0.8728150890200613,
+  "val_iou": 0.8845146277524621,
+  "chosen": "initial",
+  "same_data_iou": 0.8851872827914212
+ },
+ "L5H6": {
+  "test_iou": 0.9737232272661628,
+  "val_iou": 0.9742670391062078,
+  "chosen": "refined",
+  "same_data_iou": 0.9721255596103238
+ },
+ "L5H7": {
+  "test_iou": 0.9934835060847463,
+  "val_iou": 0.9933900703832549,
+  "chosen": "initial",
+  "same_data_iou": 0.9937474830747591
+ },
+ "L5H8": {
+  "test_iou": 0.866446182956646,
+  "val_iou": 0.8744179537496963,
+  "chosen": "refined",
+  "same_data_iou": 0.8740446247320548
+ },
+ "L5H9": {
+  "test_iou": 0.7217113088090883,
+  "val_iou": 0.72022830887826,
+  "chosen": "initial",
+  "same_data_iou": 0.722150458834302
+ },
+ "L6H0": {
+  "test_iou": 0.7753072293841983,
+  "val_iou": 0.7770811255159764,
+  "chosen": "initial",
+  "same_data_iou": 0.7775545945194452
+ },
+ "L6H1": {
+  "test_iou": 0.9466999480192945,
+  "val_iou": 0.9505720385136378,
+  "chosen": "initial",
+  "same_data_iou": 0.9502327347995241
+ },
+ "L6H10": {
+  "test_iou": 0.8103000329380223,
+  "val_iou": 0.8165255078122913,
+  "chosen": "initial",
+  "same_data_iou": 0.8123057856682241
+ },
+ "L6H11": {
+  "test_iou": 0.7177002265283312,
+  "val_iou": 0.7217785203692769,
+  "chosen": "initial",
+  "same_data_iou": 0.7215689303329607
+ },
+ "L6H12": {
+  "test_iou": 0.7385599018296825,
+  "val_iou": 0.7418461192286168,
+  "chosen": "refined",
+  "same_data_iou": 0.7260138794247608
+ },
+ "L6H13": {
+  "test_iou": 0.8348867199593386,
+  "val_iou": 0.8456721645666516,
+  "chosen": "initial",
+  "same_data_iou": 0.8240321197273701
+ },
+ "L6H14": {
+  "test_iou": 0.6613250811784988,
+  "val_iou": 0.6684458574863329,
+  "chosen": "refined",
+  "same_data_iou": 0.6803415412088596
+ },
+ "L6H15": {
+  "test_iou": 0.6836334855492912,
+  "val_iou": 0.6873906831327214,
+  "chosen": "initial",
+  "same_data_iou": 0.6925049750655021
+ },
+ "L6H16": {
+  "test_iou": 0.7664037404118099,
+  "val_iou": 0.7733376150853605,
+  "chosen": "initial",
+  "same_data_iou": 0.7683341040704712
+ },
+ "L6H17": {
+  "test_iou": 0.7101075655214533,
+  "val_iou": 0.7210657214845897,
+  "chosen": "refined",
+  "same_data_iou": 0.7143425293984016
+ },
+ "L6H18": {
+  "test_iou": 0.9397966415301149,
+  "val_iou": 0.9427684990404828,
+  "chosen": "initial",
+  "same_data_iou": 0.9406439999903842
+ },
+ "L6H19": {
+  "test_iou": 0.9538284683888945,
+  "val_iou": 0.9574295676221047,
+  "chosen": "initial",
+  "same_data_iou": 0.951739182188828
+ },
+ "L6H2": {
+  "test_iou": 0.7978018343209828,
+  "val_iou": 0.8017951971783287,
+  "chosen": "initial",
+  "same_data_iou": 0.7963599486615505
+ },
+ "L6H20": {
+  "test_iou": 0.7769726154422695,
+  "val_iou": 0.7827180014403876,
+  "chosen": "initial",
+  "same_data_iou": 0.7891766919386659
+ },
+ "L6H21": {
+  "test_iou": 0.8906540102382436,
+  "val_iou": 0.8858072767402936,
+  "chosen": "initial",
+  "same_data_iou": 0.9144659478805561
+ },
+ "L6H22": {
+  "test_iou": 0.7317578749915742,
+  "val_iou": 0.742387123448932,
+  "chosen": "initial",
+  "same_data_iou": 0.7378752354960209
+ },
+ "L6H23": {
+  "test_iou": 0.6597908856915206,
+  "val_iou": 0.6532832923486523,
+  "chosen": "initial",
+  "same_data_iou": 0.6497401910907725
+ },
+ "L6H3": {
+  "test_iou": 0.7754665300683677,
+  "val_iou": 0.774682172640414,
+  "chosen": "initial",
+  "same_data_iou": 0.7894275406236521
+ },
+ "L6H4": {
+  "test_iou": 0.67855337000688,
+  "val_iou": 0.6978903576890018,
+  "chosen": "initial",
+  "same_data_iou": 0.6919225036888397
+ },
+ "L6H5": {
+  "test_iou": 0.7070272107736878,
+  "val_iou": 0.7103843491437009,
+  "chosen": "initial",
+  "same_data_iou": 0.7119104859365525
+ },
+ "L6H6": {
+  "test_iou": 0.7498004149694302,
+  "val_iou": 0.7430264934030426,
+  "chosen": "initial",
+  "same_data_iou": 0.7505614228461309
+ },
+ "L6H7": {
+  "test_iou": 0.6955002096683183,
+  "val_iou": 0.6964503729358374,
+  "chosen": "initial",
+  "same_data_iou": 0.6977062330617737
+ },
+ "L6H8": {
+  "test_iou": 0.7113150259230193,
+  "val_iou": 0.7148033646198155,
+  "chosen": "initial",
+  "same_data_iou": 0.7102768266282682
+ },
+ "L6H9": {
+  "test_iou": 0.633959234982889,
+  "val_iou": 0.6310383483659262,
+  "chosen": "initial",
+  "same_data_iou": 0.635214858884942
+ },
+ "L7H0": {
+  "test_iou": 0.6643344948643406,
+  "val_iou": 0.6648249017381602,
+  "chosen": "refined",
+  "same_data_iou": 0.6761409604904525
+ },
+ "L7H1": {
+  "test_iou": 0.7071377424537241,
+  "val_iou": 0.71376544740033,
+  "chosen": "initial",
+  "same_data_iou": 0.7130530761219366
+ },
+ "L7H10": {
+  "test_iou": 0.7550919650520997,
+  "val_iou": 0.7608275033109401,
+  "chosen": "refined",
+  "same_data_iou": 0.7697111857730147
+ },
+ "L7H11": {
+  "test_iou": 0.7006065302886979,
+  "val_iou": 0.7101321188056104,
+  "chosen": "initial",
+  "same_data_iou": 0.7136964198820188
+ },
+ "L7H12": {
+  "test_iou": 0.6933347845293596,
+  "val_iou": 0.7072307177901699,
+  "chosen": "initial",
+  "same_data_iou": 0.7010089752514552
+ },
+ "L7H13": {
+  "test_iou": 0.6627615064385068,
+  "val_iou": 0.6680739255704762,
+  "chosen": "initial",
+  "same_data_iou": 0.6638066332876729
+ },
+ "L7H14": {
+  "test_iou": 0.7093639671859354,
+  "val_iou": 0.7187895938098612,
+  "chosen": "initial",
+  "same_data_iou": 0.7201980724526205
+ },
+ "L7H15": {
+  "test_iou": 0.772631405062515,
+  "val_iou": 0.7780820897593941,
+  "chosen": "initial",
+  "same_data_iou": 0.7799122011027675
+ },
+ "L7H16": {
+  "test_iou": 0.6203324651248099,
+  "val_iou": 0.6256468828647029,
+  "chosen": "refined",
+  "same_data_iou": 0.629614173279235
+ },
+ "L7H17": {
+  "test_iou": 0.8203597734190395,
+  "val_iou": 0.82388399530398,
+  "chosen": "initial",
+  "same_data_iou": 0.8345125470525311
+ },
+ "L7H18": {
+  "test_iou": 0.7706799362619422,
+  "val_iou": 0.7892604691370124,
+  "chosen": "initial",
+  "same_data_iou": 0.7838997771328701
+ },
+ "L7H19": {
+  "test_iou": 0.7890550066694234,
+  "val_iou": 0.793990715987813,
+  "chosen": "initial",
+  "same_data_iou": 0.7994094538187165
+ },
+ "L7H2": {
+  "test_iou": 0.8721691709587088,
+  "val_iou": 0.8821606660982095,
+  "chosen": "initial",
+  "same_data_iou": 0.8793121965750487
+ },
+ "L7H20": {
+  "test_iou": 0.7325270710560743,
+  "val_iou": 0.73451964306836,
+  "chosen": "initial",
+  "same_data_iou": 0.7576276861161488
+ },
+ "L7H21": {
+  "test_iou": 0.7223981345501795,
+  "val_iou": 0.7316383544411953,
+  "chosen": "initial",
+  "same_data_iou": 0.7045922010679112
+ },
+ "L7H22": {
+  "test_iou": 0.7012171938056944,
+  "val_iou": 0.7088608523731856,
+  "chosen": "initial",
+  "same_data_iou": 0.6968033820140459
+ },
+ "L7H23": {
+  "test_iou": 0.7060445819334638,
+  "val_iou": 0.7043536846628287,
+  "chosen": "initial",
+  "same_data_iou": 0.7065529705025579
+ },
+ "L7H3": {
+  "test_iou": 0.7109934773190041,
+  "val_iou": 0.7248126595347623,
+  "chosen": "initial",
+  "same_data_iou": 0.7163875032053204
+ },
+ "L7H4": {
+  "test_iou": 0.8295736503819878,
+  "val_iou": 0.8429514648229685,
+  "chosen": "initial",
+  "same_data_iou": 0.8428523736756084
+ },
+ "L7H5": {
+  "test_iou": 0.821816975184354,
+  "val_iou": 0.8367240359444379,
+  "chosen": "initial",
+  "same_data_iou": 0.8336753129650774
+ },
+ "L7H6": {
+  "test_iou": 0.7065710173468557,
+  "val_iou": 0.712669369663912,
+  "chosen": "initial",
+  "same_data_iou": 0.7215130831898273
+ },
+ "L7H7": {
+  "test_iou": 0.6838557163027008,
+  "val_iou": 0.6950950080037422,
+  "chosen": "initial",
+  "same_data_iou": 0.6902126796479957
+ },
+ "L7H8": {
+  "test_iou": 0.5225637109151482,
+  "val_iou": 0.5374349415299582,
+  "chosen": "initial",
+  "same_data_iou": 0.5342208014526023
+ },
+ "L7H9": {
+  "test_iou": 0.6141356616349792,
+  "val_iou": 0.6159966258090847,
+  "chosen": "initial",
+  "same_data_iou": 0.6222419931271503
+ },
+ "L8H0": {
+  "test_iou": 0.7731809738335838,
+  "val_iou": 0.7919481935218583,
+  "chosen": "initial",
+  "same_data_iou": 0.7635536907474169
+ },
+ "L8H1": {
+  "test_iou": 0.7920045898794769,
+  "val_iou": 0.7991639536135853,
+  "chosen": "initial",
+  "same_data_iou": 0.8025086711216206
+ },
+ "L8H10": {
+  "test_iou": 0.7741532137240467,
+  "val_iou": 0.7730611452960034,
+  "chosen": "initial",
+  "same_data_iou": 0.7598895314206777
+ },
+ "L8H11": {
+  "test_iou": 0.6784692440220731,
+  "val_iou": 0.6889181523906109,
+  "chosen": "refined",
+  "same_data_iou": 0.6858340001713662
+ },
+ "L8H12": {
+  "test_iou": 0.7715790263345729,
+  "val_iou": 0.7806844599243657,
+  "chosen": "initial",
+  "same_data_iou": 0.7659157197454223
+ },
+ "L8H13": {
+  "test_iou": 0.6900849657756517,
+  "val_iou": 0.699163935391419,
+  "chosen": "initial",
+  "same_data_iou": 0.6997919317900364
+ },
+ "L8H14": {
+  "test_iou": 0.6964116646276562,
+  "val_iou": 0.7108124260819657,
+  "chosen": "initial",
+  "same_data_iou": 0.7175926499942789
+ },
+ "L8H15": {
+  "test_iou": 0.6621436774666551,
+  "val_iou": 0.6681040156974718,
+  "chosen": "initial",
+  "same_data_iou": 0.6745158213284248
+ },
+ "L8H16": {
+  "test_iou": 0.70651111666828,
+  "val_iou": 0.7115170256069535,
+  "chosen": "initial",
+  "same_data_iou": 0.7037146505608707
+ },
+ "L8H17": {
+  "test_iou": 0.6493456937600527,
+  "val_iou": 0.6527419166789866,
+  "chosen": "initial",
+  "same_data_iou": 0.6491390730617175
+ },
+ "L8H18": {
+  "test_iou": 0.7006111931417771,
+  "val_iou": 0.7088607709073186,
+  "chosen": "initial",
+  "same_data_iou": 0.6972077848606129
+ },
+ "L8H19": {
+  "test_iou": 0.7342307894914777,
+  "val_iou": 0.7455757806461576,
+  "chosen": "initial",
+  "same_data_iou": 0.7320576778768636
+ },
+ "L8H2": {
+  "test_iou": 0.9369545508873989,
+  "val_iou": 0.9382636824701329,
+  "chosen": "initial",
+  "same_data_iou": 0.9345962447307343
+ },
+ "L8H20": {
+  "test_iou": 0.7504857958206788,
+  "val_iou": 0.7610573304158725,
+  "chosen": "initial",
+  "same_data_iou": 0.7650256070261139
+ },
+ "L8H21": {
+  "test_iou": 0.6240552970385526,
+  "val_iou": 0.6460788850938832,
+  "chosen": "initial",
+  "same_data_iou": 0.6312939134946326
+ },
+ "L8H22": {
+  "test_iou": 0.5786561487143125,
+  "val_iou": 0.6057448754139669,
+  "chosen": "initial",
+  "same_data_iou": 0.5684052733761739
+ },
+ "L8H23": {
+  "test_iou": 0.7304928499145805,
+  "val_iou": 0.7405274026761381,
+  "chosen": "initial",
+  "same_data_iou": 0.7422139802597199
+ },
+ "L8H3": {
+  "test_iou": 0.7205718558168502,
+  "val_iou": 0.7231996408896765,
+  "chosen": "refined",
+  "same_data_iou": 0.7154284872994429
+ },
+ "L8H4": {
+  "test_iou": 0.7642756946935925,
+  "val_iou": 0.7714784011799785,
+  "chosen": "refined",
+  "same_data_iou": 0.778650608051829
+ },
+ "L8H5": {
+  "test_iou": 0.7155598092054234,
+  "val_iou": 0.7167569436282267,
+  "chosen": "refined",
+  "same_data_iou": 0.7313092735811529
+ },
+ "L8H6": {
+  "test_iou": 0.9270228361754809,
+  "val_iou": 0.9354428260518796,
+  "chosen": "refined",
+  "same_data_iou": 0.9269464536701688
+ },
+ "L8H7": {
+  "test_iou": 0.8995821146081978,
+  "val_iou": 0.9014571049130866,
+  "chosen": "initial",
+  "same_data_iou": 0.9050981658294516
+ },
+ "L8H8": {
+  "test_iou": 0.8906128661879876,
+  "val_iou": 0.8982194126952576,
+  "chosen": "initial",
+  "same_data_iou": 0.892662659450937
+ },
+ "L8H9": {
+  "test_iou": 0.6190285130571397,
+  "val_iou": 0.6282031802211736,
+  "chosen": "initial",
+  "same_data_iou": 0.6294449584921716
+ },
+ "L9H0": {
+  "test_iou": 0.7124494904454609,
+  "val_iou": 0.7171672583359073,
+  "chosen": "initial",
+  "same_data_iou": 0.700184472325615
+ },
+ "L9H1": {
+  "test_iou": 0.6547299714109497,
+  "val_iou": 0.6761079622648424,
+  "chosen": "initial",
+  "same_data_iou": 0.640749579142812
+ },
+ "L9H10": {
+  "test_iou": 0.7801000040075562,
+  "val_iou": 0.7948560160812767,
+  "chosen": "initial",
+  "same_data_iou": 0.7649161123954219
+ },
+ "L9H11": {
+  "test_iou": 0.8069996324656763,
+  "val_iou": 0.8156977638200144,
+  "chosen": "initial",
+  "same_data_iou": 0.822663954586135
+ },
+ "L9H12": {
+  "test_iou": 0.6834297241015723,
+  "val_iou": 0.6987022886208165,
+  "chosen": "initial",
+  "same_data_iou": 0.6825541243574008
+ },
+ "L9H13": {
+  "test_iou": 0.8027560403079121,
+  "val_iou": 0.8082536088467649,
+  "chosen": "initial",
+  "same_data_iou": 0.7874778488095764
+ },
+ "L9H14": {
+  "test_iou": 0.624791270089711,
+  "val_iou": 0.6340981626577225,
+  "chosen": "initial",
+  "same_data_iou": 0.6351057701524077
+ },
+ "L9H15": {
+  "test_iou": 0.7903733892030845,
+  "val_iou": 0.8072729340103328,
+  "chosen": "initial",
+  "same_data_iou": 0.8066255494223666
+ },
+ "L9H16": {
+  "test_iou": 0.6522503860625976,
+  "val_iou": 0.6629891320725411,
+  "chosen": "refined",
+  "same_data_iou": 0.6653058785242515
+ },
+ "L9H17": {
+  "test_iou": 0.7324382740601887,
+  "val_iou": 0.7534582406576531,
+  "chosen": "initial",
+  "same_data_iou": 0.744051156081529
+ },
+ "L9H18": {
+  "test_iou": 0.6580873671118684,
+  "val_iou": 0.6619157932257943,
+  "chosen": "refined",
+  "same_data_iou": 0.6609788785212134
+ },
+ "L9H19": {
+  "test_iou": 0.9171851614187005,
+  "val_iou": 0.9085392928710764,
+  "chosen": "initial",
+  "same_data_iou": 0.925891192564192
+ },
+ "L9H2": {
+  "test_iou": 0.5404206543986393,
+  "val_iou": 0.547109017793384,
+  "chosen": "refined",
+  "same_data_iou": 0.543303576508608
+ },
+ "L9H20": {
+  "test_iou": 0.8043794244416975,
+  "val_iou": 0.8120682967464273,
+  "chosen": "refined",
+  "same_data_iou": 0.8140955373729444
+ },
+ "L9H21": {
+  "test_iou": 0.7951246416641786,
+  "val_iou": 0.801433873608551,
+  "chosen": "initial",
+  "same_data_iou": 0.7858790316614879
+ },
+ "L9H22": {
+  "test_iou": 0.7361453778407374,
+  "val_iou": 0.7443890837065809,
+  "chosen": "initial",
+  "same_data_iou": 0.7447826383509587
+ },
+ "L9H23": {
+  "test_iou": 0.7592786817566364,
+  "val_iou": 0.7887650311042662,
+  "chosen": "initial",
+  "same_data_iou": 0.7455010283914251
+ },
+ "L9H3": {
+  "test_iou": 0.7974480095857873,
+  "val_iou": 0.7994089508269036,
+  "chosen": "initial",
+  "same_data_iou": 0.7955654876745328
+ },
+ "L9H4": {
+  "test_iou": 0.82432934507107,
+  "val_iou": 0.8304107718837536,
+  "chosen": "initial",
+  "same_data_iou": 0.8298587016868695
+ },
+ "L9H5": {
+  "test_iou": 0.9333923300090495,
+  "val_iou": 0.9361599088534602,
+  "chosen": "initial",
+  "same_data_iou": 0.9313289148169984
+ },
+ "L9H6": {
+  "test_iou": 0.6527133275695272,
+  "val_iou": 0.6593377116778959,
+  "chosen": "refined",
+  "same_data_iou": 0.673897882748596
+ },
+ "L9H7": {
+  "test_iou": 0.553859505502478,
+  "val_iou": 0.5470115416552435,
+  "chosen": "initial",
+  "same_data_iou": 0.5579384181168443
+ },
+ "L9H8": {
+  "test_iou": 0.6981256629723153,
+  "val_iou": 0.6976843139099862,
+  "chosen": "refined",
+  "same_data_iou": 0.6880455842221155
+ },
+ "L9H9": {
+  "test_iou": 0.8271927785401672,
+  "val_iou": 0.8400154193665094,
+  "chosen": "initial",
+  "same_data_iou": 0.8298421274184505
+ }
+}
