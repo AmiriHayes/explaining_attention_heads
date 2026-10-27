@@ -136,6 +136,31 @@ def apply_causal_mask(matrix):
 
 
 
+
+# --- helpers inlined from data/tinyllama_programs.py, needed by the substituted
+# --- programs below. Copied verbatim.
+def _align_to_spacy(sentence: str, tokens: list) -> list:
+    doc = _get_nlp()(sentence)
+    spans, pos = [], 0
+    for t in tokens:
+        clean = t.lstrip("\u0120").lstrip("##").lstrip()
+        span_len = max(len(clean), 1)
+        spans.append((pos, pos + span_len))
+        pos += span_len
+    alignment = []
+    for gs, ge in spans:
+        overlapping = [si for si, st in enumerate(doc)
+                       if st.idx < ge and st.idx + len(st.text) > gs]
+        alignment.append(overlapping)
+    return alignment
+
+
+def _char_sim(a: str, b: str) -> float:
+    """Character-overlap similarity as embedding_similarity proxy."""
+    sa, sb = set(a.lower()), set(b.lower())
+    return len(sa & sb) / max(len(sa | sb), 1)
+
+
 def prog_L0H0(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
     """Diffuse causal-prefix averaging; punctuation discounts within-word suffix keys.
     The special case redistributes prefix mass without changing self-attention.
@@ -47815,118 +47840,74 @@ def prog_L17H27(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str,
     return "bos_sink_with_pronominal_residual", attention
 
 
+# ---------------------------------------------------------------------------
+# SUBSTITUTED L17H28. The gpt-6.1-sol program for this head (prog_L17H28)
+# raised ValueError: could not broadcast input array from shape (2,) into shape (20,)
+# on 500 of the 500 splits.json sentences, so it is replaced here by the
+# paper library's program for the same head, copied verbatim from
+# data/tinyllama_programs.py. The preferred replacement -- the other candidate
+# from the same synthesis run -- was not available: the per-head records for
+# this model live on the cluster, which was unreachable.
+# ---------------------------------------------------------------------------
 def prog_L17H28(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
-    """BOS attention sink with selective backward links to object-governing
-    verbs and prepositions, including the beginnings of their argument phrases.
-    """
-    tokens = tokenize(sentence, tokenizer)
+    """Sentence boundary and structural attention head focusing on periods, newlines, and sentence-initial tokens."""
+
+    tokens = tokenizer.convert_ids_to_tokens(tokenizer(sentence, return_tensors="pt").input_ids[0])
     n = len(tokens)
-    matrix = np.zeros((n, n), dtype=np.float64)
-    if n == 0:
-        return "bos_sink_with_argument_links", matrix
+    attention = np.zeros((n, n))
 
+    # Parse with spacy for linguistic features
     doc = spacy_parse(sentence)
-    alignment = align_tokens_to_spacy(sentence, tokens, tokenizer)
-    inverse = [[] for _ in doc]
-    for i, aligned in enumerate(alignment):
-        for sid in aligned:
-            inverse[sid].append(i)
+    token_to_spacy = _align_to_spacy(sentence, tokens)
 
-    matrix[0, 0] = 1.0
-    specials = set(tokenizer.all_special_tokens)
+    for i in range(n):
+        for j in range(i + 1):  # Causal mask
+            weight = 0.01  # Base attention
 
-    for i in range(1, n):
-        # A small diffuse causal component accompanies the dominant sink.
-        distances = i - np.arange(i + 1)
-        background = np.exp(-distances / 5.0)
-        background /= background.sum()
+            # Very high attention to periods and sentence boundaries
+            if tokens[j].strip() in ['.', '!', '?']:
+                weight += 0.5
 
-        sink_mass = 0.93
-        target = None
-        link_mass = 0.0
-        raw = tokens[i]
+            # High attention to newlines (sentence separators)
+            if tokens[j].strip() == '' and '\n' in tokens[j]:
+                weight += 0.3
 
-        if raw in specials or not alignment[i]:
-            sink_mass = 0.97
-        else:
-            word = doc[alignment[i][-1]]
-            pos = word.pos_
-            dep = word.dep_
+            # Strong attention to first token of sentences
+            # Check if j is at start or after sentence boundary
+            if j == 0:
+                weight += 0.2
+            elif j > 0 and (tokens[j-1].strip() in ['.', '!', '?'] or '\n' in tokens[j-1]):
+                weight += 0.2
 
-            if word.is_punct or word.is_space:
-                sink_mass = 0.965
-            elif pos in ("ADP", "PART", "CCONJ", "SCONJ"):
-                sink_mass = 0.94
-            elif pos in ("VERB", "AUX", "ADV"):
-                sink_mass = 0.92
-            elif pos in ("DET", "ADJ", "NUM"):
-                sink_mass = 0.86
-            elif pos in ("NOUN", "PROPN", "PRON"):
-                sink_mass = 0.82
+            # Self-attention boost
+            if i == j:
+                weight += 0.1
 
-            if not word.is_punct and not word.is_space:
-                argument = word
-                phrase_factor = 1.0
+            # Attention to tokens immediately before periods
+            if j < n - 1 and tokens[j+1].strip() in ['.', '!', '?']:
+                weight += 0.1
 
-                # Argument-initial determiners can already identify the governor.
-                if dep in ("det", "poss", "amod", "nummod"):
-                    argument = word.head
-                    phrase_factor = {
-                        "det": 0.76,
-                        "poss": 0.48,
-                        "amod": 0.25,
-                        "nummod": 0.35,
-                    }[dep]
+            # Boost for semantic similarity (moderate)
+            if i != j:
+                sim = _char_sim(tokens[i], tokens[j])
+                if sim > 0.7:
+                    weight += 0.15 * sim
 
-                governor = argument.head
-                relation = argument.dep_
-                strength = 0.0
+            # Distance decay for non-structural tokens
+            if not (tokens[j].strip() in ['.', '!', '?', ''] or 
+                   (j == 0) or 
+                   (j > 0 and (tokens[j-1].strip() in ['.', '!', '?'] or '\n' in tokens[j-1]))):
+                distance = i - j
+                if distance > 0:
+                    weight *= (0.8 ** distance)
 
-                if relation in ("dobj", "obj", "iobj", "dative"):
-                    strength = 0.80
-                    if argument.pos_ == "PRON":
-                        strength = 0.86
-                elif relation in ("pobj", "obl"):
-                    strength = 0.57
-                elif relation in ("attr", "oprd"):
-                    strength = 0.32
-                elif relation in ("nsubj", "nsubjpass"):
-                    # A subordinate subject may point back to the verb that
-                    # introduced its clause, rather than its future predicate.
-                    if governor.dep_ in ("ccomp", "xcomp"):
-                        governor = governor.head
-                        strength = 0.57
+            attention[i, j] = weight
 
-                candidates = [
-                    j for j in inverse[governor.i] if 0 < j < i
-                ]
-                if strength and candidates and governor.i != argument.i:
-                    target = candidates[-1]
-                    distance = i - target
-                    locality = np.exp(-max(distance - 3, 0) / 22.0)
-                    link_mass = strength * phrase_factor * locality
+    # Apply causal mask and normalize
+    attention = apply_causal_mask(attention)
+    attention = make_row_stochastic(attention)
 
-                    # Incomplete lexical pieces mostly retain the sink;
-                    # argument selection is stronger at word completion.
-                    pieces = inverse[word.i]
-                    if pieces and i != pieces[-1]:
-                        link_mass *= 0.12
-                        sink_mass = max(sink_mass, 0.95)
-
-        if i == 1:
-            sink_mass = max(sink_mass, 0.94)
-            link_mass = 0.0
-
-        if target is not None and link_mass > 0.0:
-            remainder = 1.0 - link_mass
-            matrix[i] = 0.045 * remainder * background
-            matrix[i, 0] += 0.955 * remainder
-            matrix[i, target] += link_mass
-        else:
-            matrix[i] = (1.0 - sink_mass) * background
-            matrix[i, 0] += sink_mass
-
-    return "bos_sink_with_argument_links", make_row_stochastic(matrix)
+    return "prog_L17H28", attention
 
 
 def prog_L17H29(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
@@ -50302,113 +50283,95 @@ def prog_L18H25(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str,
     )
 
 
+# ---------------------------------------------------------------------------
+# SUBSTITUTED L18H26. The gpt-6.1-sol program for this head (prog_L18H26)
+# raised ValueError: could not broadcast input array from shape (2,) into shape (19,)
+# on 500 of the 500 splits.json sentences, so it is replaced here by the
+# paper library's program for the same head, copied verbatim from
+# data/tinyllama_programs.py. The preferred replacement -- the other candidate
+# from the same synthesis run -- was not available: the per-head records for
+# this model live on the cluster, which was unreachable.
+# ---------------------------------------------------------------------------
 def prog_L18H26(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
-    """BOS attention sink with weaker, predominantly local contextual attention.
-    Punctuation and clause boundaries strengthen the sink; phrase interiors weaken it.
-    """
-    tokens = tokenize(sentence, tokenizer)
+    """Sentence boundary attention: focuses on periods, line breaks, and structural markers."""
+
+    tokens = tokenizer.convert_ids_to_tokens(tokenizer(sentence, return_tensors="pt").input_ids[0])
     n = len(tokens)
-    attention = np.zeros((n, n), dtype=np.float64)
+
     if n == 0:
-        return "bos_sink_with_local_context", attention
+        n_empty = len(tokenizer.convert_ids_to_tokens(tokenizer(sentence, return_tensors="pt").input_ids[0]))
+        return "prog_L18H26", np.zeros((n_empty, n_empty))
 
+    attention = np.zeros((n, n))
+
+    # Parse with spacy for linguistic features
     doc = spacy_parse(sentence)
-    alignment = align_tokens_to_spacy(sentence, tokens, tokenizer)
-    special_tokens = tokenizer.all_special_tokens
-    attention[0, 0] = 1.0
+    token_to_spacy = _align_to_spacy(sentence, tokens)
 
-    for i in range(1, n):
-        raw = tokens[i]
-        text = raw.replace("▁", " ").replace("Ġ", " ").strip()
-        indices = alignment[i]
-        word = doc[indices[0]] if indices else None
-        previous_indices = alignment[i - 1]
-        previous_word = doc[previous_indices[-1]] if previous_indices else None
+    for i in range(n):
+        # Strong self-attention for structural tokens
+        if tokens[i].strip() in ['.', '\n', '!', '?']:
+            attention[i, i] = 1.0
+        else:
+            # Find structural tokens to attend to
+            structural_weights = []
 
-        pos = word.pos_ if word is not None else ""
-        dep = word.dep_ if word is not None else ""
+            # Look for periods and line breaks in previous positions
+            for j in range(i + 1):
+                weight = 0.0
 
-        sink = {
-            "VERB": 0.72,
-            "AUX": 0.72,
-            "NOUN": 0.51,
-            "PROPN": 0.66,
-            "PRON": 0.56,
-            "DET": 0.47,
-            "ADJ": 0.60,
-            "ADV": 0.65,
-            "ADP": 0.57,
-            "PART": 0.57,
-            "CCONJ": 0.62,
-            "SCONJ": 0.73,
-            "NUM": 0.49,
-            "INTJ": 0.82,
-            "PUNCT": 0.83,
-            "SPACE": 0.90,
-        }.get(pos, 0.65)
+                if tokens[j].strip() in ['.', '\n']:
+                    # Strong attention to sentence/paragraph boundaries
+                    if tokens[j].strip() == '.':
+                        weight = 0.4
+                    elif tokens[j].strip() == '\n':
+                        weight = 0.3
 
-        if word is not None:
-            if dep in ("ROOT", "conj", "advcl", "ccomp"):
-                sink += 0.05
-            if dep in ("pobj", "dobj", "obj", "amod", "compound"):
-                sink -= 0.04
+                    # Boost for recent structural tokens
+                    distance = i - j
+                    if distance <= 5:
+                        weight *= 1.5
 
-        # The earliest lexical token has almost no competing context.
-        if i == 1:
-            sink = 0.83 if pos == "DET" else 0.96
+                elif tokens[j].strip() in ['!', '?']:
+                    weight = 0.2
 
-        if not text:
-            sink = 0.91
-        elif all(not c.isalnum() for c in text):
-            sink = 0.81 if "," in text else 0.90
-            if "'" in text or "’" in text:
-                sink = 0.95
+                # Self-attention
+                elif i == j:
+                    weight = 0.1
 
-        if raw in special_tokens:
-            sink = 0.97
+                # Recency bias for recent tokens
+                elif i - j <= 3:
+                    weight = 0.05
 
-        local_gate = False
-        if i > 2 and word is not None and previous_word is not None:
-            # Some phrase-internal queries strongly select their immediate context.
-            local_gate = (
-                pos == "PRON"
-                and previous_word.pos_ in ("ADP", "ADV", "NOUN", "AUX")
-            ) or (
-                pos == "DET" and previous_word.pos_ == "ADP"
-            )
-            if local_gate:
-                sink = 0.29
+                # Small attention to content words
+                else:
+                    spacy_indices = token_to_spacy[j]
+                    if spacy_indices:
+                        spacy_token = doc[spacy_indices[0]]
+                        if spacy_token.pos_ in ['NOUN', 'VERB', 'ADJ']:
+                            weight = 0.02
+                        else:
+                            weight = 0.01
+                    else:
+                        weight = 0.01
 
-        sink = float(np.clip(sink, 0.18, 0.98))
-        if i == 1:
-            attention[i, 0] = sink
-            attention[i, i] = 1.0 - sink
-            continue
+                structural_weights.append(weight)
 
-        weights = np.zeros(i + 1, dtype=np.float64)
-        positions = np.arange(1, i + 1)
-        weights[1:] = 0.22 * np.exp(-(i - positions) / 2.2)
-        weights[i - 1] += 0.56
-        weights[i] += 0.16
+            # Normalize and assign
+            total = sum(structural_weights)
+            if total > 0:
+                for j, weight in enumerate(structural_weights):
+                    attention[i, j] = weight / total
+            else:
+                # Fallback to uniform over available positions
+                for j in range(i + 1):
+                    attention[i, j] = 1.0 / (i + 1)
 
-        if local_gate:
-            weights[i - 1] += 1.8
+    # Apply causal mask and normalize
+    attention = apply_causal_mask(attention)
+    attention = make_row_stochastic(attention)
 
-        # Add a small backward syntactic correction without overriding the sink.
-        if word is not None and word.head.i != word.i:
-            for j in range(max(1, i - 8), i):
-                if word.head.i in alignment[j]:
-                    weights[j] += 0.16
-                    break
-
-        # Later subword pieces retain some attention to the preceding piece.
-        if indices and previous_indices and indices[0] == previous_indices[-1]:
-            weights[i - 1] += 0.20
-
-        attention[i, 0] = sink
-        attention[i, 1:] = (1.0 - sink) * weights[1:] / weights[1:].sum()
-
-    return "bos_sink_with_local_context", attention
+    return "prog_L18H26", attention
 
 
 def prog_L18H27(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:

@@ -53600,78 +53600,124 @@ def prog_L12H6(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, 
     return "first_token_sink_with_local_residual", make_row_stochastic(attention)
 
 
-def prog_L12H7(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
-    """First-token attention sink with a secondary self-attention channel.
-    Linguistic features modestly adjust self-attention and local residual attention.
+# ---------------------------------------------------------------------------
+# SUBSTITUTED L12H7. The gpt-6.1-sol program for this head (prog_L12H7)
+# raised ValueError: could not broadcast input array from shape (3,) into shape (19,)
+# on 500 of the 500 splits.json sentences, so it is replaced here by the
+# paper library's program for the same head, copied verbatim from
+# data/qwen3_programs.py. The preferred replacement -- the other candidate
+# from the same synthesis run -- was not available: the per-head records for
+# this model live on the cluster, which was unreachable.
+# ---------------------------------------------------------------------------
+def prog_L12H7(sentence: str, tokenizer: "PreTrainedTokenizerBase"):
     """
+    Hypothesis: this head attends strongly to the first token (sentence-level predicate or topic),
+    with additional strong self-attention on some tokens (esp. lexical content words),
+    plus moderate attention spread locally backwards to syntactically related words,
+    and some weaker attention to tokens semantically similar (embedding-wise).
+    Attention is lower-triangular and row-normalized.
+    """
+    import numpy as np
+
     tokens = tokenize(sentence, tokenizer)
     n = len(tokens)
-    attention = np.zeros((n, n), dtype=np.float64)
-    if n == 0:
-        return "first_token_sink_with_self", attention
 
     doc = spacy_parse(sentence)
-    alignment = align_tokens_to_spacy(sentence, tokens, tokenizer)
+    # Align model tokens to spacy tokens to use linguistic features
+    t2s = align_tokens_to_spacy(sentence, tokens, tokenizer)  # model-token idx -> list of spacy token idx
+    s2t = align_spacy_to_tokens(sentence, tokens, tokenizer)  # spacy token idx -> list of model-token idx
+    emb = _get_embeddings()
 
-    # Select the most substantially overlapping linguistic token.
-    representatives = []
-    for indices in alignment:
-        candidates = [k for k in indices if not doc[k].is_space]
-        representatives.append(candidates[-1] if candidates else None)
+    # Build initial attention matrix: shape (n, n), causal mask applied later
+    A = np.zeros((n, n), dtype=np.float64)
 
-    attention[0, 0] = 1.0
-    for i in range(1, n):
-        si = representatives[i]
-        word = doc[si] if si is not None else None
+    # Identify first token index (usually 0)
+    first_token_idx = 0
 
-        sink_mass = 0.66
-        self_mass = 0.25
+    # Precompute embedding vectors for tokens for similarity checks
+    token_embs = []
+    for i in range(n):
+        try:
+            eid = tokenizer.convert_tokens_to_ids(tokens[i])
+            v = emb[eid]
+        except Exception:
+            v = np.zeros(emb.shape[1], dtype=np.float32)
+        token_embs.append(v)
+    token_embs = np.array(token_embs)
 
-        if word is not None:
-            if word.pos_ == "ADJ":
-                sink_mass -= 0.09
-                self_mass += 0.09
-            elif word.pos_ in ("NOUN", "PROPN"):
-                sink_mass -= 0.025
-                self_mass += 0.025
-            elif word.pos_ == "VERB":
-                sink_mass -= 0.045
-                self_mass += 0.045
-            elif word.pos_ == "PRON" and word.dep_ in (
-                "dobj", "obj", "iobj", "pobj"
-            ):
-                sink_mass -= 0.08
-                self_mass += 0.08
-            elif word.is_punct or word.pos_ in ("ADP", "DET", "AUX"):
-                sink_mass += 0.025
-                self_mass -= 0.025
+    # Similarity function vectorized helper (cosine similarity)
+    def cosine_sim(u, v):
+        nu = np.linalg.norm(u)
+        nv = np.linalg.norm(v)
+        if nu == 0 or nv == 0:
+            return 0.0
+        return float(np.dot(u, v) / (nu * nv))
 
-        # Keep the residual small: syntax is secondary to the positional sink.
-        residual = np.exp(-(i - np.arange(i + 1)) / 3.0)
-        residual[0] = 0.0
-        residual[i] = 0.0
+    # First pass: strong attention to first token (index 0) for almost all tokens except the first itself
+    # Weight magnitude ~ 0.6 for example
+    for i in range(n):
+        if i != first_token_idx:
+            A[i, first_token_idx] += 0.6
 
-        if word is not None and word.head.i != word.i:
-            head_positions = [
-                j for j in range(1, i)
-                if representatives[j] == word.head.i
-            ]
-            if head_positions:
-                residual[head_positions[-1]] += 0.6
+    # Strong self-attention for tokens that are content: nouns, verbs, adjectives, proper nouns, maybe cardinal
+    # According to spaCy POS tags
+    content_pos = {"NOUN", "VERB", "ADJ", "PROPN", "NUM", "ADV"}
+    for i in range(n):
+        sp_inds = t2s[i]
+        # If token aligns to no spacy token, skip self attention boost
+        if not sp_inds:
+            continue
+        # Check if ANY of the aligned spacy tokens have content POS
+        if any(doc[sp].pos_ in content_pos for sp in sp_inds):
+            A[i, i] += 0.3  # moderate boost
 
-        residual_sum = residual.sum()
-        if residual_sum > 0:
-            attention[i] = (
-                (1.0 - sink_mass - self_mass) * residual / residual_sum
-            )
-            attention[i, 0] += sink_mass
-            attention[i, i] += self_mass
-        else:
-            total = sink_mass + self_mass
-            attention[i, 0] = sink_mass / total
-            attention[i, i] = self_mass / total
+    # Medium attention to syntactic heads: each token attends also to its syntactic head token
+    # We map spaCy heads back to model tokens and distribute attention evenly if multiple target tokens in model
+    for i in range(n):
+        sp_inds = t2s[i]
+        if not sp_inds:
+            continue
+        # Get all heads for these spacy tokens (usually one head per spacy token)
+        # Collect unique head token indices (spaCy token indices)
+        head_spacy_tokens = set()
+        for sp in sp_inds:
+            # spacy token itself might be root with head = itself; skip self-head
+            head = doc[sp].head
+            if head.i != sp:
+                head_spacy_tokens.add(head.i)
+        # Map head spaCy tokens to model tokens
+        head_model_tokens = set()
+        for hsp in head_spacy_tokens:
+            head_model_tokens.update(s2t[hsp])
+        # Remove any head token > i (not causal)
+        head_model_tokens = [h for h in head_model_tokens if h <= i]
+        # Add moderate attention divided evenly (total 0.1)
+        count = len(head_model_tokens)
+        if count > 0:
+            weight = 0.1 / count
+            for h in head_model_tokens:
+                A[i, h] += weight
 
-    return "first_token_sink_with_self", make_row_stochastic(attention)
+    # Slight attention to tokens semantically similar by embedding:
+    # Each token attends to backward tokens with cosine similarity > 0.9 (except self)
+    for i in range(n):
+        for j in range(i):
+            sim = cosine_sim(token_embs[i], token_embs[j])
+            if sim > 0.9:
+                # Add small boost proportional to similarity (up to 0.15)
+                A[i, j] += 0.15 * sim
+
+    # Finally add a small self-attention baseline for every token to ensure minimum self-attention
+    for i in range(n):
+        A[i, i] += 0.1
+
+    # Apply causal mask (lower triangular)
+    A = apply_causal_mask(A)
+
+    # Normalize rows to sum to 1, with fallback uniform if dead rows
+    A = make_row_stochastic(A)
+
+    return "first_token_plus_self_and_heads_with_similarity", A
 
 
 def prog_L12H8(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
@@ -59469,126 +59515,122 @@ def prog_L14H9(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, 
     )
 
 
-def prog_L14H10(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
-    """First-token attention sink with secondary object and discourse-boundary anchors.
-    Nominal boundaries and local subject–verb links can temporarily override the sink.
+# ---------------------------------------------------------------------------
+# SUBSTITUTED L14H10. The gpt-6.1-sol program for this head (prog_L14H10)
+# raised ValueError: could not broadcast input array from shape (2,) into shape (19,)
+# on 500 of the 500 splits.json sentences, so it is replaced here by the
+# paper library's program for the same head, copied verbatim from
+# data/qwen3_programs.py. The preferred replacement -- the other candidate
+# from the same synthesis run -- was not available: the per-head records for
+# this model live on the cluster, which was unreachable.
+# ---------------------------------------------------------------------------
+def prog_L14H10(sentence: str, tokenizer: "PreTrainedTokenizerBase") -> "tuple[str, np.ndarray]":
     """
+    Hypothesis: This head primarily attends to the first token (sentence-initial)
+    strongly, plus attention to the syntactic head of the current token’s spaCy
+    token and related nearby tokens, with some attention decay by distance.
+    Also attends strongly to punctuation like commas near the first token.
+    """
+    import numpy as np
+
     tokens = tokenize(sentence, tokenizer)
     n = len(tokens)
-    attention = np.zeros((n, n), dtype=np.float64)
-    if n == 0:
-        return "first_token_with_nominal_anchors", attention
+    matrix = np.zeros((n, n), dtype=np.float64)
 
-    doc = spacy_parse(sentence)
-    aligned = align_tokens_to_spacy(sentence, tokens, tokenizer)
-    inverse = align_spacy_to_tokens(sentence, tokens, tokenizer)
+    # spaCy parse
+    doc = _get_nlp()(sentence)
+    # Align model tokens to spaCy tokens (many model tokens per spacy token possible)
+    tok2spacy = align_tokens_to_spacy(sentence, tokens, tokenizer)
 
-    words = []
-    for indices in aligned:
-        candidates = [doc[k] for k in indices if not doc[k].is_space]
-        lexical = [w for w in candidates if not w.is_punct]
-        words.append(lexical[-1] if lexical else (candidates[-1] if candidates else None))
+    # For each model token index, find its main spacy token (take first if multiple)
+    # Defensive: if no spacy token aligned, skip
+    main_spacy_indices = []
+    for spans in tok2spacy:
+        if spans:
+            main_spacy_indices.append(spans[0])
+        else:
+            main_spacy_indices.append(None)  # no alignment
 
-    nominal_pos = {"NOUN", "PROPN", "PRON"}
-    object_deps = {"dobj", "obj", "iobj", "attr", "oprd"}
-    quote_chars = {'"', "“", "”", "«", "»"}
-    latest_object = None
-    latest_boundary_object = None
-    boundary_count = 0
+    # Compute attention rows one by one:
+    # 1) Strong self attention to token 0 (the 1st token in sentence),
+    #    all tokens strongly attend to tokens[0], also tokens[0] attends itself.
+    # 2) For each token i, attend to the spaCy syntactic head token(s)’ model tokens
+    #    (closest or average attention), normalized with decay by token distance.
+    # 3) Add some extra small attention to punctuation tokens near beginning (e.g. commas),
+    #    which often get attended strongly in example.
+    # 4) Normalize rows to sum to 1, respecting causal mask (lower triangular).
 
+    # Identify punctuation tokens indices (model tokens that are punctuation in spaCy)
+    punct_indices = []
+    # We'll find all model tokens aligned to spaCy tokens that are punctuation
+    for sp_i, sp_token in enumerate(doc):
+        if sp_token.is_punct:
+            # add all model tokens that cover this spacy token
+            for mtok_i in align_spacy_to_tokens(sentence, tokens, tokenizer)[sp_i]:
+                punct_indices.append(mtok_i)
+    punct_indices = sorted(set(punct_indices))
+
+    # To handle attention decay by distance, define a decay function:
+    def decay(dist):
+        # Exponential decay with base ~0.8 per token distance to make close heads more weighted
+        return 0.8 ** dist
+
+    # To attend to syntactic heads:
+    # Map from spacy token index to spacy head token index
+    # If spacy token is root, head is itself
+    spacy_head = [t.head.i if t.head.i != t.i else t.i for t in doc]
+
+    # For each model token i:
     for i in range(n):
-        if i == 0:
-            attention[0, 0] = 1.0
-            continue
+        # causal mask: j <= i only
+        allowed_js = list(range(i + 1))
 
-        word = words[i]
-        previous = words[i - 1]
-        clean = tokens[i].lstrip("Ġ▁")
-        is_quote = any(c in clean for c in quote_chars)
-        is_punctuation = bool(clean) and all(
-            not c.isalnum() and not c.isspace() for c in clean
-        )
-        pos = word.pos_ if word is not None else ""
+        # Step 1: Always add strong attention to first token (token 0)
+        # This matches the examples where token 0 is heavily attended by many tokens
+        matrix[i, 0] = 0.4
 
-        sink = 0.55 + 0.42 * np.exp(-i / 10.0)
-        sink -= min(0.12, 0.018 * boundary_count)
-        if pos in {"NOUN", "PROPN", "VERB", "ADJ"}:
-            sink += 0.025
-        sink = float(np.clip(sink, 0.38, 0.97))
+        # Step 2: Attend to own syntactic head token(s)
+        sp_i = main_spacy_indices[i]
+        if sp_i is not None and sp_i < len(doc):
+            head_i = spacy_head[sp_i]
+            # model token(s) aligned to head spacy token
+            head_model_tokens = align_spacy_to_tokens(sentence, tokens, tokenizer)[head_i]
+            if head_model_tokens:
+                # Distribute some attention mass to syntactic head model tokens that are allowed (<=i)
+                # Weight spread inversely proportional to token distance with decay
+                distribute = 0.5
+                unmasked_heads = [j for j in head_model_tokens if j <= i]
+                if unmasked_heads:
+                    # Calculate scores by decay of distance
+                    scores = np.array([decay(abs(i - j)) for j in unmasked_heads])
+                    scores_sum = scores.sum()
+                    if scores_sum > 0:
+                        scores = scores / scores_sum
+                        for idx, j in enumerate(unmasked_heads):
+                            matrix[i, j] += distribute * scores[idx]
 
-        # Spread non-sink mass over recent tokens, with a weak syntactic prior.
-        indices = np.arange(i + 1)
-        residual = np.exp(-(i - indices) / 4.0)
-        residual[i] *= 0.35
+        # Step 3: Attend a small amount to punctuation tokens in causal window, decayed by distance
+        # Adds structure like commas nearby or at start
+        punct_weight = 0.1
+        punct_js = [j for j in punct_indices if j <= i and j != 0]
+        if punct_js:
+            dist_decay = np.array([decay(abs(i - j)) for j in punct_js])
+            if dist_decay.sum() > 0:
+                dist_decay /= dist_decay.sum()
+                for idx, j in enumerate(punct_js):
+                    matrix[i, j] += punct_weight * dist_decay[idx]
 
-        if word is not None and word.head.i != word.i:
-            head_tokens = inverse[word.head.i]
-            causal_heads = [j for j in head_tokens if 0 < j <= i]
-            if causal_heads:
-                residual[causal_heads[-1]] += 1.8
+        # Step 4: Add some small self-attention if slot open
+        if i <= i:
+            matrix[i, i] += 0.1
 
-        anchor = None
-        strength = 0.0
+    # Apply causal mask: zero upper triangle
+    matrix = apply_causal_mask(matrix)
 
-        # Commas and opening quotation marks often select the preceding nominal.
-        if is_punctuation or is_quote:
-            for j in range(i - 1, max(-1, i - 5), -1):
-                candidate = words[j]
-                if candidate is None or candidate.is_punct or candidate.is_space:
-                    continue
-                if candidate.pos_ in nominal_pos and j > 0:
-                    anchor = j
-                    strength = 0.80 if is_quote else 0.66
-                break
+    # Normalize rows to sum to 1 with fallback uniform causal if any row zero
+    matrix = make_row_stochastic(matrix)
 
-        # A direct object can act as a local anchor for its following complement.
-        if latest_object is not None:
-            distance = i - latest_object
-            if 0 < distance <= 4 and pos in {"ADP", "NOUN", "PROPN", "PUNCT"}:
-                candidate_strength = 0.88 if pos == "ADP" and distance == 1 else 0.65
-                if candidate_strength > strength:
-                    anchor, strength = latest_object, candidate_strength
-
-        # Retain an object at a closing discourse boundary for nearby continuation.
-        if latest_boundary_object is not None:
-            boundary_index, object_index = latest_boundary_object
-            if 0 < i - boundary_index <= 10 and pos in {"VERB", "AUX", "DET"}:
-                if strength < 0.46:
-                    anchor, strength = object_index, 0.46
-
-        # In inverted modal clauses, the lexical verb often selects its subject.
-        if word is not None and pos == "VERB":
-            has_modal = any(
-                c.dep_ in {"aux", "auxpass"} and c.tag_ == "MD" and c.i < word.i
-                for c in word.children
-            )
-            if has_modal:
-                for child in word.children:
-                    if child.dep_ in {"nsubj", "nsubjpass"}:
-                        subject_tokens = [j for j in inverse[child.i] if 0 < j < i]
-                        if subject_tokens and strength < 0.68:
-                            anchor, strength = subject_tokens[-1], 0.68
-
-        residual[0] = 0.0
-        residual /= residual.sum()
-        attention[i] = (1.0 - sink) * residual
-        attention[i, 0] = sink
-
-        if anchor is not None:
-            attention[i] *= 1.0 - strength
-            attention[i, anchor] += strength
-
-        if word is not None and pos in nominal_pos and word.dep_ in object_deps:
-            latest_object = i
-
-        if is_punctuation:
-            boundary_count += 1
-            if latest_object is not None and i - latest_object <= 5:
-                latest_boundary_object = (i, latest_object)
-
-    return "first_token_with_nominal_anchors", make_row_stochastic(
-        apply_causal_mask(attention)
-    )
+    return "first_token_plus_syntactic_head", matrix
 
 
 def prog_L14H11(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
@@ -66717,65 +66759,129 @@ def prog_L17H2(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, 
     return "first_token_sink_with_content_residual", attention
 
 
-def prog_L17H3(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
-    """First-token attention sink with gradual positional weakening.
-    Residual attention favors recent tokens and accessible syntactic heads.
+# ---------------------------------------------------------------------------
+# SUBSTITUTED L17H3. The gpt-6.1-sol program for this head (prog_L17H3)
+# raised ValueError: could not broadcast input array from shape (2,) into shape (19,)
+# on 500 of the 500 splits.json sentences, so it is replaced here by the
+# paper library's program for the same head, copied verbatim from
+# data/qwen3_programs.py. The preferred replacement -- the other candidate
+# from the same synthesis run -- was not available: the per-head records for
+# this model live on the cluster, which was unreachable.
+# ---------------------------------------------------------------------------
+def prog_L17H3(sentence: str, tokenizer: PreTrainedTokenizerBase) -> tuple[str, np.ndarray]:
     """
+    Hypothesis: Same as original, plus a special case boosting attention from 
+    punctuation and coordinating conjunctions to their syntactic heads and 
+    complements, to capture missed edges related to coordination and punctuation.
+    """
+    import numpy as np
+    from collections import defaultdict
+    from spacy.symbols import PUNCT, SPACE, CCONJ
+
     tokens = tokenize(sentence, tokenizer)
     n = len(tokens)
-    attention = np.zeros((n, n), dtype=np.float64)
-    if n == 0:
-        return "first_token_sink_with_local_competition", attention
+    doc = _get_nlp()(sentence)
+    toks2spacy = align_tokens_to_spacy(sentence, tokens, tokenizer)
+    spacy_heads = [t.head.i for t in doc]
+    dependents_map = defaultdict(list)
+    for i, h in enumerate(spacy_heads):
+        if i != h:
+            dependents_map[h].append(i)
+    model2spacy_single = [arr[0] if arr else None for arr in toks2spacy]
 
-    doc = spacy_parse(sentence)
-    alignment = align_tokens_to_spacy(sentence, tokens, tokenizer)
-    inverse = [[] for _ in doc]
-    for ti, indices in enumerate(alignment):
-        for si in indices:
-            inverse[si].append(ti)
+    w_first_token_self = 0.4
+    w_others_to_first = 0.45
+    w_syntactic_head = 0.1
+    w_syntactic_dependents = 0.025
+    w_self = 0.1
 
-    attention[0, 0] = 1.0
-    for i in range(1, n):
-        sink = 0.50 + 0.48 * np.exp(-i / 25.0)
-        local = np.exp(-(i - np.arange(i + 1)) / 3.0)
-        local[0] = 0.0
-        local[i] *= 0.35
+    def dist_decay(i, j):
+        return 1.0 / (1 + (i - j))
 
-        if alignment[i]:
-            word = doc[alignment[i][0]]
-            if word.pos_ in ("PUNCT", "CCONJ"):
-                sink -= 0.13
-            elif word.pos_ in ("PRON", "AUX"):
-                sink -= 0.04
+    emb_sim_cache = dict()
+    def emb_sim(i, j):
+        if (i,j) in emb_sim_cache:
+            return emb_sim_cache[(i,j)]
+        if (j,i) in emb_sim_cache:
+            return emb_sim_cache[(j,i)]
+        sim = embedding_similarity(tokens, i, j, tokenizer)
+        emb_sim_cache[(i,j)] = sim
+        return sim
 
-            # A preceding syntactic governor can compete with the sink.
-            if word.head.i != word.i:
-                governors = [
-                    j for j in inverse[word.head.i] if 0 < j < i
-                ]
-                if governors:
-                    j = governors[-1]
-                    local[j] += 1.5
-                    if word.pos_ in ("ADP", "CCONJ"):
-                        sink -= 0.10
+    attn = np.zeros((n, n), dtype=np.float64)
+    spacy_to_model = align_spacy_to_tokens(sentence, tokens, tokenizer)
 
-            # Verbs sometimes favor an immediately preceding subject.
-            if word.pos_ in ("VERB", "AUX"):
-                for child in word.children:
-                    if child.dep_ in ("nsubj", "nsubjpass", "csubj"):
-                        preceding = [
-                            j for j in inverse[child.i] if 0 < j < i
-                        ]
-                        if preceding:
-                            j = preceding[-1]
-                            local[j] += 2.0 * np.exp(-(i - j) / 8.0)
-                            sink -= 0.07 * np.exp(-(i - j) / 8.0)
+    for i in range(n):
+        row = np.zeros(n, dtype=np.float64)
+        first_token_idx = 0
+        if i == first_token_idx:
+            row[first_token_idx] = w_first_token_self + w_others_to_first
+        else:
+            row[first_token_idx] = w_others_to_first
 
-        sink = float(np.clip(sink, 0.30, 0.995))
-        attention[i] = (1.0 - sink) * local / local.sum()
-        attention[i, 0] = sink
+        sp_i = model2spacy_single[i]
+        if sp_i is not None:
+            sp_head = spacy_heads[sp_i]
+            if sp_head is not None and sp_head != sp_i:
+                head_model_tokens = [t for t in spacy_to_model[sp_head] if t <= i]
+                if head_model_tokens:
+                    head_mt = max(head_model_tokens)
+                    row[head_mt] += w_syntactic_head * dist_decay(i, head_mt)
+            deps = dependents_map.get(sp_i, [])
+            dep_model_tokens = []
+            for d in deps:
+                for mtok in spacy_to_model[d]:
+                    if mtok <= i:
+                        dep_model_tokens.append(mtok)
+            for dmt in dep_model_tokens:
+                row[dmt] += w_syntactic_dependents * dist_decay(i, dmt)
 
-    return "first_token_sink_with_local_competition", make_row_stochastic(attention)
+        row[i] += w_self
+
+        window_start = max(0, i - 4)
+        for j in range(window_start, i+1):
+            if j == first_token_idx or j == i:
+                continue
+            sim = emb_sim(i, j)
+            if sim > 0.8:
+                row[j] += 0.15 * sim * dist_decay(i, j)
+            elif sim > 0.6:
+                row[j] += 0.05 * sim * dist_decay(i, j)
+
+        sp_token = doc[sp_i] if sp_i is not None else None
+        if sp_token is not None and (sp_token.pos == PUNCT or sp_token.is_space):
+            row[i] += 0.05
+            row[first_token_idx] += 0.02
+
+        # ===== New special-case logic begins here =====
+        # Boost attention from punctuation or coordinating conjunction tokens to:
+        #   - their syntactic head token(s), if <= i
+        #   - siblings/complements under that head (e.g. conjuncts)
+        if sp_token is not None and (sp_token.pos == PUNCT or sp_token.pos == CCONJ):
+            # Add increased boost to their syntactic head token(s) if within causal window
+            sp_head = spacy_heads[sp_i]
+            if sp_head is not None and sp_head != sp_i:
+                head_mts = [t for t in spacy_to_model[sp_head] if t <= i]
+                if head_mts:
+                    head_mt = max(head_mts)
+                    # Small additive boost to syntactic head for punctuation/CCONJ tokens
+                    row[head_mt] += 0.1 * dist_decay(i, head_mt)
+                # Also boost all other conjunct siblings of sp_i under same head
+                # conjunct siblings typically have dep_ "conj" and same head
+                conj_siblings = [c for c in doc[sp_head].children if c.dep_ == "conj" and c.i != sp_i]
+                for sib in conj_siblings:
+                    sib_model_tokens = [t for t in spacy_to_model[sib.i] if t <= i]
+                    for smt in sib_model_tokens:
+                        row[smt] += 0.05 * dist_decay(i, smt)
+
+        # Clamp negatives to zero to be safe
+        row = np.clip(row, 0, None)
+        attn[i] = row
+
+    attn = apply_causal_mask(attn)
+    attn = make_row_stochastic(attn)
+
+    return "first_token_anchor_plus_syntactic_heads_and_similarity_decay_with_coordination_boost", attn
 
 
 def prog_L17H4(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
@@ -80526,93 +80632,98 @@ def prog_L22H17(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str,
     return "first_token_sink_with_local_backoff", attention
 
 
-def prog_L22H18(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
-    """First-token attention sink, with weaker sentence/clause-onset anchors.
-    Sink strength decreases with distance and for content-bearing tokens.
+# ---------------------------------------------------------------------------
+# SUBSTITUTED L22H18. The gpt-6.1-sol program for this head (prog_L22H18)
+# raised ValueError: could not broadcast input array from shape (2,) into shape (19,)
+# on 500 of the 500 splits.json sentences, so it is replaced here by the
+# paper library's program for the same head, copied verbatim from
+# data/qwen3_programs.py. The preferred replacement -- the other candidate
+# from the same synthesis run -- was not available: the per-head records for
+# this model live on the cluster, which was unreachable.
+# ---------------------------------------------------------------------------
+def prog_L22H18(sentence: str, tokenizer: "PreTrainedTokenizerBase") -> "tuple[str, np.ndarray]":
     """
+    Hypothesis: builds on original anchor + head attention, but adds a special boost for early tokens
+    (tokens near sentence start or first noun/pronoun phrases) attending strongly to the first token
+    to better capture the under-predicted strong start-token attractor seen in evaluation. This adds
+    a focused strong first-token boost on early content tokens, preserving other behaviors intact.
+    """
+    import numpy as np
+    nlp = _get_nlp()
     tokens = tokenize(sentence, tokenizer)
-    n = len(tokens)
-    attention = np.zeros((n, n), dtype=np.float64)
-    if n == 0:
-        return "first_token_sink_with_clause_anchors", attention
+    m = len(tokens)
+    matrix = np.zeros((m, m), dtype=np.float64)
 
-    doc = spacy_parse(sentence)
-    alignment = align_tokens_to_spacy(sentence, tokens, tokenizer)
-    word_to_model = [[] for _ in doc]
-    for i, word_ids in enumerate(alignment):
-        for word_id in word_ids:
-            word_to_model[word_id].append(i)
+    doc = nlp(sentence)
+    tok2spacy = align_tokens_to_spacy(sentence, tokens, tokenizer)
 
-    # Prefer the earliest subtoken when a syntactic word is an anchor.
-    first_subtoken = [
-        indices[0] if indices else -1 for indices in word_to_model
-    ]
-    representatives = []
-    for word_ids in alignment:
-        candidates = [doc[k] for k in word_ids if not doc[k].is_space]
-        representatives.append(candidates[0] if candidates else None)
+    punct_set = set(['"', "'", "‘", "’", "“", "”", "!", ".", ",", ":", ";", "?", "–", "-", "—"])
+    anchors = set()
+    if m > 0:
+        anchors.add(0)
+    for i, t in enumerate(tokens):
+        text = t.lstrip("Ġ").lstrip("\u0120")
+        if text in punct_set:
+            anchors.add(i)
 
-    # A sentence onset can be represented by its preceding whitespace token.
-    sentence_anchor = np.zeros(n, dtype=np.int64)
-    coordination_anchor = np.zeros(n, dtype=np.int64)
-    current_sentence = 0
-    current_coordination = 0
+    for spacy_i, spacy_token in enumerate(doc):
+        if spacy_token.pos_ == "CCONJ":
+            for ti, sids in enumerate(tok2spacy):
+                if spacy_i in sids:
+                    anchors.add(ti)
+                    break
 
-    for i, word in enumerate(representatives):
-        if word is not None and first_subtoken[word.i] == i:
-            if word.is_sent_start and i > 0:
-                current_sentence = i
-                if i > 0:
-                    previous = tokens[i - 1].replace("Ġ", " ").replace("Ċ", "\n")
-                    if previous and previous.isspace():
-                        current_sentence = i - 1
-                current_coordination = current_sentence
+    spacy_to_model = align_spacy_to_tokens(sentence, tokens, tokenizer)
+    head_token_map = []
+    for spacy_i, spacy_token in enumerate(doc):
+        head_spacy_i = spacy_token.head.i
+        candidates = spacy_to_model[head_spacy_i]
+        if candidates:
+            head_token_map.append(min(candidates))
+        else:
+            head_token_map.append(None)
 
-            if word.dep_ == "cc":
-                current_coordination = i
+    # Identify early content tokens: tokens aligned to spaCy tokens in first <=3 tokens and that are nouns or pronouns
+    early_content_tokens = set()
+    first_spacy_inds = set(range(min(3, len(doc))))
+    for i in range(m):
+        sids = tok2spacy[i]
+        # If any of sids in first 3 and pos_ noun/pronoun, mark this token
+        if any((sid in first_spacy_inds and doc[sid].pos_ in ("NOUN", "PROPN", "PRON")) for sid in sids):
+            early_content_tokens.add(i)
 
-        sentence_anchor[i] = current_sentence
-        coordination_anchor[i] = current_coordination
+    for i in range(m):
+        weights = np.zeros(i + 1, dtype=np.float64)
 
-    attention[0, 0] = 1.0
-    for i in range(1, n):
-        word = representatives[i]
-        pos = word.pos_ if word is not None else ""
+        candidates = [j for j in anchors if j <= i]
+        if candidates:
+            anchor_j = max(candidates)
+            dist = i - anchor_j
+            decay = 1 / ((1 + dist) ** 1.5)
+            weights[anchor_j] += decay * 10.0
 
-        sink_mass = 0.32 + 0.57 * np.exp(-i / 28.0)
-        if pos in ("DET", "ADP", "PRON", "PART"):
-            sink_mass += 0.08
-        elif pos in ("NOUN", "PROPN", "ADJ"):
-            sink_mass -= 0.10
-        elif pos in ("VERB", "ADV"):
-            sink_mass -= 0.05
+        weights[i] += 3.0
 
-        if i <= 3:
-            sink_mass += 0.07
-        sink_mass = float(np.clip(sink_mass, 0.30, 0.98))
+        spacy_tokens_i = tok2spacy[i]
+        for spacy_i in spacy_tokens_i:
+            htok = head_token_map[spacy_i]
+            if htok is not None and htok < i:
+                weights[htok] += 1.0
 
-        indices = np.arange(i + 1)
-        residual = 0.12 * np.exp(-(i - indices) / 7.0)
-        residual[0] = 0.0
+        # NEW LOGIC:
+        # For early content tokens (early noun/pronoun tokens), add extra boost to first token (0)
+        # to help correct strong start-token attention seen under-predicted,
+        # only add if first token is causal (j <= i)
+        if i in early_content_tokens and 0 <= i:
+            # add a strong fixed boost to first token attention for these
+            weights[0] += 5.0
 
-        onset = int(sentence_anchor[i])
-        coordination = int(coordination_anchor[i])
-        if onset > 0:
-            residual[onset] += 0.90
-        if coordination > onset:
-            residual[coordination] += 0.50
+        matrix[i, : i + 1] = weights
 
-        # Causal syntactic heads provide a small local alternative to the sink.
-        if word is not None:
-            head_index = first_subtoken[word.head.i]
-            if 0 < head_index <= i and word.head.i != word.i:
-                residual[head_index] += 0.20
+    matrix = apply_causal_mask(matrix)
+    matrix = make_row_stochastic(matrix)
 
-        residual[i] += 0.08
-        attention[i] = (1.0 - sink_mass) * residual / residual.sum()
-        attention[i, 0] = sink_mass
-
-    return "first_token_sink_with_clause_anchors", make_row_stochastic(attention)
+    return "first_token_and_punct_anchors_with_head_plus_early_content_boost", matrix
 
 
 def prog_L22H19(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
@@ -99106,99 +99217,133 @@ def prog_L32H20(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str,
     return "first_token_sink_pos_modulated", attention
 
 
-def prog_L32H21(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
-    """First-token attention sink, with competing quote and whitespace anchors.
-    Dialogue weakens the global sink in favor of nearby segment boundaries.
+# ---------------------------------------------------------------------------
+# SUBSTITUTED L32H21. The gpt-6.1-sol program for this head (prog_L32H21)
+# raised ZeroDivisionError: division by zero
+# on 470 of the 500 splits.json sentences, so it is replaced here by the
+# paper library's program for the same head, copied verbatim from
+# data/qwen3_programs.py. The preferred replacement -- the other candidate
+# from the same synthesis run -- was not available: the per-head records for
+# this model live on the cluster, which was unreachable.
+# ---------------------------------------------------------------------------
+def prog_L32H21(sentence: str, tokenizer: "PreTrainedTokenizerBase") -> "tuple[str, np.ndarray]":
     """
+    Hypothesis: This head primarily attends heavily to the first token (sentence start),
+    and also strongly attends to punctuation tokens (especially commas and sentence-final punctuation)
+    and to syntactic heads or 'important' tokens in the sentence; less strongly it attends to mainly
+    the syntactic head or punctuation near each token. We model this by a large bias on the first token,
+    some weight on closest punctuation on left and on the syntactic head token of each word's span,
+    mixing this with self-attention.
+    """
+    import numpy as np
     tokens = tokenize(sentence, tokenizer)
     n = len(tokens)
-    attention = np.zeros((n, n), dtype=np.float64)
-    if n == 0:
-        return "first_token_with_segment_sinks", attention
-
     doc = spacy_parse(sentence)
-    alignment = align_tokens_to_spacy(sentence, tokens, tokenizer)
+    # Align tokens to spacy tokens
+    modeltok_to_spacy = align_tokens_to_spacy(sentence, tokens, tokenizer)
+    spacy_to_modeltok = align_spacy_to_tokens(sentence, tokens, tokenizer)
 
-    quote_open = None
-    whitespace_anchor = None
-    dialogue_seen = False
+    # Precompute token positions for quick lookup of first token, punctuation etc
+    first_token_idx = 0
 
-    for i, token in enumerate(tokens):
-        clean = token.replace("Ġ", " ").replace("Ċ", "\n")
-        stripped = clean.strip()
-        whitespace_only = bool(clean) and not stripped
-        has_quote = any(c in stripped for c in ('"', "“", "”", "«", "»"))
-        terminal = any(c in stripped for c in (".", "!", "?"))
-        punctuation = bool(stripped) and all(
-            not c.isalnum() for c in stripped
-        )
+    # Identify punctuation token indices
+    punct_ids = set()
+    for i, stids in enumerate(modeltok_to_spacy):
+        # If any spacy token here is punctuation, mark the model tokens as punctuation
+        if any(doc[si].is_punct or doc[si].pos_ == "PUNCT" for si in stids):
+            punct_ids.add(i)
 
-        mapped = alignment[i]
-        pos = doc[mapped[0]].pos_ if mapped else ""
-        dep = doc[mapped[0]].dep_ if mapped else ""
+    # Identify sentence-final punctuation (the dot ending the sentence)
+    # We treat last token punctuation specially as a strong attractor, per examples
+    # Because sentence may have multiple sentences, find all sentence end punctuation indices
+    sent_end_punct_ids = set()
+    for sent in doc.sents:
+        # Take last spaCy token of sentence, find model token(s)
+        last_si = sent[-1].i
+        model_toks = spacy_to_modeltok[last_si]
+        for mtidx in model_toks:
+            # If this token is in punct_ids, mark as sent end punct
+            if mtidx in punct_ids:
+                sent_end_punct_ids.add(mtidx)
 
-        if i == 0:
-            attention[0, 0] = 1.0
+    # Build attention matrix
+    # Initialize with zeros
+    attn = np.zeros((n, n), dtype=np.float64)
+
+    # Parameters to tune the relative strengths - inspired by patterns in examples
+    # Very strong attention to first token (index 0) for all tokens (including itself)
+    # Some strong attend to sentence-final punctuation (last tokens of any sentence)
+    # Some intermediate attend to closest punctuation to the left (if any)
+    # Some intermediate attend to the syntactic head token(s) aligned (choosing first model token)
+    # Transformer tokens only attend leftwards (lower triangle) so if targets are > i, skip.
+    # For dead rows fallback to uniform causal (make_row_stochastic covers this)
+
+    # Weights summaries roughly (relative magnitudes):
+    w_first = 8.0
+    w_sent_end_punct = 3.0
+    w_closest_punct = 1.5
+    w_head = 2.0
+    w_self = 1.0
+
+    # Precompute for each token i the syntactic head spaCy token (token.head) and aligned model tokens
+    # We'll pick the lowest model token index of head span for determinism
+    head_token_for_i = []
+    for i in range(n):
+        sids = modeltok_to_spacy[i]
+        if not sids:
+            head_token_for_i.append(None)
+            continue
+        # Pick first spacy token of this model token span to determine head
+        first_spacy = sids[0]
+        head_spacy = doc[first_spacy].head
+        # Map head spaCy token to its covered model tokens, pick min model token idx for head
+        mtoks_for_head = spacy_to_modeltok[head_spacy.i]
+        if mtoks_for_head:
+            head_token_for_i.append(min(mtoks_for_head))
         else:
-            sink = 0.87 if not dialogue_seen else 0.56
+            head_token_for_i.append(None)
 
-            if i <= 3 and not dialogue_seen:
-                sink += 0.035
-            if i == 1 and doc and doc[0].pos_ in ("DET", "NUM", "ADP", "ADV"):
-                sink = 0.965
-            if pos in ("VERB", "AUX") and dep == "ROOT":
-                sink += 0.025
-            if terminal:
-                sink = 0.95 if not dialogue_seen else 0.83
-            elif punctuation or whitespace_only or has_quote:
-                sink += 0.08
+    # Precompute punctuation positions for quick left search
+    punct_list = sorted(punct_ids)
 
-            quote_mass = 0.0
-            if quote_open is not None and not has_quote and not terminal:
-                distance = i - quote_open
-                quote_mass = 0.34 * np.exp(-max(distance - 5, 0) / 12.0)
-                sink -= 0.12
+    for i in range(n):
+        # 1) Always attend to first token if allowed (j=0 <= i)
+        if 0 <= i:
+            attn[i, 0] += w_first
 
-            boundary_mass = 0.0
-            if whitespace_anchor is not None and not whitespace_only:
-                distance = i - whitespace_anchor
-                boundary_mass = 0.33 * np.exp(-max(distance - 6, 0) / 14.0)
-                if terminal:
-                    boundary_mass *= 0.20
-                if has_quote:
-                    boundary_mass *= 0.35
+        # 2) Attend to sentence-final punctuation tokens <= i
+        # there can be multiple (e.g. multiple sentences)
+        for pidx in sent_end_punct_ids:
+            if pidx <= i:
+                attn[i, pidx] += w_sent_end_punct
 
-            sink = float(np.clip(sink, 0.30, 0.97))
-            competing = quote_mass + boundary_mass
-            if competing > 0.90 - sink:
-                scale = max(0.0, 0.90 - sink) / competing
-                quote_mass *= scale
-                boundary_mass *= scale
+        # 3) Attend to closest punctuation token on left before i
+        # Linear search backwards for largest punct_id <= i (excluding sentence-final punctuation)
+        left_punct = None
+        # Candidates are punct ids less than or equal i but not final sentence punct if already added
+        # We still add sent_end_punct fully separately, so we add other punctuation here but less
+        # To avoid double count, exclude sent_end_punct_ids here
+        candidate_puncts = [p for p in punct_list if p <= i and p not in sent_end_punct_ids]
+        if candidate_puncts:
+            left_punct = max(candidate_puncts)
+            attn[i, left_punct] += w_closest_punct
 
-            remaining = 1.0 - sink - quote_mass - boundary_mass
-            distances = i - np.arange(i + 1)
-            background = np.exp(-distances / 4.0) + 0.08
-            attention[i, :i + 1] = remaining * background / background.sum()
-            attention[i, 0] += sink
+        # 4) Attend to syntactic head token if not same as self and <= i
+        head_t = head_token_for_i[i]
+        if head_t is not None and head_t <= i and head_t != i:
+            attn[i, head_t] += w_head
 
-            if quote_mass:
-                attention[i, quote_open] += quote_mass
-            if boundary_mass:
-                attention[i, whitespace_anchor] += boundary_mass
+        # 5) Self attention (token attends to itself)
+        attn[i, i] += w_self
 
-        if whitespace_only:
-            whitespace_anchor = i
+    # Apply causal mask to ensure no attention forward in time
+    attn = apply_causal_mask(attn)
 
-        if has_quote:
-            dialogue_seen = True
-            quote_count = sum(stripped.count(c) for c in ('"', "“", "”", "«", "»"))
-            if quote_count % 2:
-                if quote_open is None:
-                    quote_open = i
-                else:
-                    quote_open = None
+    # Normalize rows to sum to 1; fallback to uniform causal row if row sum is zero
+    attn = make_row_stochastic(attn)
 
-    return "first_token_with_segment_sinks", make_row_stochastic(attention)
+    label = "first_token_plus_punct_head_bias_lower_triangle"
+    return label, attn
 
 
 def prog_L32H22(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:

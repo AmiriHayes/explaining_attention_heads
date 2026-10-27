@@ -138,6 +138,28 @@ def apply_causal_mask(matrix):
 
 
 
+
+# --- helpers inlined from data/gpt2_programs.py, needed by the substituted
+# --- programs below. Copied verbatim.
+def _align_to_spacy(sentence: str, tokens: list) -> list:
+    """Map each token index to list of overlapping spacy token indices."""
+    doc = _get_nlp()(sentence)
+    # reconstruct char spans from token strings
+    spans, pos = [], 0
+    for t in tokens:
+        # strip BPE/sentencepiece prefix chars
+        clean = t.lstrip("\u0120").lstrip("##").lstrip()
+        span_len = max(len(clean), 1)
+        spans.append((pos, pos + span_len))
+        pos += span_len
+    alignment = []
+    for gs, ge in spans:
+        overlapping = [si for si, st in enumerate(doc)
+                       if st.idx < ge and st.idx + len(st.text) > gs]
+        alignment.append(overlapping)
+    return alignment
+
+
 def prog_L0H0(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
     """First-token sink with lexical anchors; quoted dialogue additionally favors
     opening quotation marks, participant nouns, and reporting predicates.
@@ -4430,147 +4452,120 @@ def prog_L3H2(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, n
     )
 
 
-def prog_L3H3(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
-    """First-token attention sink, interrupted by local phrase-head and subword links.
-    Function words preferentially retrieve a nearby preceding syntactic anchor.
-    """
-    tokens = tokenize(sentence, tokenizer)
+# ---------------------------------------------------------------------------
+# SUBSTITUTED L3H3. The gpt-6.1-sol program for this head (prog_L3H3)
+# raised ValueError: could not broadcast input array from shape (2,) into shape (19,)
+# on 500 of the 500 splits.json sentences, so it is replaced here by the
+# paper library's program for the same head, copied verbatim from
+# data/gpt2_programs.py. The preferred replacement -- the other candidate
+# from the same synthesis run -- was not available; that run produced no
+# second candidate for this head (program_refined is null).
+# ---------------------------------------------------------------------------
+def first_token_bias_content_focus_punctuation_L3H3(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
+    tokens = tokenizer.convert_ids_to_tokens(tokenizer(sentence, return_tensors="pt").input_ids[0])
     n = len(tokens)
-    attention = np.zeros((n, n), dtype=np.float64)
-    if n == 0:
-        return "first_token_sink_with_local_anchors", attention
-
+    attention = np.zeros((n, n))
+    
     doc = spacy_parse(sentence)
-    alignment = align_tokens_to_spacy(sentence, tokens, tokenizer)
-    inverse = [[] for _ in doc]
-    for i, word_ids in enumerate(alignment):
-        for word_id in word_ids:
-            inverse[word_id].append(i)
-
-    attention[0, 0] = 1.0
-
-    for i in range(1, n):
-        word_ids = alignment[i]
-        word = doc[word_ids[0]] if word_ids else None
-        previous_ids = alignment[i - 1]
-        previous = doc[previous_ids[-1]] if previous_ids else None
-
-        sink = 0.74
-        if word is not None:
-            if word.pos_ in ("VERB", "AUX"):
-                sink = 0.85
-            elif word.pos_ in ("NOUN", "PROPN", "ADJ"):
-                sink = 0.77
-            elif word.pos_ in ("DET", "PRON", "ADP", "PART", "SCONJ"):
-                sink = 0.57
-            elif word.pos_ == "PUNCT":
-                sink = 0.72
-
-        # Background mass is mostly recent, without excluding earlier tokens.
-        distances = i - np.arange(i + 1)
-        background = np.exp(-distances / 2.0)
-        background /= background.sum()
-        row = (1.0 - sink) * background
-        row[0] += sink
-
-        anchor = None
-        strength = 0.0
-
-        if word is not None:
-            pieces = inverse[word.i]
-            earlier_pieces = [j for j in pieces if j < i]
-
-            # Continuations recover the beginning of their lexical item.
-            if earlier_pieces:
-                anchor = earlier_pieces[0]
-                strength = 0.84
-            else:
-                head = word.head
-                head_pieces = [j for j in inverse[head.i] if j < i]
-                if head.i != word.i and head_pieces:
-                    head_start = head_pieces[0]
-                    gap = i - head_pieces[-1]
-
-                    if gap <= 3:
-                        if (
-                            word.pos_ == "PRON"
-                            and word.dep_ in ("dobj", "obj", "iobj", "dative")
-                            and head.pos_ == "VERB"
-                        ):
-                            anchor, strength = head_start, 0.82
-                        elif (
-                            word.pos_ == "ADP"
-                            and head.pos_ in ("NOUN", "PROPN", "ADJ", "ADV", "VERB")
-                            and gap == 1
-                        ):
-                            anchor, strength = head_start, 0.68
-                        elif (
-                            word.pos_ == "PART"
-                            and head.pos_ in ("VERB", "ADJ")
-                            and gap == 1
-                        ):
-                            anchor, strength = head_start, 0.55
-
-                if previous is not None and previous.i != word.i:
-                    previous_pieces = inverse[previous.i]
-                    previous_start = previous_pieces[0]
-
-                    if (
-                        word.pos_ == "PRON"
-                        and word.dep_ in ("nsubj", "nsubjpass")
-                        and previous.pos_ == "AUX"
-                    ):
-                        anchor, strength = previous_start, 0.82
-                    elif (
-                        word.pos_ == "DET"
-                        and previous.pos_ in ("VERB", "ADP")
-                    ):
-                        anchor, strength = previous_start, 0.62
-
-                        # A determiner after a preposition may retain the
-                        # preposition's preceding nominal phrase anchor.
-                        if previous.pos_ == "ADP":
-                            nominal = previous.head
-                            nominal_pieces = [
-                                j for j in inverse[nominal.i] if j < i
-                            ]
-                            if (
-                                nominal.pos_ in ("NOUN", "PROPN")
-                                and nominal_pieces
-                                and i - nominal_pieces[-1] <= 3
-                            ):
-                                anchor = nominal_pieces[0]
-                                strength = 0.65
-                    elif (
-                        word.pos_ in ("NOUN", "PROPN")
-                        and previous.pos_ in ("ADJ", "ADV")
-                        and previous.head.i == word.i
-                    ):
-                        anchor, strength = previous_start, 0.55
-                    elif (
-                        word.pos_ == "ADP"
-                        and previous.pos_ in ("ADV", "ADJ")
-                    ):
-                        anchor, strength = previous_start, 0.82
-
-        if tokens[i].isspace():
-            anchor, strength = i - 1, 0.56
-
-        if anchor is not None:
-            row *= 1.0 - strength
-            row[anchor] += strength
-
-        # The second token almost invariably selects the sequence start.
-        if i == 1:
-            row[:] = 0.0
-            row[0], row[1] = 0.98, 0.02
-
-        attention[i] = row
-
-    return (
-        "first_token_sink_with_local_anchors",
-        make_row_stochastic(apply_causal_mask(attention)),
-    )
+    gpt2_to_spacy = _align_to_spacy(sentence, tokens)
+    
+    for i in range(n):
+        # Strong attention to first token (BOS-like behavior)
+        if i > 0:
+            attention[i, 0] = 0.6
+        else:
+            attention[i, 0] = 1.0  # First token attends to itself strongly
+        
+        # Self-attention (moderate)
+        if i > 0:
+            attention[i, i] = 0.15
+        
+        # Previous token attention (local context)
+        if i > 0:
+            attention[i, i-1] = 0.4
+        
+        # Special patterns for different token types
+        token_text = tokens[i].strip()
+        
+        # Enhanced article handling - attend to verbs they're grammatically linked to
+        if token_text.lower() in ['the', 'a', 'an'] and i > 0:
+            # First try to find grammatically related verb through spacy dependencies
+            found_verb = False
+            spacy_indices = gpt2_to_spacy[i]
+            if spacy_indices:
+                spacy_token = doc[spacy_indices[0]]
+                # Check if this article's noun is an object or part of a prepositional phrase
+                if spacy_token.head and spacy_token.head.pos_ == 'NOUN':
+                    noun_head = spacy_token.head
+                    # Check if the noun is an object of a verb or in a prep phrase
+                    if noun_head.head and noun_head.head.pos_ == 'VERB':
+                        # Find the verb token in GPT2 tokenization
+                        verb_spacy_idx = list(doc).index(noun_head.head)
+                        for j in range(max(0, i-5), i):
+                            if verb_spacy_idx in gpt2_to_spacy[j]:
+                                attention[i, j] = 0.7
+                                found_verb = True
+                                break
+                    # Also check for prepositional relationships
+                    elif noun_head.dep_ == 'pobj' and noun_head.head.head and noun_head.head.head.pos_ == 'VERB':
+                        verb_spacy_idx = list(doc).index(noun_head.head.head)
+                        for j in range(max(0, i-5), i):
+                            if verb_spacy_idx in gpt2_to_spacy[j]:
+                                attention[i, j] = 0.6
+                                found_verb = True
+                                break
+            
+            # Fallback to original behavior if no specific verb relationship found
+            if not found_verb:
+                for j in range(max(0, i-3), i):
+                    spacy_indices = gpt2_to_spacy[j]
+                    if spacy_indices:
+                        spacy_token = doc[spacy_indices[0]]
+                        if spacy_token.pos_ in ['VERB', 'NOUN']:
+                            attention[i, j] = 0.5
+                            break
+        
+        # Conjunctions attend to previous content
+        elif token_text.lower() in ['and', 'but', 'or'] and i > 1:
+            # Find previous content word
+            for j in range(i-1, max(0, i-4), -1):
+                spacy_indices = gpt2_to_spacy[j]
+                if spacy_indices:
+                    spacy_token = doc[spacy_indices[0]]
+                    if spacy_token.pos_ in ['NOUN', 'VERB', 'ADJ']:
+                        attention[i, j] = 0.3
+                        break
+        
+        # Prepositions attend to previous verb
+        if i > 0:
+            spacy_indices = gpt2_to_spacy[i]
+            if spacy_indices:
+                spacy_token = doc[spacy_indices[0]]
+                if spacy_token.pos_ == 'ADP':  # Preposition
+                    for j in range(i-1, max(0, i-3), -1):
+                        prev_spacy = gpt2_to_spacy[j]
+                        if prev_spacy:
+                            prev_token = doc[prev_spacy[0]]
+                            if prev_token.pos_ == 'VERB':
+                                attention[i, j] = 0.4
+                                break
+        
+        # Final tokens (punctuation) attend to recent content
+        if i == n - 1 and token_text in ['.', '!', '?']:
+            attention[i, i] = 0.2
+            # Attend to recent content words
+            for j in range(max(0, i-3), i):
+                spacy_indices = gpt2_to_spacy[j]
+                if spacy_indices:
+                    spacy_token = doc[spacy_indices[0]]
+                    if spacy_token.pos_ in ['NOUN', 'VERB']:
+                        attention[i, j] = 0.1
+    
+    # Apply causal mask and normalize
+    attention = apply_causal_mask(attention)
+    attention = make_row_stochastic(attention)
+    
+    return "first_token_bias_content_", attention
 
 
 def prog_L3H4(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:

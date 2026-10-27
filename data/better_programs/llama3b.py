@@ -28,6 +28,19 @@ def _get_nlp():
     return _nlp
 
 
+_tok = None
+
+
+def _get_tokenizer():
+    """Tokenizer for the model under study, loaded once. Only used when a
+    substituted program calls embedding_similarity without one."""
+    global _tok
+    if _tok is None:
+        from transformers import AutoTokenizer
+        _tok = AutoTokenizer.from_pretrained(_MODEL_ID)
+    return _tok
+
+
 def _get_embeddings():
     """Input-embedding matrix of the model under study, loaded once."""
     global _emb
@@ -101,7 +114,12 @@ def get_modifying_adjectives(token):
     return [c for c in token.children if c.dep_ in ("amod", "advmod")]
 
 
-def embedding_similarity(tokens, i, j, tokenizer):
+def embedding_similarity(tokens, i, j, tokenizer=None):
+    # `tokenizer` is optional so that a substituted paper-library program,
+    # which calls this with the paper signature (tokens, i, j), still works.
+    # Every program written by this run passes it explicitly.
+    if tokenizer is None:
+        tokenizer = _get_tokenizer()
     """Cosine similarity between tokens[i] and tokens[j] in the model's own
     input-embedding space. Use this instead of string equality to catch
     morphological and semantic relatives ("heard"/"hear", "cat"/"kitten")."""
@@ -134,6 +152,25 @@ def apply_causal_mask(matrix):
     """Zero the strict upper triangle: token i may only attend to j <= i."""
     return np.tril(np.asarray(matrix, dtype=np.float64))
 
+
+
+
+# --- helpers inlined from data/llama3b_programs.py, needed by the substituted
+# --- programs below. Copied verbatim.
+def _align_to_spacy(sentence: str, tokens: list) -> list:
+    doc = _get_nlp()(sentence)
+    spans, pos = [], 0
+    for t in tokens:
+        clean = t.lstrip("\u0120").lstrip("##").lstrip()
+        span_len = max(len(clean), 1)
+        spans.append((pos, pos + span_len))
+        pos += span_len
+    alignment = []
+    for gs, ge in spans:
+        overlapping = [si for si, st in enumerate(doc)
+                       if st.idx < ge and st.idx + len(st.text) > gs]
+        alignment.append(overlapping)
+    return alignment
 
 
 def prog_L0H0(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
@@ -22093,98 +22130,91 @@ def prog_L12H5(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, 
     return "bos_sink_with_local_syntax", attention
 
 
+# ---------------------------------------------------------------------------
+# SUBSTITUTED L12H6. The gpt-6.1-sol program for this head (prog_L12H6)
+# raised ValueError: operands could not be broadcast together with shapes (19,) (2,) (19,) 
+# on 500 of the 500 splits.json sentences, so it is replaced here by the
+# paper library's program for the same head, copied verbatim from
+# data/llama3b_programs.py. The preferred replacement -- the other candidate
+# from the same synthesis run -- was not available: the per-head records for
+# this model live on the cluster, which was unreachable.
+# ---------------------------------------------------------------------------
 def prog_L12H6(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:
-    """BOS attention sink with gradual positional weakening and sparse
-    semantic retrieval of earlier content and discourse boundaries."""
-    tokens = tokenize(sentence, tokenizer)
+    """Sentence boundary attention with content word emphasis - attends to <|begin_of_text|> tokens and semantically similar content words, with strong sentence-start grounding."""
+
+    tokens = tokenizer.convert_ids_to_tokens(tokenizer(sentence, return_tensors="pt").input_ids[0])
     n = len(tokens)
-    attention = np.zeros((n, n), dtype=np.float64)
-    if n == 0:
-        return "bos_sink_with_semantic_retrieval", attention
+    attention_matrix = np.zeros((n, n))
 
+    # Parse with spacy for linguistic features
     doc = spacy_parse(sentence)
-    alignment = align_tokens_to_spacy(sentence, tokens, tokenizer)
-    inverse = align_spacy_to_tokens(sentence, tokens, tokenizer)
-    representatives = [
-        doc[indices[-1]] if indices else None
-        for indices in alignment
-    ]
-    content_pos = ("NOUN", "PROPN", "VERB", "ADJ", "ADV")
-    nominal_pos = ("NOUN", "PROPN")
-    attention[0, 0] = 1.0
+    token_to_spacy = _align_to_spacy(sentence, tokens)
 
-    for i in range(1, n):
-        word = representatives[i]
-        age = 1.0 - np.exp(-(i - 1) / 15.0)
-        sink = 0.966 - 0.27 * age
+    # Identify sentence boundary tokens
+    boundary_indices = [i for i, token in enumerate(tokens) if token == '<|begin_of_text|>']
 
-        if word is not None:
-            if word.pos_ in nominal_pos:
-                sink -= 0.07 * age
-            elif word.pos_ in ("VERB", "AUX"):
-                sink += 0.025 * age
-            elif word.pos_ == "PUNCT":
-                sink -= 0.045 * age
-        sink = float(np.clip(sink, 0.45, 0.975))
+    for i in range(n):
+        # Get spacy tokens for current position
+        spacy_indices = token_to_spacy[i]
+        is_content_word = False
+        if spacy_indices:
+            spacy_token = doc[spacy_indices[0]]
+            is_content_word = spacy_token.pos_ in ['NOUN', 'VERB', 'ADJ', 'PROPN']
 
-        background = np.zeros(i + 1, dtype=np.float64)
-        retrieval = np.zeros(i + 1, dtype=np.float64)
-        query = i
-        query_word = word
+        # Base attention distribution
+        for j in range(i + 1):  # Only attend to previous and current tokens
+            weight = 0.01  # Base weight
 
-        # Nominal modifiers can retrieve an earlier mention of their referent.
-        if word is not None and word.pos_ in ("ADJ", "DET", "ADP"):
-            head = word.head
-            if head.pos_ in nominal_pos and inverse[head.i]:
-                query = inverse[head.i][-1]
-                query_word = head
+            # Strong attention to sentence boundaries
+            if tokens[j] == '<|begin_of_text|>':
+                # Find the most recent boundary before current token
+                relevant_boundaries = [b for b in boundary_indices if b <= i]
+                if relevant_boundaries:
+                    most_recent = max(relevant_boundaries)
+                    if j == most_recent:
+                        weight = 0.3  # Very high for most recent boundary
+                    else:
+                        # Decay for older boundaries
+                        distance = most_recent - j
+                        weight = 0.15 * (0.7 ** distance)
 
-        for j in range(1, i + 1):
-            previous = representatives[j]
-            distance = i - j
-            background[j] = 0.12 + np.exp(-distance / 7.0)
+            # Content words attend to other content words with semantic similarity
+            elif is_content_word and spacy_indices:
+                target_spacy = token_to_spacy[j]
+                if target_spacy:
+                    target_token = doc[target_spacy[0]]
+                    if target_token.pos_ in ['NOUN', 'VERB', 'ADJ', 'PROPN']:
+                        # Use embedding similarity for content words
+                        sim = embedding_similarity(tokens, i, j)
+                        if sim > 0.5:
+                            weight = 0.1 + 0.1 * sim
+                        elif sim > 0.3:
+                            weight = 0.05 + 0.05 * sim
 
-            if previous is not None:
-                if previous.pos_ in nominal_pos:
-                    background[j] += 0.35
-                if previous.pos_ == "PUNCT" and any(
-                    mark in previous.text for mark in ".!?\"”"
-                ):
-                    background[j] += 0.8 * np.exp(-distance / 24.0)
-                if word is not None and previous.i == word.head.i:
-                    background[j] += 0.45
+            # NEW: Strong sentence-start grounding for content words
+            if is_content_word and j == 0 and i > 0:
+                # Content words should attend strongly to the very first token
+                weight = 0.4
 
-            if (
-                distance >= 4
-                and query_word is not None
-                and previous is not None
-                and query_word.pos_ in content_pos
-                and previous.pos_ in content_pos
-                and previous.i != query_word.i
-            ):
-                similarity = embedding_similarity(tokens, query, j, tokenizer)
-                strength = max(0.0, (similarity - 0.48) / 0.52) ** 2
-                if query_word.pos_ == previous.pos_:
-                    strength *= 1.15
-                retrieval[j] = strength
+            # Moderate attention to punctuation and conjunctions
+            if tokens[j] in ['.', ',', '!', '?', '\n'] or (spacy_indices and token_to_spacy[j] and doc[token_to_spacy[j][0]].pos_ == 'CCONJ'):
+                weight += 0.03
 
-        peak = float(retrieval.max())
-        retrieval_mass = min(0.80, 0.80 * peak)
-        sink *= 1.0 - retrieval_mass
-        attention[i, 0] = sink
+            # Self-attention
+            if i == j:
+                weight += 0.02
 
-        if peak > 0:
-            attention[i, 1:] += (
-                retrieval_mass * retrieval[1:] / retrieval[1:].sum()
-            )
+            # Slight recency bias
+            if i - j <= 3:
+                weight += 0.01 * (4 - (i - j)) / 4
 
-        remainder = max(0.0, 1.0 - sink - retrieval_mass)
-        attention[i, 1:] += remainder * background[1:] / background[1:].sum()
+            attention_matrix[i, j] = weight
 
-    return (
-        "bos_sink_with_semantic_retrieval",
-        make_row_stochastic(apply_causal_mask(attention)),
-    )
+    # Apply causal mask and normalize
+    attention_matrix = apply_causal_mask(attention_matrix)
+    attention_matrix = make_row_stochastic(attention_matrix)
+
+    return "prog_L12H6", attention_matrix
 
 
 def prog_L12H7(sentence: str, tokenizer: PreTrainedTokenizerBase) -> Tuple[str, np.ndarray]:

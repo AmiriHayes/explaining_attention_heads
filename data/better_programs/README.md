@@ -28,6 +28,11 @@ appear in neither the prompts nor the refinement feedback.
 
 See `program_quality_four_models.png` for the full distributions.
 
+Both the table and the figure predate the substitutions below, so the nine
+substituted heads are still counted at 0. The two that could be rescored
+locally went from 0.000 to 0.546 (GPT-2 L3H3) and 0.582 (Llama-3.2-3B L12H6),
+so these medians understate the libraries slightly.
+
 ## Evidence format
 
 On GPT-2 we also tried showing the model the full attention matrix instead of
@@ -48,33 +53,53 @@ wasn't worth it, so these libraries use the 2.5% format.
   prompt (seed 1), one per line, verbatim.
 - `program_quality_four_models.png` — the boxplot behind the table above.
 
+## Substituted programs
+
+Nine programs raised on at least one of the 500 sentences in `splits.json`
+(200 prompt pool + 100 validation + 200 test). Each has been replaced by the
+paper library's program for the same head, copied verbatim. **Every program in
+this folder now runs on all 500 sentences.**
+
+The preferred replacement was the other candidate from the same synthesis run
+(initial vs refined), which keeps the provenance uniform. It was not usable for
+any of these: the GPT-2 run produced no second candidate for L3H3
+(`program_refined` is null), and the per-head records for the other three models
+live on the cluster, which was unreachable. All nine therefore fall back to the
+paper library.
+
+| model | head | replaced program | failed on | replaced by |
+|---|---|---|---|---|
+| GPT-2 | L3H3 | `prog_L3H3` | 500/500 | `first_token_bias_content_focus_punctuation_L3H3` |
+| TinyLlama | L17H28 | `prog_L17H28` | 500/500 | `prog_L17H28` |
+| TinyLlama | L18H26 | `prog_L18H26` | 500/500 | `prog_L18H26` |
+| Llama-3.2-3B | L12H6 | `prog_L12H6` | 500/500 | `prog_L12H6` |
+| Qwen3-8B | L12H7 | `prog_L12H7` | 500/500 | `prog_L12H7` |
+| Qwen3-8B | L14H10 | `prog_L14H10` | 500/500 | `prog_L14H10` |
+| Qwen3-8B | L17H3 | `prog_L17H3` | 500/500 | `prog_L17H3` |
+| Qwen3-8B | L22H18 | `prog_L22H18` | 500/500 | `prog_L22H18` |
+| Qwen3-8B | L32H21 | `prog_L32H21` | 470/500 | `prog_L32H21` |
+
+Each substituted function carries a comment saying what it replaced and why.
+No program's logic was edited. Three supporting changes were needed:
+
+- `gpt2.py`, `tinyllama.py`, `llama3b.py`: the helpers `_align_to_spacy` (all
+  three) and `_char_sim` (TinyLlama) are inlined verbatim from the paper
+  libraries, because the substituted programs call them.
+- `llama3b.py`: `embedding_similarity`'s `tokenizer` argument is now optional,
+  falling back to a lazily-loaded tokenizer for the model under study. The
+  substituted program calls it with the paper library's three-argument
+  signature. Every program written by the synthesis run passes the argument
+  explicitly, so their behaviour is unchanged.
+
 ## Known issues
 
-**These programs raise and need fixing.** The list below comes from a partial
-scan — every program in the four files was run on all 500 sentences in
-`splits.json` (200 prompt pool + 100 validation + 200 test), but the scan was
-stopped before the replacements were made. These will be fixed later.
+Two programs run on all 500 sentences but still score 0.000 on the test set:
+Llama-3.2-3B `prog_L13H22` and Qwen3-8B `prog_L27H15`. They do not raise, so
+they were left alone.
 
-| model | program | sentences that fail | exception |
-|---|---|---|---|
-| GPT-2 | `prog_L3H3` | 500/500 | `ValueError: could not broadcast input array from shape (2,) into shape (19,)` |
-| TinyLlama | `prog_L17H28` | 500/500 | `ValueError: could not broadcast input array from shape (2,) into shape (20,)` |
-| TinyLlama | `prog_L18H26` | 500/500 | `ValueError: could not broadcast input array from shape (2,) into shape (19,)` |
-| Llama-3.2-3B | `prog_L12H6` | 500/500 | `ValueError: operands could not be broadcast together with shapes (19,) (2,) (19,)` |
-| Qwen3-8B | `prog_L12H7` | 500/500 | `ValueError: could not broadcast input array from shape (3,) into shape (19,)` |
-| Qwen3-8B | `prog_L14H10` | 500/500 | `ValueError: could not broadcast input array from shape (2,) into shape (19,)` |
-| Qwen3-8B | `prog_L17H3` | 500/500 | `ValueError: could not broadcast input array from shape (2,) into shape (19,)` |
-| Qwen3-8B | `prog_L22H18` | 500/500 | `ValueError: could not broadcast input array from shape (2,) into shape (19,)` |
-| Qwen3-8B | `prog_L32H21` | 470/500 | `ZeroDivisionError: division by zero` |
-
-A program that raises is scored 0, so these also drag down the medians above.
-
-Two more programs run on all 500 sentences but still score 0.000 on the test
-set: Llama-3.2-3B `prog_L13H22` and Qwen3-8B `prog_L27H15`.
-
-Separately, Llama-3.2-3B's **paper** library calls two helpers it never defines,
-so 346 of its 672 programs crash; the paper column above scores it with
-reconstructed helpers. That does not affect the Llama-3.2-3B programs here.
+Llama-3.2-3B's **paper** library calls two helpers it never defines, so 346 of
+its 672 programs crash; the paper column above scores it with reconstructed
+helpers. That does not affect the Llama-3.2-3B programs here.
 
 ## Interactive viewer
 
@@ -87,13 +112,17 @@ All four were synthesized with `gpt-6.1-sol`, `reasoning_effort=medium`,
 
 | file | origin | generated | synthesis target | sha256 |
 |---|---|---|---|---|
-| `gpt2.py` | copied from `llama_programs_v3/ab_compare/attn/gpt2_intended_programs.py` | 2026-10-17 | `gpt2` | `fedf4d8f4660f9972de145051d5fa00c8f3d10587e14a18aef940e8627768f2c` |
-| `tinyllama.py` | written here by the cluster run | 2026-10-24 | `TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T` | `d013b65390d1bf50d70670eed3e6da8b748255f2a42f4f89ff69bf1cb83f97dd` |
-| `llama3b.py` | written here by the cluster run | 2026-10-24 | `meta-llama/Llama-3.2-3B` | `6c34121a2da97a996cb541b52ead78e3e8bd885bacefefeae18e9fe427cc2601` |
-| `qwen3.py` | written here by the cluster run | 2026-10-24 | `Qwen/Qwen3-8B-Base` | `940f59ae791c404ec35b614d6837acd47d54503e446601a89ad3443e316b293d` |
+| `gpt2.py` | copied from `llama_programs_v3/ab_compare/attn/gpt2_intended_programs.py` | 2026-10-17 | `gpt2` | `1ef8763dcee119fcadf02ac054e54000ba9645afb409874cac8d8f8a52bb7a56` |
+| `tinyllama.py` | written here by the cluster run | 2026-10-24 | `TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T` | `0a7fe7f2bb5b8e378eb83900fcbe869d96681a91dccf05872960a3b57a7a9036` |
+| `llama3b.py` | written here by the cluster run | 2026-10-24 | `meta-llama/Llama-3.2-3B` | `80f3149bc940c31c59bde2a8c1c4ca65047f1aecd2453096eb7af6d12bb2ac91` |
+| `qwen3.py` | written here by the cluster run | 2026-10-24 | `Qwen/Qwen3-8B-Base` | `705bc2ed4b6d9fbb4af6055e125dff328848db5cb5d091ca0846e2cbe3b814db` |
 | `program_quality_four_models.png` | copied from `results/multimodel/multimodel_program_quality.png` | 2026-10-24 | — | `269a8d058a94b2e8ac7611263035480af657d382f9e0dbdc234963c6d61db2e7` |
 
-Each `.py` hash matches the one recorded in its `.provenance.json`. `gpt2.py`
+The sha256 above is of the file as it now stands, after the substitutions. It
+therefore no longer matches the hash recorded in each `.provenance.json`, which
+describes the file as the synthesis run wrote it. The `.iou.json` scores are
+likewise from that run, so the nine substituted heads are scored there at 0,
+under the program that was replaced. `gpt2.py`
 differs from the file it was copied from in one place: the header docstring
 originally said it was generated by `make_programs.ipynb`, which is wrong. Every
 program body below that docstring is byte-identical. `gpt2.py` has no
